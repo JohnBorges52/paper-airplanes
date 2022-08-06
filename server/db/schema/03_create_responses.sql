@@ -2,6 +2,10 @@ DROP TABLE IF EXISTS responses CASCADE;
 
 CREATE TABLE responses (
   id SERIAL PRIMARY KEY,
-  email VARCHAR(255) NOT NULL,
-  password VARCHAR(255)
+  letter_id INT REFERENCES LETTERS(ID),
+  responder_id INT REFERENCES USERS(ID),
+  message VARCHAR(777) NOT NULL,
+  flag_count INT DEFAULT 0,
+  created_at TIMESTAMP DEFAULT NOW(),
+  active BOOLEAN DEFAULT TRUE
 );
