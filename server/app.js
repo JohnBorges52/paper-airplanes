@@ -5,9 +5,9 @@ const cookieParser = require('cookie-parser');  /***/
 const logger = require('morgan');
 
 const indexRouter = require('./routes/index');
-const usersRouter = require('./routes/users');
-
-const responsesRouter = require('./routes/responses');
+const usersRouter = require('./routes/usersRouter');
+const lettersRouter = require('./routes/lettersRouter')
+const responsesRouter = require('./routes/responsesRouter');
 
 const app = express();
 
@@ -21,7 +21,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter(db));
 app.use('/letters', lettersRouter(db));
 app.use('/responses', responsesRouter(db));
-app.use('/stickers', stickersRouter(db));
+//app.use('/stickers', stickersRouter(db));
 
 
 module.exports = app;
