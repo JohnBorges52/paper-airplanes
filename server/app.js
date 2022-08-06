@@ -19,7 +19,7 @@ app.use('/', indexRouter);
 app.use('/users', usersRouter(db));
 app.use('/letters', lettersRouter(db));
 app.use('/responses', responsesRouter(db));
-app.use('/', Router(db));
+app.use('/stickers', stickersRouter(db));
 
 
 module.exports = app;
