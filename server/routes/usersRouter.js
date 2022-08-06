@@ -26,7 +26,7 @@ module.exports = (db) => {
   // POST logout
   router.post("/logout", (req, res) => {});
 
-  /*************SECONDARY FEATURES */
+  /*************SECONDARY FEATURES ***********/
 
   // GET a user info
   router.get("/info", (req, res) => {});
