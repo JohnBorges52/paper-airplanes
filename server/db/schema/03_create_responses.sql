@@ -1,0 +1,7 @@
+DROP TABLE IF EXISTS responses CASCADE;
+
+CREATE TABLE responses (
+  id SERIAL PRIMARY KEY,
+  email VARCHAR(255) NOT NULL,
+  password VARCHAR(255)
+);
