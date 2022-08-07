@@ -51,6 +51,9 @@ module.exports = (db) => {
   // GET login form
   router.get("/login", (req, res) => { });
 
+  // POST login
+  router.post('/login', (req, res) => {});
+
   // POST logout
   router.post("/logout", (req, res) => { });
 
