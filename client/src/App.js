@@ -5,6 +5,7 @@ import "./styles/letterItem.scss";
 import { Navbar } from "./components/Navbar";
 import { Form } from "./components/Form";
 import { UserInformation } from "./components/UserInfomation"
+import { UserProvider } from "./UserContext";
 
 import { LetterList } from "./components/LetterList";
 
@@ -13,24 +14,26 @@ function App() {
 
   return (
     <div className="App">
-      <Navbar />
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <button
-              onClick={() => {
-                navigate("/letters");
-              }}
-            >
-              All Letters{" "}
-            </button>
-          }
-        />
-        <Route path="/letters" element={<LetterList />} />
-        <Route path="/letters/new" element={<Form />} />
-        <Route path="/letters/profile" element={<UserInformation />} />
-      </Routes>
+      <UserProvider>
+        <Navbar />
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <button
+                onClick={() => {
+                  navigate("/letters");
+                }}
+              >
+                All Letters{" "}
+              </button>
+            }
+          />
+          <Route path="/letters" element={<LetterList />} />
+          <Route path="/letters/new" element={<Form />} />
+          <Route path="/letters/profile" element={<LetterList />} />
+        </Routes>
+      </UserProvider>
     </div>
   );
 }
