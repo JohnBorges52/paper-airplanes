@@ -1,7 +1,24 @@
 .letterItem {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+  width: 60px;
   border: solid;
   border-width: 3px;
   border-color: red;
   padding: 6px;
   margin: 1em;
+}
+@media (min-width: 745px) {
+  .letterItem {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 120px;
+    border: solid;
+    border-width: 3px;
+    border-color: red;
+    padding: 6px;
+    margin: 1em;
+  }
 }
