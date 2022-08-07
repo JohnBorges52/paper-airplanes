@@ -30,7 +30,7 @@ module.exports = (db) => {
     */
   });
 
-  router.post("/new", (req, res) => {
+  router.post("/letters/:id/responses/new", (req, res) => {
     const response = req.body.response
     const responder_id = req.session.user_id
     const letter_id = req.params.letter_id      /*??????? IDK IF THIS WORKS*/

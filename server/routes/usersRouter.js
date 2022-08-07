@@ -1,3 +1,5 @@
+const { response } = require("../app");
+
 const router = require("express").Router();
 
 module.exports = (db) => {
@@ -11,17 +13,12 @@ module.exports = (db) => {
 
   // GET new user form
   router.get("/register", (req, res) => {
-    email = req.body.email
-    password = req.body.password
+    userID = req.session.user_id
 
-    const templateVars = { email: email, password: password }   /* <= BCRYPT?*/
-
-    if (!db.query(`SELECT * FROM users WHERE email = $1;`, [email])) {
-      res.render("/", templateVars)
+    if (!userID) {
+      res.redirect("/register")
     }
-
-    return res.status(400).send("EMAIL ALREADY EXISTS")
-
+    res.redirect("/")
     // if logged in:
     //   redirect home
     // if not logged in:
@@ -29,7 +26,27 @@ module.exports = (db) => {
   });
 
   //POST create a new user
-  router.post("/", (req, res) => { });
+  router.post("/register", (req, res) => {
+    // email = req.body.email
+    // password = req.body.password
+
+    // const username = user.username;
+    // const email = user.email;
+    // const password = user.password;
+
+    // db.query(`
+    // INSERT INTO users (username, email, password) VALUES ($1, $2, $3);
+    // `, [usernamegenerator(), email, password])
+    //   .then((user) => {
+    //     if (!user) {
+    //       res.send({ error: "error" });
+    //       return;
+    //     }
+    //     req.session.userId
+    //   });
+
+    // res.render("")
+  });
 
   // GET login form
   router.get("/login", (req, res) => { });

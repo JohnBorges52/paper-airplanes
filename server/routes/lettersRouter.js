@@ -8,7 +8,7 @@ module.exports = (db) => {
       WHERE active = true`;
     db.query(queryString)
       .then((data) => {
-        return;
+        res.json(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
@@ -41,11 +41,11 @@ module.exports = (db) => {
   //GET letter by ID
   router.get("/:letter_id", (req, res) => {
     const queryString = `
-  SELECT *
-  FROM letters
-  `;
+    SELECT *
+    FROM letters
+    `;
     db.query(queryString)
-      .then((data) => {})
+      .then((data) => { })
 
       .catch((err) => {
         res.status(500).json({ error: err.message });
