@@ -1,3 +1,5 @@
+// Mobile View
+
 .letterItem {
   display: flex;
   flex-direction: column-reverse;
@@ -9,6 +11,8 @@
   padding: 6px;
   margin: 1em;
 }
+
+//Desktop View
 @media (min-width: 745px) {
   .letterItem {
     display: flex;
