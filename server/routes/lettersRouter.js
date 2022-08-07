@@ -1,7 +1,7 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  //GET all active maps
+  //GET all active letters
   router.get("/", (req, res) => {
     const queryString = `
       SELECT * FROM letters
@@ -17,12 +17,11 @@ module.exports = (db) => {
 
   //GET subset of letters based on logged in user
   router.get("/profile", (req, res) => {
-    // this is in /letters because the queries will look like SELECT * FROM letters
     const queryString = `
     SELECT DISTINCT ON(letters.id) letters.message, letters.id,
-    FROM letters
+    FROM letters where sender_id = $1
 `;
-    db.query(queryString)
+    db.query(queryString, [req.session.userId])
       .then((data) => {
         //requires cookie sessions
       })
@@ -42,11 +41,12 @@ module.exports = (db) => {
   router.get("/:letter_id", (req, res) => {
     const queryString = `
     SELECT *
-    FROM letters
+    FROM letters where letters.id = $1
     `;
-    db.query(queryString)
-      .then((data) => { })
-
+    db.query(queryString, [req.params.letter_id])
+      .then((data) => {
+        res.json(data.rows);
+      })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
