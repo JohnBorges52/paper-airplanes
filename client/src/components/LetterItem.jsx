@@ -1,5 +1,5 @@
 import React from "react"
-
+import { Button } from "./Button"
 
 export const LetterItem = (props) => {
 
@@ -12,6 +12,7 @@ export const LetterItem = (props) => {
       <p className="letterMessage">{props.letterMessage}</p>
       <footer className="letterType">
         Type:{props.type}
+        <Button>Flag</Button>
       </footer>
     </div>
   )
