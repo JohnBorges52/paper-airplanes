@@ -1,7 +1,7 @@
 import React from "react"
 import { useEffect, useState } from "react"
 import axios from 'axios'
-
+import { LetterItem } from "./LetterItem"
 
 export const LetterList = () => {
   const  [data, setData] = useState([])
@@ -12,7 +12,12 @@ export const LetterList = () => {
   }, [])
   return (
     <>
-      {data.map((letter) => <p key={letter.id}>{letter.letter_message}</p>)}
+      {data.map((letter) => 
+      <LetterItem 
+      key={letter.id} 
+      letterMessage={letter.letter_message}
+      type={letter.type}
+      />)}
     </>
   )
 
