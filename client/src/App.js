@@ -4,6 +4,7 @@ import "./App.css";
 import "./styles/letterItem.scss";
 import { Navbar } from "./components/Navbar";
 import { Form } from "./components/Form";
+import { UserInformation } from "./components/UserInfomation"
 
 import { LetterList } from "./components/LetterList";
 
@@ -27,7 +28,8 @@ function App() {
           }
         />
         <Route path="/letters" element={<LetterList />} />
-        <Route path="/letters/new" element={<Form/>} />
+        <Route path="/letters/new" element={<Form />} />
+        <Route path="/letters/profile" element={<UserInformation />} />
       </Routes>
     </div>
   );

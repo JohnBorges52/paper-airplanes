@@ -16,6 +16,16 @@ module.exports = (db) => {
   });
 
   //GET subset of letters based on logged in user
+  router.get("/:id", (req, res) => {
+    db.query(`SELECT * FROM letters WHERE id = $1;`, [req.params.id]).then(
+      (data) => {
+        res.json(data.rows);
+      }
+    );
+  });
+
+
+
   router.get("/profile", (req, res) => {
     const queryString = `
     SELECT DISTINCT ON(letters.id) letters.message, letters.id,

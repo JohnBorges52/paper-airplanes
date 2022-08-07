@@ -5,11 +5,11 @@ import { LetterItem } from "./LetterItem"
 
 export const LetterList = () => {
   const  [data, setData] = useState([])
-  useEffect(()=>{
+  useEffect(()=> {
     axios.get('/letters')
-      .then(res => setData(res.data)) //data =
-      // .then(data_from_above => setData(data_from_above))
+      .then(res => setData(res.data)) 
   }, [])
+  
   return (
     <>
       {data.map((letter) => 
