@@ -12,7 +12,7 @@ module.exports = (db) => {
 
   // GET a specific response
   router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM responses WHERE letter_id = $1;`, [req.query.id]).then(
+    db.query(`SELECT * FROM responses WHERE letter_id = $1;`, [req.params.id]).then(
       (data) => {
         res.json(data.rows);
       }

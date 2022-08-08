@@ -32,7 +32,7 @@ export const LetterDetail = (props) => {
         Type:{data.type}
         <Button>Flag</Button>
       </footer>
-      {data.type === 'request' && <Form />}
+      {(data.type === 'request'&& userID !== data.sender_id) && <Form />}
 
       {userID === data.sender_id && responses.message}
     </div>
