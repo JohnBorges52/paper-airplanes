@@ -7,9 +7,8 @@ export const Login = () => {
   const[userEmail, setUserEmail] = useState("")
   const{userID, setUserID} = useContext(UserContext);
   const getUserId =  (email) => {
-    axios.post('/users/login', {email})
+    axios.get('/users/login/success', {params:{email}})
     .then(res=>{setUserID(res.data[0].id)})
-    .then(console.log(userID))
 
 
   }
@@ -20,7 +19,7 @@ export const Login = () => {
     <div className="login">
       <input type="email" id="email" placeholder="email" onChange={(event)=>{setUserEmail(event.target.value)}}/>
       <input type="text" placeholder="password" />
-      <button onClick={()=>{console.log(userEmail)}}>Other</button>
+      <button onClick={()=>{console.log(userID)}}>Other</button>
       <button onClick={()=>{getUserId(userEmail)}}>Submit</button>
     </div>
   )

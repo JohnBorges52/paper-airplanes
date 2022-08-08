@@ -49,12 +49,12 @@ module.exports = (db) => {
   });
 
   // GET login form
-  router.post("/login", (req, res) => { 
+  router.get("/login/success", (req, res) => { 
     const queryString = "SELECT * FROM users where email=$1";
-    db.query(queryString, [req.body.email]).then((data) => {
+    db.query(queryString, [req.query.email]).then((data) => {
       res.json(data.rows);
     });
-    // console.log(req.body.email)
+    console.log(req.query.email)
   });
 
   // POST login
