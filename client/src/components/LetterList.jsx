@@ -1,32 +1,44 @@
 import React from "react"
 import { useEffect, useState } from "react"
+import { useNavigate } from "react-router-dom"
 import axios from 'axios'
-import { LetterItem } from "./LetterItem"
+import { LetterListItem } from "./LetterListItem"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 
 
 export const LetterList = (props) => {
-  const{userID, setUserID} = useContext(UserContext);
+  const navigate = useNavigate();
+  const { userID, setUserID } = useContext(UserContext);
   console.log(userID)
- 
-  const  [data, setData] = useState([])
-    useEffect(()=> {
-          axios.get(`${props.path}`, {params:{userID}})
-          .then(res => setData(res.data))
-          .then(console.log(props.path)) 
-                    
-      }, [props.path])
-  
+
+  const [data, setData] = useState([])
+  const [currentLetter, setCurrentLetter] = useState({})
+  useEffect(() => {
+    axios.get(`${props.path}`, { params: { userID } })
+      .then(res => setData(res.data))
+      .then(console.log(props.path))
+
+  }, [props.path])
+
+  console.log("++++++++++++++++++", currentLetter)
+
   return (
     <>
-      {data.map((letter) => 
-      <LetterItem 
-      key={letter.id} 
-      letterMessage={letter.letter_message}
-      type={letter.type}
-      />)}
-    
+      {data.map((letter) =>
+        <LetterListItem
+          key={letter.id}
+          id={letter.id}
+          letterMessage={letter.letter_message}
+          letter={letter}
+          setCurrentLetter={setCurrentLetter}
+          type={letter.type}
+          onClick={() => {
+            console.log('hello')
+            navigate("/letters/detail", { state: { id: letter.id } })
+          }}
+        />)}
+
     </>
   )
 

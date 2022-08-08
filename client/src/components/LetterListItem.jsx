@@ -1,10 +1,16 @@
 import React from "react"
 import { Button } from "./Button"
+import { useNavigate } from "react-router-dom"
 
-export const LetterItem = (props) => {
+export const LetterListItem = (props) => {
+  // console.log("++++++++++++++++++", props)
+  const navigate = useNavigate();
 
-  return(
-    <div className="letterItem">
+  const { letter, setCurrentLetter } = props
+  return (
+    <div className="letterItem"
+      //    onClick={() => setCurrentLetter(letter)}>
+      onClick={() => navigate(`/letters/${letter.id}`)}>
       <style>
         @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
       </style>
