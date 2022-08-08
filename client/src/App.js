@@ -31,7 +31,7 @@ function App() {
           />
           <Route path="/letters" element={<LetterList />} />
           <Route path="/letters/new" element={<Form />} />
-          <Route path="/letters/profile" element={<LetterList />} />
+          <Route path="/profile" element={<LetterList />} />
         </Routes>
       </UserProvider>
     </div>

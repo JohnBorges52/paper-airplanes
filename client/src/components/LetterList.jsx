@@ -18,8 +18,10 @@ export const LetterList = () => {
         .then(res => setData(res.data)) 
       }
       else {
-        axios.get(`/letters/${userID}`)
+        axios.get(`/letters/profile/${userID}`)
         .then(res => setData(res.data)) 
+        // axios.post(`/letters/profile`, {userID})
+        // .then(res => setData(res.data)) 
 
       }
       }, [userID])

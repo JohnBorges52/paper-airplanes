@@ -15,52 +15,68 @@ module.exports = (db) => {
       });
   });
 
+  
+  
+  // router.get("/mine", (req, res) => {
+  //   const queryString = `
+  //   SELECT * 
+  //   FROM letters WHERE sender_id = 1`;
+  //   db.query(queryString)
+  //   .then((data) => {
+  //     res.json(data.rows);
+  //   })
+  //   .catch((err) => {
+  //     res.status(500).json({ error: err.message });
+  //   });
+  // });
+  // router.post("/profile", (req,res)=>{
+  //     console.log(req.body.userID)
+  //     req.url(`/profile/${req.body.userID}`)
+  //   })
+  
   //GET subset of letters based on logged in user
-  router.get("/:id", (req, res) => {
-    db.query(`SELECT * FROM letters WHERE id = $1;`, [req.params.id]).then(
-      (data) => {
-        res.json(data.rows);
-      }
-    );
-  });
-
-
-
-  router.get("/profile", (req, res) => {
-    const queryString = `
-    SELECT DISTINCT ON(letters.id) letters.message, letters.id,
-    FROM letters where sender_id = $1
-`;
-    db.query(queryString, [req.session.userId])
-      .then((data) => {
-        //requires cookie sessions
-      })
-      .catch((err) => {
-        res.status(500).json({ error: err.message });
-      });
-  });
-
-  //GET new letter form
-  router.get("/new", (req, res) => {
-    // if logged in
-    //    render page with form for new letter
-    return;
-  });
-
-  //GET letter by ID
-  router.get("/:letter_id", (req, res) => {
+  router.get("/profile/:id", (req, res) => {
     const queryString = `
     SELECT *
-    FROM letters where letters.id = $1
-    `;
-    db.query(queryString, [req.params.letter_id])
+    FROM letters where sender_id = $1`;
+    db.query(queryString, [req.params.id])
       .then((data) => {
         res.json(data.rows);
       })
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
-  });
+    });
+    
+      
+      //GET new letter form
+      router.get("/new", (req, res) => {
+        // if logged in
+        //    render page with form for new letter
+        return;
+      });
+      
+      router.get("/:id", (req, res) => {
+        db.query(`SELECT * FROM letters WHERE id = $1;`, [req.params.id]).then(
+          (data) => {
+            res.json(data.rows);
+          }
+        );
+      });
+  //GET letter by ID
+  // router.get("/:letter_id", (req, res) => {
+  //   const queryString = `
+  //   SELECT *
+  //   FROM letters where letters.id = $1
+  //   `;
+  //   db.query(queryString, [req.params.letter_id])
+  //     .then((data) => {
+  //       res.json(data.rows);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
   return router;
 };
