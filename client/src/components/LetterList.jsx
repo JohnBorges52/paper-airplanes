@@ -18,19 +18,17 @@ export const LetterList = () => {
         .then(res => setData(res.data)) 
       }
       else {
-        axios.post(`/letters/profile/`, {userID})
-        .then(res => setData(res.data))
-        .then(console.log(data)) 
-        // axios.post(`/letters/profile`, {userID})
-        // .then(res => setData(res.data)) 
-
-      }
+          axios.get(`/letters/profile`, {params:{userID}})
+          .then(res => setData(res.data))
+          .then(console.log(data)) 
+          // axios.post(`/letters/profile`, {userID})
+          // .then(res => setData(res.data)) 
+          
+        }
       }, [userID])
   
   return (
     <>
-      <button onClick={() => {setUserID(userID === null ? 1 : null )}}>click here aaaa</button>
-
       {data.map((letter) => 
       <LetterItem 
       key={letter.id} 

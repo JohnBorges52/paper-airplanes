@@ -10,11 +10,8 @@ export const Login = () => {
     axios.get('/users/login/success', {params:{email}})
     .then(res=>{setUserID(res.data[0].id)})
 
-
   }
 
-
-  
   return(
     <div className="login">
       <input type="email" id="email" placeholder="email" onChange={(event)=>{setUserEmail(event.target.value)}}/>
