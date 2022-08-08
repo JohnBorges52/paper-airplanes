@@ -49,10 +49,27 @@ module.exports = (db) => {
   });
 
   // GET login form
-  router.get("/login", (req, res) => { });
+  router.post("/login", (req, res) => { 
+    const queryString = "SELECT * FROM users where email=$1";
+    db.query(queryString, [req.body.email]).then((data) => {
+      res.json(data.rows);
+    });
+    // console.log(req.body.email)
+  });
 
   // POST login
-  router.post('/login', (req, res) => {});
+  // router.post('/login', (req, res) => {
+  //       const queryString = `
+  //   SELECT id
+  //   FROM users where email = $1`;
+  //   db.query(queryString, [req.body.email])
+  //     .then((data) => {
+  //       res.json(data.rows);
+  //     })
+  //     .catch((err) => {
+  //       res.status(500).json({ error: err.message });
+  //     });
+  // });
 
   // POST logout
   router.post("/logout", (req, res) => { });
