@@ -30,9 +30,9 @@ function App() {
               </button>
             }
           />
-          <Route path="/letters" element={<LetterList />} />
+          <Route path="/letters" element={<LetterList path={"/letters"} />} />
           <Route path="/letters/new" element={<Form />} />
-          <Route path="/letters/profile" element={<LetterList />} />
+          <Route path="/letters/profile" element={<LetterList path={"/letters/profile"} />} />
           <Route path="/users/login" element={<Login />} />
 
         </Routes>

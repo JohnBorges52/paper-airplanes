@@ -6,26 +6,17 @@ import { UserContext } from "../UserContext";
 import { useContext } from "react";
 
 
-export const LetterList = () => {
+export const LetterList = (props) => {
   const{userID, setUserID} = useContext(UserContext);
   console.log(userID)
  
   const  [data, setData] = useState([])
     useEffect(()=> {
-      if(userID === null) {
-
-        axios.get(`/letters`)
-        .then(res => setData(res.data)) 
-      }
-      else {
-          axios.get(`/letters/profile`, {params:{userID}})
+          axios.get(`${props.path}`, {params:{userID}})
           .then(res => setData(res.data))
-          .then(console.log(data)) 
-          // axios.post(`/letters/profile`, {userID})
-          // .then(res => setData(res.data)) 
-          
-        }
-      }, [userID])
+          .then(console.log(props.path)) 
+                    
+      }, [props.path])
   
   return (
     <>
