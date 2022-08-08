@@ -5,15 +5,20 @@ import { Button } from "./Button"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Form } from "./Form"
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
 export const LetterDetail = (props) => {
   let { id } = useParams();
   // alert(id)
-
+  const { userID, setUserID } = useContext(UserContext);
   const [data, setData] = useState("")
+  const [responses, setResponses] = useState({})
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
+    axios.get(`/responses/${id}`)
+        .then(res=>setResponses(res.data[0]))
   }, [])
 
   return (
@@ -28,6 +33,8 @@ export const LetterDetail = (props) => {
         <Button>Flag</Button>
       </footer>
       {data.type === 'request' && <Form />}
+
+      {userID === data.sender_id && responses.message}
     </div>
   )
 }
