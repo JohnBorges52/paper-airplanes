@@ -8,6 +8,7 @@ import { UserInformation } from "./components/UserInfomation"
 import { UserProvider } from "./UserContext";
 
 import { LetterList } from "./components/LetterList";
+import { Login } from "./components/Login";
 
 function App() {
   const navigate = useNavigate();
@@ -32,6 +33,8 @@ function App() {
           <Route path="/letters" element={<LetterList />} />
           <Route path="/letters/new" element={<Form />} />
           <Route path="/profile" element={<LetterList />} />
+          <Route path="/login" element={<Login />} />
+
         </Routes>
       </UserProvider>
     </div>
