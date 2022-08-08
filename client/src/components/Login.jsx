@@ -1,11 +1,15 @@
 import axios from "axios";
 import { useState } from "react"
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
 
 export const Login = () => {
-
+  const{userID, setUserID} = useContext(UserContext);
   const getUserId =  (email) => {
     axios.post('/users/login', {email})
-    .then(res=>{console.log(res.data[0].id)})
+    .then(res=>{setUserID(res.data[0].id)})
+    .then(console.log(userID))
+
 
   }
 
