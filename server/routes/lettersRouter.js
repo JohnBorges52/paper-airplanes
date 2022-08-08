@@ -29,10 +29,18 @@ module.exports = (db) => {
   //     res.status(500).json({ error: err.message });
   //   });
   // });
-  // router.post("/profile", (req,res)=>{
-  //     console.log(req.body.userID)
-  //     req.url(`/profile/${req.body.userID}`)
-  //   })
+  router.post("/profile", (req,res)=>{
+    const queryString = `
+    SELECT *
+    FROM letters where sender_id = $1`;
+    db.query(queryString, [req.body.userID])
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+    })
   
   //GET subset of letters based on logged in user
   router.get("/profile/:id", (req, res) => {
