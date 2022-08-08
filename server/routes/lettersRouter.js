@@ -15,8 +15,6 @@ module.exports = (db) => {
       });
   });
 
-
-
   // router.get("/mine", (req, res) => {
   //   const queryString = `
   //   SELECT * 
@@ -29,6 +27,8 @@ module.exports = (db) => {
   //     res.status(500).json({ error: err.message });
   //   });
   // });
+
+
   router.get("/profile", (req, res) => {
     const queryString = `
     SELECT *
@@ -56,11 +56,15 @@ module.exports = (db) => {
   //     });
   // });
 
-
   //GET new letter form
-  router.get("/new", (req, res) => {
-    // if logged in
-    //    render page with form for new letter
+  router.post("/new", (req, res) => {
+    const queryString = `INSERT INTO letters (letter_message, type, sender_id)
+    VALUES ($1, $2, $3)
+    `;
+    db.query(queryString, [req.body.message, req.body.letterType, req.body.senderID])
+    // console.log(req.body)
+
+
     return;
   });
 

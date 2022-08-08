@@ -1,10 +1,20 @@
 import { useState } from "react"
 import { Button } from "./Button"
 import { TypeSelector } from "./TypeSelector"
+import { useContext } from "react";
+import { UserContext } from "../UserContext";
+import axios from "axios";
 
 export const Form = (props) => {
-  const [message, setMessage] = useState("")
-  const [letterType, setLetterType] = useState("request")
+  const {userID} = useContext(UserContext);
+  const [message, setMessage] = useState("");
+  const [letterType, setLetterType] = useState("request");
+
+  const submitMessage = (message, letterType, senderID) => {
+    axios.post(`/letters/new`, {message, letterType, senderID})
+    
+  }
+
 
   return (
     <div>
@@ -15,7 +25,7 @@ export const Form = (props) => {
       </form>
       <TypeSelector onChange={(event) => {setLetterType(event.target.value)}}></TypeSelector>
       <Button onClick={()=>{console.log(letterType, message)}}>Submit</Button>
-      <Button onClick={()=>{console.log("Cancel")}}>Cancel</Button>
+      <Button onClick={()=> {submitMessage(message, letterType, userID)}}>Cancel</Button>
     </div>
   )
 }
