@@ -40,10 +40,11 @@ export const LetterDetail = (props) => {
       {<p className="letterMessage">FLAG_COUNT: {data.flag_count}</p>}
       <footer className="letterType">
         Type:{data.type}
-        <Button onClick={() =>{updateFlagCount()}}> Flag</Button>
       </footer>
-      {(userID && userID !== data.sender_id && data.type === 'request') && <Form letterID={id} isResponse={true}/>}
+      
+      {userID && userID !== data.sender_id && data.type === 'request' && <Form letterID={id} isResponse={true}/>}
       {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
+      {userID && userID !== data.sender_id && <Button onClick={() =>{updateFlagCount()}}> Flag</Button>}
     </div>
   )
 }
