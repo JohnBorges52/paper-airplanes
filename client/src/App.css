@@ -6,6 +6,10 @@
   padding-bottom: 4.2rem;
 }
 
+.nav-bar{
+  z-index: 1;
+}
+
 .App-logo {
   height: 40vmin;
   pointer-events: none;
