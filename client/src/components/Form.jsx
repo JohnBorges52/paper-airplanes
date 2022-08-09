@@ -12,13 +12,13 @@ export const Form = (props) => {
 
   const submitMessage = (message, letterType, senderID) => {
     axios.post(`/letters/new`, {message, letterType, senderID})
-    .then(setMessage(''))
+    .then(alert(`Letter Saved!`))
     
     
   }
   const submitResponse = (message, letterID, responderID) => {
     axios.post(`/responses/new`, {message, letterID, responderID})
-    .then(setMessage(''))
+    .then(alert(`Response Sent!`))
     
     
   }
