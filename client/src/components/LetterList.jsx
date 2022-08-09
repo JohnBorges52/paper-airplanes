@@ -5,6 +5,7 @@ import axios from 'axios';
 import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import '../styles/letterItem.scss'
 
 export const LetterList = (props) => {
   const navigate = useNavigate();
@@ -25,7 +26,7 @@ export const LetterList = (props) => {
     <>
 
       {data.map((letter) =>
-        <LetterListItem
+        <LetterListItem className = "letterItem"
           key={letter.id}
           id={letter.id}
           letterMessage={letter.letter_message}

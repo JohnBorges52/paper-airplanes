@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
-import classNames from "classnames"
+import classNames from "classnames";
 // Material UI
 import Card from '@mui/material/Card';
 import CardActions from "@mui/material/CardActions";
@@ -32,19 +32,30 @@ export const LetterListItem = (props) => {
     setExpanded(!expanded);
   };
 
-  const disabled = classNames({"Mui-disabled" : props.letterMessage.length < 60})
+  const disabled = classNames({ "Mui-disabled": props.letterMessage.length < 60 });
 
   const longLetter = (message) => {
-    if(message.length > 60){
-      return true
+    if (message.length > 60) {
+      return true;
     }
-    else{
-      return false
+    else {
+      return false;
     }
-  }
+  };
+
+  const cardStyle = {
+    height: "30vh",
+    width: "85vw",
+    margin: "20px",
+    display: "flex",
+    "flex-direction": "row"
+  };
+
 
   return (
-    <Card sx={{ width: 275, margin: 1, padding: 1 }}
+    <Card className="letterItem"
+      sx={{ width: 275, margin: 1, padding: 1 }}
+      style={cardStyle}
     //    onClick={() => setCurrentLetter(letter)}>
     // onClick={() => navigate(`/letters/${letter.id}`)}
     >
@@ -52,26 +63,50 @@ export const LetterListItem = (props) => {
         @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
       </style>
       {/* <h5>Hello friend</h5> */}
-      {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
-      
-      <Collapse in={expanded} timeout="100" unmountOnExit>
-        <p className="letterMessage">{props.letterMessage}</p>
-      </Collapse>
-      <CardActions>
-        <ExpandMore className={disabled}
-          expand={expanded}
-          onClick={handleExpandClick}
-          aria-expanded={expanded}
-          aria-label="show more"
-        >
-          <ExpandCircleDownOutlinedIcon />
-        </ExpandMore>
-      </CardActions>
+      <div className='toomany' style={{  display: "flex",
+  "flex-direction": "column",
+  "justify-content": "space-between",
+  width: "100%"}}>
+        <div className='john' style={{display: 'flex', "flex-direction":"row", width: "100%", "justify-content": "space-between" }}>
 
 
-      <footer className="letterType">
-        Type: {props.type}
-      </footer>
+          <div>
+            <p>🎈</p>
+
+          </div>
+          <div style={{width: "90%"}}>
+
+
+            {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
+          </div>
+          <Collapse in={expanded} timeout="100" unmountOnExit>
+            <p className="letterMessage">{props.letterMessage}</p>
+          </Collapse>
+        </div>
+          <footer>
+            <div>
+
+              Type: {props.type}
+            </div>
+            <CardActions>
+              <ExpandMore className={disabled}
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more"
+              >
+                <ExpandCircleDownOutlinedIcon />
+              </ExpandMore>
+            </CardActions>
+          </footer>
+      </div>
+
+
+
+
+
+
+
     </Card>
   );
 };
