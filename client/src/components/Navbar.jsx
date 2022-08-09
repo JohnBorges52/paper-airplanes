@@ -1,3 +1,4 @@
+import Button from '@mui/material/Button';
 import { useNavigate } from "react-router-dom";
 
 export const Navbar = () => {
@@ -10,6 +11,7 @@ export const Navbar = () => {
         <li className="nav-link" onClick={() => { navigate("/letters/new") }}>New Letter</li>
         <li className="nav-link" onClick={() => { navigate("/letters/profile") }}>My Letters</li>
         <li className="nav-link" onClick={() => { navigate("/users/login") }}>Login</li>
+        <Button onClick={() => { navigate("/letters") }} variant="contained">Hello World</Button>
       </ul>
     </div>
   )
