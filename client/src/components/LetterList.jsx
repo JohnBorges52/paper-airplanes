@@ -6,7 +6,6 @@ import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 
-
 export const LetterList = (props) => {
   const navigate = useNavigate();
   const { userID, setUserID } = useContext(UserContext);
@@ -14,7 +13,7 @@ export const LetterList = (props) => {
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
-  
+
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
       .then(res => setData(res.data))
@@ -33,10 +32,10 @@ export const LetterList = (props) => {
           letter={letter}
           setCurrentLetter={setCurrentLetter}
           type={letter.type}
-          // onClick={() => {
-          //   console.log('hello');
-          //   navigate("/letters/detail", { state: { id: letter.id } });
-          // }}
+        // onClick={() => {
+        //   console.log('hello');
+        //   navigate("/letters/detail", { state: { id: letter.id } });
+        // }}
         />)}
 
     </>

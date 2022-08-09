@@ -3,6 +3,7 @@
   flex-direction: column;
   align-items: center;
   background-color: slategray;
+  padding-bottom: 4.2rem;
 }
 
 .App-logo {
