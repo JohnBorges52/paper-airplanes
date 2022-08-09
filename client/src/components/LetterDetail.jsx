@@ -13,12 +13,12 @@ export const LetterDetail = (props) => {
   // alert(id)
   const { userID, setUserID } = useContext(UserContext);
   const [data, setData] = useState("")
-  const [responses, setResponses] = useState({})
+  const [responses, setResponses] = useState([])
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
     axios.get(`/responses/${id}`)
-        .then(res=>setResponses(res.data[0]))
+        .then(res=>setResponses(res.data))
   }, [])
 
   return (
@@ -34,7 +34,8 @@ export const LetterDetail = (props) => {
       </footer>
       {(data.type === 'request'&& userID !== data.sender_id) && <Form />}
 
-      {userID === data.sender_id && responses.message}
+
+      {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
     </div>
   )
 }
