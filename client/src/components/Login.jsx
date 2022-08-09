@@ -16,8 +16,8 @@ export const Login = () => {
     <div className="login">
       <input type="email" id="email" placeholder="email" onChange={(event)=>{setUserEmail(event.target.value)}}/>
       <input type="text" placeholder="password" />
-      <button onClick={()=>{console.log(userID)}}>Other</button>
       <button onClick={()=>{getUserId(userEmail)}}>Submit</button>
+      <button onClick={()=>{console.log(userID)}}>Other</button>
     </div>
   )
 }

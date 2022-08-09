@@ -1,11 +1,12 @@
-import logo from "./logo.svg";
-import { Route, Link, Routes, useNavigate } from "react-router-dom";
+
+import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import "./styles/letterItem.scss";
 import { Navbar } from "./components/Navbar";
 import { Form } from "./components/Form";
 import { UserInformation } from "./components/UserInfomation";
 import { UserProvider } from "./UserContext";
+import { LetterNew } from "./components/LetterNew";
 
 import { LetterList } from "./components/LetterList";
 import { LetterDetail } from "./components/LetterDetail";
@@ -32,7 +33,7 @@ function App(props) {
             }
           />
           <Route path="/letters" element={<LetterList path={"/letters"} />} />
-          <Route path="/letters/new" element={<Form />} />
+          <Route path="/letters/new" element={<LetterNew />} />
           <Route
             path="/letters/profile"
             element={<LetterList path={"/letters/profile"} />}
