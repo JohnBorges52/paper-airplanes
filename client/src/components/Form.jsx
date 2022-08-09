@@ -12,9 +12,16 @@ export const Form = (props) => {
 
   const submitMessage = (message, letterType, senderID) => {
     axios.post(`/letters/new`, {message, letterType, senderID})
+    .then(setMessage(''))
+    
     
   }
-
+  const submitResponse = (message, letterID, responderID) => {
+    axios.post(`/responses/new`, {message, letterID, responderID})
+    .then(setMessage(''))
+    
+    
+  }
 
   return (
     <div>
@@ -23,9 +30,10 @@ export const Form = (props) => {
         <label>Message</label>
         <textarea name="message" id="message-id" cols="30" rows="10" placeholder="Type Here"></textarea>
       </form>
-      <TypeSelector onChange={(event) => {setLetterType(event.target.value)}}></TypeSelector>
-      <Button onClick={()=>{console.log(letterType, message)}}>Submit</Button>
-      <Button onClick={()=> {submitMessage(message, letterType, userID)}}>Cancel</Button>
+      {console.log(props.letterID)}
+      {!props.isResponse && <TypeSelector onChange={(event) => {setLetterType(event.target.value)}}></TypeSelector>}
+      {!props.isResponse && <Button onClick={()=> {submitMessage(message, letterType, userID); }}>Submit</Button>}
+      {props.isResponse && <Button onClick={()=> {submitResponse(message, props.letterID, userID); }}>Submit</Button>}
     </div>
   )
 }
