@@ -21,8 +21,6 @@ export const LetterList = (props) => {
 
   }, [props.path]);
 
-  console.log("++++++++++++++++++", currentLetter);
-
   return (
     <>
 
@@ -34,10 +32,10 @@ export const LetterList = (props) => {
           letter={letter}
           setCurrentLetter={setCurrentLetter}
           type={letter.type}
-          onClick={() => {
-            console.log('hello');
-            navigate("/letters/detail", { state: { id: letter.id } });
-          }}
+          // onClick={() => {
+          //   console.log('hello');
+          //   navigate("/letters/detail", { state: { id: letter.id } });
+          // }}
         />)}
 
     </>
