@@ -15,6 +15,7 @@ export const LetterDetail = (props) => {
   const [data, setData] = useState("")
   const [responses, setResponses] = useState([])
   const [flagCount, setFlagCount] = useState([])
+  const [reported, setReported] = useState(false)
 
   useEffect(() => {
     axios.get(`/letters/${id}`)
@@ -27,8 +28,14 @@ export const LetterDetail = (props) => {
     console.log("ID = ", id)
     axios.put(`/letters/${id}`)
     .then((res) => setFlagCount([res.data]))
-    
   }
+
+  const report = () => {
+    updateFlagCount()
+    setReported(true)
+    alert("The post have been reported")
+  }
+
 
   return (
     <div className="letterDetail">
@@ -41,10 +48,10 @@ export const LetterDetail = (props) => {
       <footer className="letterType">
         Type:{data.type}
       </footer>
-      
+
       {userID && userID !== data.sender_id && data.type === 'request' && <Form letterID={id} isResponse={true}/>}
       {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
-      {userID && userID !== data.sender_id && <Button onClick={() =>{updateFlagCount()}}> Flag</Button>}
+      {userID && userID !== data.sender_id && !reported && <Button onClick={() =>{ report()}}> Flag</Button>}
     </div>
   )
 }
