@@ -14,6 +14,7 @@ export const LetterList = (props) => {
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
+  
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
       .then(res => setData(res.data))
