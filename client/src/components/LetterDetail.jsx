@@ -52,7 +52,7 @@ export const LetterDetail = (props) => {
     //   </footer> */}
 
       <Card className="cardStyle letter-item-vh"
-      sx={{ margin: 1, padding: 1, backgroundColor: grey[200] }}
+      sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
     >
       <div className='letter-wrapper-primary'>
           <div>
@@ -71,7 +71,7 @@ export const LetterDetail = (props) => {
       
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {userID === data.sender_id && responses.map(e=>      <Card className="response-cardStyle letter-item-vh"
-      sx={{ padding: 1, backgroundColor: purple[50] }}
+      sx={{ padding: 1, backgroundColor: deepPurple[100] }}
     >
       <div className='letter-wrapper-primary'>
           <div>
