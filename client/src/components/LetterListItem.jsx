@@ -10,6 +10,10 @@ import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import { styled } from '@mui/material/styles';
 
+import {Hidden} from '@mui/material/Hidden';
+
+
+
 // Material UI Icons
 import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
@@ -39,6 +43,7 @@ export const LetterListItem = (props) => {
 
   const disabled = classNames( { "Mui-disabled": props.letterMessage.length < 60 });
   const expandedDiv = classNames("cardStyle",{ 'letterItem': !expanded }, { 'letter-item-vh': expanded });
+
 
   const longLetter = (message) => {
     if (message.length > 60) {
@@ -74,7 +79,7 @@ export const LetterListItem = (props) => {
           </div>
           
           <CardActions className="letter-actions" >
-            {userID && userID !== props.sender_id && props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />}
+            {userID && userID !== props.sender_id && props.type === 'request' ? <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <DriveFileRenameOutlineOutlinedIcon className="hidden-component" /> }
               <ExpandCircleDownOutlinedIcon className={disabled} color="action"
               expand={expanded}
               onClick={handleExpandClick}
