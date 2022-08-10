@@ -49,9 +49,10 @@ export const LetterDetail = (props) => {
         Type:{data.type}
       </footer>
 
-      {userID && userID !== data.sender_id && data.type === 'request' && <Form letterID={id} isResponse={true}/>}
+      {<Form letterID={id} isResponse={true}/>}
       {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
       {userID && userID !== data.sender_id && !reported && <Button onClick={() =>{ report()}}> Flag</Button>}
+      
     </div>
   )
 }

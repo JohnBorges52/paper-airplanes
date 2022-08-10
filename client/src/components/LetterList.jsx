@@ -30,7 +30,8 @@ export const LetterList = (props) => {
           key={letter.id}
           id={letter.id}
           letterMessage={letter.letter_message}
-          letter={letter}
+     //     letter={letter}
+          senderID = {letter.sender_id}
           setCurrentLetter={setCurrentLetter}
           type={letter.type}
         // onClick={() => {

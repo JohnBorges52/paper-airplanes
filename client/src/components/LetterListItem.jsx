@@ -1,6 +1,9 @@
 import { useState } from "react";
 import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
+import { UserContext } from "../UserContext";
+import { useContext } from "react";
+
 // Material UI
 import Card from '@mui/material/Card';
 import CardActions from "@mui/material/CardActions";
@@ -9,8 +12,9 @@ import { styled } from '@mui/material/styles';
 
 // Material UI Icons
 import IconButton from "@mui/material/IconButton";
-import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
+import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -26,7 +30,8 @@ const ExpandMore = styled((props) => {
 export const LetterListItem = (props) => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-  // const { letter, setCurrentLetter } = props;
+  const { letter, setCurrentLetter } = props;
+  const { userID, setUserID } = useContext(UserContext);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -50,7 +55,7 @@ export const LetterListItem = (props) => {
       sx={{ width: 275, margin: 1, padding: 1 }}
       
     //    onClick={() => setCurrentLetter(letter)}>
-    // onClick={() => navigate(`/letters/${letter.id}`)}
+    
     >
       <div className='letter-wrapper-primary'>
           <div>
@@ -67,15 +72,14 @@ export const LetterListItem = (props) => {
           <div className="letter-userID"> {/*change here after*/}
             Type: {props.type}
           </div>
-          <CardActions>
-            <ExpandMore className={disabled}
+          
+          <CardActions className="letter-actions" >
+            {userID && userID !== props.sender_id && props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />}
+              <ExpandCircleDownOutlinedIcon className={disabled} color="action"
               expand={expanded}
               onClick={handleExpandClick}
               aria-expanded={expanded}
-              aria-label="show more"
-            >
-              <ExpandCircleDownOutlinedIcon />
-            </ExpandMore>
+              aria-label="show more"/>
           </CardActions>
         </footer>
         </div>
