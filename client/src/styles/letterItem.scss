@@ -61,14 +61,23 @@
 };
 
 .text-area-component{
-
+  display: flex;
+  flex-direction: column;
+  align-items: center;
   width: 72vw;
   margin-left: 10vw;
   
 
 }
 
-
+.form-buttons{
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.align-button-send {
+  margin-left: 10px;
+}
 
 //Desktop View
 @media (min-width: 481px) {

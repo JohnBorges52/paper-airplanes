@@ -40,6 +40,7 @@ export const Form = (props) => {
         <textarea name="message" id="message-id" cols="30" rows="10" placeholder="Type Here"></textarea>
       </form> */}
 
+    
 
         <TextField  sx={{width: 1 }} style={{marginTop: "40px", marginBottom: "30px" }}
                   
@@ -50,26 +51,33 @@ export const Form = (props) => {
                   value={message}
                   onChange={(e) => {setMessage(e.target.value); console.log(message)}}
                   variant="outlined"
-                />
+                  />
 
-    </div>
-      <div>
+    
+
+    <div className="form-buttons">
       {!props.isResponse && <TypeSelector onChange={(event) => {setLetterType(event.target.value)}}></TypeSelector>}
-
+      
+     
       {!props.isResponse && 
-      <span>
+      <>
         <Button size="small" variant="outlined" endIcon={<ClearIcon />} onClick={()=> {submitMessage(message, letterType, userID); }}>Clear</Button> 
         
-        <Button size="small" variant="contained" endIcon={<SendIcon />} onClick={()=> {submitMessage(message, letterType, userID); }}>Submit</Button>
-      </span>}
-
-      {props.isResponse && 
-      <span>
-        <Button size="small" variant="outlined" endIcon={<ClearIcon />} onClick={()=> {submitResponse(message, props.letterID, userID); }}>Clear</Button> 
+        <Button style={{marginLeft: "10px"}} size="small" variant="contained" endIcon={<SendIcon />} onClick={()=> {submitMessage(message, letterType, userID); }}>Submit</Button>
+      </>}
       
-        <Button size="small" variant="contained" endIcon={<SendIcon />} onClick={()=> {submitResponse(message, props.letterID, userID); }}>Submit</Button>
-      </span>}
+      
+     
+      {props.isResponse && 
+      <>
+        <Button size="small" variant="outlined" endIcon={<ClearIcon />} onClick={()=> {submitResponse(message, props.letterID, userID); }} >Clear</Button> 
+      
+        <Button style={{marginLeft: "10px"}} size="small" variant="contained" endIcon={<SendIcon />} onClick={()=> {submitResponse(message, props.letterID, userID);}}>Submit</Button>
+      </>}
+      
+
       </div>
+    </div>
     </>
   )
 }
