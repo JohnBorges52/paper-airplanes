@@ -7,18 +7,44 @@
   justify-content: space-between;
 }
 
-.letterItem footer{
+.letter-footer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
 .letter-item-vh footer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
 }
+
+.cardStyle {
+  width: 85vw;
+  margin: 20px;
+  display: flex;
+  flex-direction: row;
+};
+.letter-wrapper-primary{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  width: 100%;
+};
+.letter-wrapper-secondary{
+  display: flex;
+  flex-direction: column;
+  width: 90%;
+  justify-content: space-between;
+};
+.letter-text-area{
+ width: 90%;
+};
+
+
+
 
 //Desktop View
 @media (min-width: 481px) {
