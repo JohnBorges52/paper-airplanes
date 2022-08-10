@@ -18,6 +18,7 @@ import {Hidden} from '@mui/material/Hidden';
 import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
+import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
 
 
 const ExpandMore = styled((props) => {
@@ -79,7 +80,15 @@ export const LetterListItem = (props) => {
           </div>
           
           <CardActions className="letter-actions" >
-            {userID && userID !== props.sender_id && props.type === 'request' ? <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <DriveFileRenameOutlineOutlinedIcon className="hidden-component" /> }
+            
+           
+            {userID && userID !== props.senderID && props.type === 'request' ? <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <DriveFileRenameOutlineOutlinedIcon className="hidden-component" /> } 
+
+             {userID && userID === props.senderID && props.type === 'request' ? <ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <ChatOutlinedIcon className="hidden-component"/> }
+            
+           
+            
+              
               <ExpandCircleDownOutlinedIcon className={disabled} color="action"
               expand={expanded}
               onClick={handleExpandClick}
