@@ -11,10 +11,6 @@ import Collapse from "@mui/material/Collapse";
 import { styled } from '@mui/material/styles';
 import { grey, deepPurple, purple } from "@mui/material/colors";
 
-import {Hidden} from '@mui/material/Hidden';
-
-
-
 // Material UI Icons
 import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
@@ -43,9 +39,8 @@ export const LetterListItem = (props) => {
     setExpanded(!expanded);
   };
 
-  const disabled = classNames( { "Mui-disabled": props.letterMessage.length < 60 });
-  const expandedDiv = classNames("cardStyle",{ 'letterItem': !expanded }, { 'letter-item-vh': expanded });
-
+  const disabled = classNames({ "Mui-disabled": props.letterMessage.length < 60 });
+  const expandedDiv = classNames("cardStyle", { 'letterItem': !expanded }, { 'letter-item-vh': expanded });
 
   const longLetter = (message) => {
     if (message.length > 60) {
@@ -56,18 +51,15 @@ export const LetterListItem = (props) => {
     }
   };
 
-
   return (
     <Card className={expandedDiv}
-      sx={{margin: 1, padding: 1 , backgroundColor: purple[100]}}
-      
+      sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
     //    onClick={() => setCurrentLetter(letter)}>
-    
     >
       <div className='letter-wrapper-primary'>
-          <div>
-            <p>🎈</p>
-          </div>
+        <div>
+          <p>🎈</p>
+        </div>
         <div className='letter-wrapper-secondary'>
           <div className='letter-text-area'>
             {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
@@ -75,29 +67,29 @@ export const LetterListItem = (props) => {
               <p className="letterMessage">{props.letterMessage}</p>
             </Collapse>
           </div>
-        <footer className="letter-footer">
-          <div className="letter-userID"> {/*change here after*/}
-            Type: {props.type}
-          </div>
-          
-          <CardActions className="letter-actions" >
-            
-            {userID && props.type === 'request'? 
-            (userID !== props.senderID ? (<DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />) : (<ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />))
-            : 
-            (<DriveFileRenameOutlineOutlinedIcon className="hidden-component" />)}
-              <ExpandMore   
-              className={disabled}
-              expand={expanded}
-              onClick={handleExpandClick}
-              aria-expanded={expanded}
-              aria-label="show more">
-              <ExpandCircleDownOutlinedIcon 
-            />
+          <footer className="letter-footer">
+            <div className="letter-userID"> {/*change here after*/}
+              Type: {props.type}
+            </div>
+
+            <CardActions className="letter-actions" >
+
+              {userID && props.type === 'request' ?
+                (userID !== props.senderID ? (<DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />) : (<ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />))
+                :
+                (<DriveFileRenameOutlineOutlinedIcon className="hidden-component" />)}
+              <ExpandMore
+                className={disabled}
+                expand={expanded}
+                onClick={handleExpandClick}
+                aria-expanded={expanded}
+                aria-label="show more">
+                <ExpandCircleDownOutlinedIcon
+                />
 
               </ExpandMore>
-          </CardActions>
-        </footer>
+            </CardActions>
+          </footer>
         </div>
       </div>
     </Card>
