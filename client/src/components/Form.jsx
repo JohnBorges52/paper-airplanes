@@ -29,12 +29,17 @@ export const Form = (props) => {
   }
 
   return (
-    <div className="text-area-component">
+    <div className="form-component">
       {/* <h1>this is a form</h1> */}
       {/* <form onChange={(event)=>{setMessage(event.target.value)}} onSubmit={(event)=>{event.preventDefault()}}>
         <label>Message</label>
         <textarea name="message" id="message-id" cols="30" rows="10" placeholder="Type Here"></textarea>
         </form> */}
+
+      {!props.isResponse &&
+        <TypeSelector
+          onChange={(event) => { setLetterType(event.target.value) }}>
+        </TypeSelector>}
 
       <TextField sx={{ width: 1 }} style={{ marginTop: "40px", marginBottom: "30px" }}
         id="filled-multiline-flexible"
@@ -42,16 +47,12 @@ export const Form = (props) => {
         multiline
         minRows={10}
         value={message}
-        onChange={(e) => { setMessage(e.target.value); console.log(message) }}
+        onChange={event => setMessage(event.target.value)}
         variant="outlined"
       />
 
       <div className="form-buttons">
 
-        {!props.isResponse &&
-          <TypeSelector
-            onChange={(event) => { setLetterType(event.target.value) }}>
-          </TypeSelector>}
 
         {!props.isResponse &&
           <>
