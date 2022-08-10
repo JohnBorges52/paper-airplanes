@@ -2,12 +2,18 @@
 .letterItem {
   display: flex;
   flex-direction: column;
-  height: 30vh;
+
   margin: 20px;
   justify-content: space-between;
 }
 
 .letterItem footer{
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+}
+.letter-item-vh footer{
   display: flex;
   flex-direction: row;
   justify-content: space-between;

@@ -33,6 +33,7 @@ export const LetterListItem = (props) => {
   };
 
   const disabled = classNames({ "Mui-disabled": props.letterMessage.length < 60 });
+  const something = classNames({'letterItem':!expanded}, {'letter-item-vh': expanded})
 
   const longLetter = (message) => {
     if (message.length > 60) {
@@ -44,7 +45,6 @@ export const LetterListItem = (props) => {
   };
 
   const cardStyle = {
-    height: "30vh",
     width: "85vw",
     margin: "20px",
     display: "flex",
@@ -53,7 +53,7 @@ export const LetterListItem = (props) => {
 
 
   return (
-    <Card className="letterItem"
+    <Card className={something}
       sx={{ width: 275, margin: 1, padding: 1 }}
       style={cardStyle}
     //    onClick={() => setCurrentLetter(letter)}>
@@ -78,10 +78,10 @@ export const LetterListItem = (props) => {
 
 
             {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
-          </div>
           <Collapse in={expanded} timeout="100" unmountOnExit>
             <p className="letterMessage">{props.letterMessage}</p>
           </Collapse>
+          </div>
         </div>
           <footer>
             <div>
