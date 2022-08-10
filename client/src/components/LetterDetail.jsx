@@ -7,6 +7,9 @@ import { useParams } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import { LetterListItem } from "./LetterListItem"
+import { Card } from "@mui/material"
+import classNames from "classnames"
 
 export const LetterDetail = (props) => {
   let { id } = useParams();
@@ -16,7 +19,7 @@ export const LetterDetail = (props) => {
   const [responses, setResponses] = useState([])
   const [flagCount, setFlagCount] = useState([])
   const [reported, setReported] = useState(false)
-
+  // const expandedDiv = classNames("cardStyle",'letter-item-vh');
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
@@ -39,15 +42,31 @@ export const LetterDetail = (props) => {
 
   return (
     <div className="letterDetail">
-      <style>
-        @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
-      </style>
-      <h5>Hello friend</h5>
-      <p className="letterMessage">{data.letter_message}</p>
-      {<p className="letterMessage">FLAG_COUNT: {data.flag_count}</p>}
-      <footer className="letterType">
-        Type:{data.type}
-      </footer>
+    {/* //   <style>
+    //     @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
+    //   </style>
+    //   <h5>Hello friend</h5>
+    //   <p className="letterMessage">{data.letter_message}</p>
+    //   {<p className="letterMessage">FLAG_COUNT: {data.flag_count}</p>}
+    //   <footer className="letterType">
+    //     Type:{data.type}
+    //   </footer> */}
+
+      <Card className="cardStyle letter-item-vh"
+      sx={{ margin: 1, padding: 1 }}
+    >
+      <div className='letter-wrapper-primary'>
+          <div>
+            <p>🎈</p>
+          </div>
+        <div className='letter-wrapper-secondary'>
+          <div className='letter-text-area'>
+            {<p className="letterMessage">{data.letter_message}</p>}
+          </div>
+        </div>
+      </div>
+    </Card>
+
 
       {userID !== data.sender_id && <Form letterID={id} isResponse={true}/>}
       {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
