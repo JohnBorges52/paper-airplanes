@@ -75,19 +75,30 @@ export const LetterListItem = (props) => {
             <CardActions className="letter-actions" >
 
               {userID && props.type === 'request' ?
-                (userID !== props.senderID ? (<DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />) : (<ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />))
+                (userID !== props.senderID ?
+                  (<DriveFileRenameOutlineOutlinedIcon
+                    color="action"
+                    onClick={() => navigate(`/letters/${props.id}`)}
+                  />)
+                  :
+                  (<ChatOutlinedIcon
+                    color="action"
+                    onClick={() => navigate(`/letters/${props.id}`)}
+                  />))
                 :
-                (<DriveFileRenameOutlineOutlinedIcon className="hidden-component" />)}
+                (<DriveFileRenameOutlineOutlinedIcon
+                  className="hidden-component"
+                />)}
+
               <ExpandMore
                 className={disabled}
                 expand={expanded}
                 onClick={handleExpandClick}
                 aria-expanded={expanded}
                 aria-label="show more">
-                <ExpandCircleDownOutlinedIcon
-                />
-
+                <ExpandCircleDownOutlinedIcon />
               </ExpandMore>
+
             </CardActions>
           </footer>
         </div>
