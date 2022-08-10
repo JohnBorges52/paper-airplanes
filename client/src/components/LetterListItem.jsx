@@ -33,7 +33,7 @@ export const LetterListItem = (props) => {
   };
 
   const disabled = classNames({ "Mui-disabled": props.letterMessage.length < 60 });
-  const something = classNames({'letterItem':!expanded}, {'letter-item-vh': expanded})
+  const something = classNames({ 'letterItem': !expanded }, { 'letter-item-vh': expanded });
 
   const longLetter = (message) => {
     if (message.length > 60) {
@@ -63,42 +63,42 @@ export const LetterListItem = (props) => {
         @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
       </style>
       {/* <h5>Hello friend</h5> */}
-      <div className='toomany' style={{  display: "flex",
-  "flex-direction": "column",
-  "justify-content": "space-between",
-  width: "100%"}}>
-        <div className='john' style={{display: 'flex', "flex-direction":"row", width: "100%", "justify-content": "space-between" }}>
-
-
+      <div className='toomany' style={{
+        display: "flex",
+        "flex-direction": "row",
+        "justify-content": "space-between",
+        width: "100%"
+      }}>
           <div>
             <p>🎈</p>
-
           </div>
-          <div style={{width: "90%"}}>
-
-
+        <div className='john' style={{ display: 'flex', "flex-direction": "column", width: "90%", "justify-content": "space-between" }}>
+          <div style={{ width: "90%" }}>
             {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
-          <Collapse in={expanded} timeout="100" unmountOnExit>
-            <p className="letterMessage">{props.letterMessage}</p>
-          </Collapse>
+            <Collapse in={expanded} timeout="100" unmountOnExit>
+              <p className="letterMessage">{props.letterMessage}</p>
+            </Collapse>
           </div>
-        </div>
-          <footer>
-            <div>
 
-              Type: {props.type}
-            </div>
-            <CardActions>
-              <ExpandMore className={disabled}
-                expand={expanded}
-                onClick={handleExpandClick}
-                aria-expanded={expanded}
-                aria-label="show more"
-              >
-                <ExpandCircleDownOutlinedIcon />
-              </ExpandMore>
-            </CardActions>
-          </footer>
+        <footer>
+          <div>
+
+            Type: {props.type}
+          </div>
+          <CardActions>
+            <ExpandMore className={disabled}
+              expand={expanded}
+              onClick={handleExpandClick}
+              aria-expanded={expanded}
+              aria-label="show more"
+            >
+              <ExpandCircleDownOutlinedIcon />
+            </ExpandMore>
+          </CardActions>
+        </footer>
+
+
+        </div>
       </div>
 
 
