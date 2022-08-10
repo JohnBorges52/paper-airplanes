@@ -59,8 +59,9 @@ export const Form = (props) => {
             <Button
               size="small"
               variant="outlined"
+              // clear message text from text field
               endIcon={<ClearIcon />}
-              onClick={() => { submitMessage(message, letterType, userID); }}
+              onClick={() => { setMessage("") }}
             >
               Clear
             </Button>
@@ -82,7 +83,7 @@ export const Form = (props) => {
               size="small"
               variant="outlined"
               endIcon={<ClearIcon />}
-              onClick={() => { submitResponse(message, props.letterID, userID); }}
+              onClick={() => { setMessage("") }}
             >
               Clear
             </Button>
@@ -96,6 +97,6 @@ export const Form = (props) => {
           </>
         }
       </div>
-    </div>
+    </div >
   )
 }
