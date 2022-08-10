@@ -70,7 +70,7 @@ export const LetterListItem = (props) => {
         <div className='letter-wrapper-secondary'>
           <div className='letter-text-area'>
             {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
-            <Collapse in={expanded} timeout="100" unmountOnExit>
+            <Collapse in={expanded} timeout={100} unmountOnExit>
               <p className="letterMessage">{props.letterMessage}</p>
             </Collapse>
           </div>
@@ -85,12 +85,16 @@ export const LetterListItem = (props) => {
             (userID !== props.senderID ? (<DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />) : (<ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />))
             : 
             (<DriveFileRenameOutlineOutlinedIcon className="hidden-component" />)}
-              
-              <ExpandCircleDownOutlinedIcon className={disabled} color="action"
+              <ExpandMore   
+              className={disabled}
               expand={expanded}
               onClick={handleExpandClick}
               aria-expanded={expanded}
-              aria-label="show more"/>
+              aria-label="show more">
+              <ExpandCircleDownOutlinedIcon 
+            />
+
+              </ExpandMore>
           </CardActions>
         </footer>
         </div>
