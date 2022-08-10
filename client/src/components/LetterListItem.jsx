@@ -81,12 +81,10 @@ export const LetterListItem = (props) => {
           
           <CardActions className="letter-actions" >
             
-           
-            {userID && userID !== props.senderID && props.type === 'request' ? <DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <DriveFileRenameOutlineOutlinedIcon className="hidden-component" /> } 
-
-             {userID && userID === props.senderID && props.type === 'request' ? <ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} /> : <ChatOutlinedIcon className="hidden-component"/> }
-            
-           
+            {userID & props.type === 'request'? 
+            (userID !== props.senderID ? (<DriveFileRenameOutlineOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />) : (<ChatOutlinedIcon color="action" onClick={() => navigate(`/letters/${props.id}`)} />))
+            : 
+            (<DriveFileRenameOutlineOutlinedIcon className="hidden-component" />)}
             
               
               <ExpandCircleDownOutlinedIcon className={disabled} color="action"
