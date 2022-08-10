@@ -7,14 +7,13 @@ import { useParams } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
-import { LetterListItem } from "./LetterListItem"
 import { Card } from "@mui/material"
-import classNames from "classnames"
+import { purple, grey, deepPurple } from "@mui/material/colors"
 
 export const LetterDetail = (props) => {
   let { id } = useParams();
   // alert(id)
-  const { userID, setUserID } = useContext(UserContext);
+  const { userID } = useContext(UserContext);
   const [data, setData] = useState("")
   const [responses, setResponses] = useState([])
   const [flagCount, setFlagCount] = useState([])
@@ -53,7 +52,7 @@ export const LetterDetail = (props) => {
     //   </footer> */}
 
       <Card className="cardStyle letter-item-vh"
-      sx={{ margin: 1, padding: 1 }}
+      sx={{ margin: 1, padding: 1, backgroundColor: grey[200] }}
     >
       <div className='letter-wrapper-primary'>
           <div>
@@ -69,7 +68,31 @@ export const LetterDetail = (props) => {
 
 
       {userID !== data.sender_id && <Form letterID={id} isResponse={true}/>}
-      {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}
+      
+      {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
+      {userID === data.sender_id && responses.map(e=>      <Card className="response-cardStyle letter-item-vh"
+      sx={{ padding: 1, backgroundColor: purple[50] }}
+    >
+      <div className='letter-wrapper-primary'>
+          <div>
+            <p>🎈</p>
+          </div>
+        <div className='letter-wrapper-secondary'>
+          <div className='letter-text-area'>
+            {<p className="letterMessage">{e.message}</p>}
+          </div>
+        </div>
+      </div>
+    </Card>)} 
+
+
+
+
+
+
+
+
+
       {userID && userID !== data.sender_id && !reported && <Button onClick={() =>{ report()}}> Flag</Button>}
       
     </div>

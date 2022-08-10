@@ -9,6 +9,7 @@ import Card from '@mui/material/Card';
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import { styled } from '@mui/material/styles';
+import { grey, deepPurple, purple } from "@mui/material/colors";
 
 import {Hidden} from '@mui/material/Hidden';
 
@@ -58,7 +59,7 @@ export const LetterListItem = (props) => {
 
   return (
     <Card className={expandedDiv}
-      sx={{margin: 1, padding: 1 }}
+      sx={{margin: 1, padding: 1 , backgroundColor: grey[200]}}
       
     //    onClick={() => setCurrentLetter(letter)}>
     

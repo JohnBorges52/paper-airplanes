@@ -40,7 +40,7 @@
   justify-content: space-between;
 };
 .letter-text-area{
- width: 90%;
+  width: 90%;
 };
 .letter-actions{
   width:86px;
@@ -51,6 +51,14 @@
   opacity: 0%;
 }
 
+.response-cardStyle {
+  width: 72vw;
+  background-color: pink;
+  // margin: 20px;
+  display: flex;
+  flex-direction: row;
+  margin-left: 10vw;
+};
 
 
 
