@@ -3,7 +3,7 @@ DROP TABLE IF EXISTS letters CASCADE;
 CREATE TABLE letters (
   id SERIAL PRIMARY KEY NOT NULL,
   sender_id INT NOT NULL REFERENCES USERS(ID),
-  letter_message VARCHAR(777) NOT NULL,
+  letter_message TEXT NOT NULL,
   type VARCHAR(20) NOT NULL,
   flag_count INT DEFAULT 0,
   created_at TIMESTAMP DEFAULT NOW(),
