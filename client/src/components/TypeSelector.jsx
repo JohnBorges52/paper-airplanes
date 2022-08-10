@@ -12,7 +12,6 @@ export const TypeSelector = (props) => {
       <Select
         label="Letter-Type"
         onChange={event => props.onChange(event)}
-
       >
         <MenuItem value={"request"}>Request</MenuItem>
         <MenuItem value={"vent"}>Vent</MenuItem>
