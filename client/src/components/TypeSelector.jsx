@@ -6,23 +6,14 @@ import Select from '@mui/material/Select';
 
 export const TypeSelector = (props) => {
 
-
-
   return (
-
-
-
     <FormControl fullWidth placeholder="Letter Type">
-      {/* <InputLabel id="demo-simple-select-label">Letter Type</InputLabel> */}
+      <InputLabel id="letter-type-label" style={{ backgroundColor: "white" }}>Choose a Letter Type&nbsp;</InputLabel>
       <Select
-        labelId="demo-simple-select-label"
-        id="demo-simple-select"
         label="Letter-Type"
         onChange={event => props.onChange(event)}
+
       >
-        <MenuItem disabled value="">
-          <em>Select a Letter Type</em>
-        </MenuItem>
         <MenuItem value={"request"}>Request</MenuItem>
         <MenuItem value={"vent"}>Vent</MenuItem>
         <MenuItem value={"encourage"}>Encourage</MenuItem>
