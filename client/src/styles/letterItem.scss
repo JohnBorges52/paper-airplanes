@@ -77,6 +77,16 @@
   margin-left: 10px;
 }
 
+.letter-report-component {
+
+}
+.report-button {
+  margin-right: 8px;
+  margin-top: 15px;
+  display: flex;
+  justify-content: flex-end;
+}
+
 //Desktop View
 @media (min-width: 481px) {
   .letterItem {

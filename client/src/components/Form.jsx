@@ -8,9 +8,9 @@ import "../styles/letterItem.scss";
 
 // Material UI
 import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
 
 // Material Icons
-import Button from '@mui/material/Button';
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -41,7 +41,7 @@ export const Form = (props) => {
           onChange={(event) => { setLetterType(event.target.value) }}>
         </TypeSelector>}
 
-      <TextField sx={{ width: 1 }} style={{ marginTop: "40px", marginBottom: "30px" }}
+      <TextField sx={{ width: 1 }} style={{ marginTop: "25px", marginBottom: "15px" }}
         id="filled-multiline-flexible"
         label="Write here"
         multiline

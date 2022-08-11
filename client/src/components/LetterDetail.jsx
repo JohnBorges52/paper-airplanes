@@ -1,14 +1,20 @@
 import React from "react"
 import axios from "axios"
 import { useEffect } from "react"
-import { Button } from "./Button"
+// import { Button } from "./Button"
 import { useState } from "react"
 import { useParams } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+
+// Material UI
 import { Card } from "@mui/material"
-import { purple, grey, deepPurple } from "@mui/material/colors"
+import Button from '@mui/material/Button';
+import { purple, red, deepPurple } from "@mui/material/colors"
+
+// Material Icons
+import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
 export const LetterDetail = (props) => {
   let { id } = useParams();
@@ -23,13 +29,13 @@ export const LetterDetail = (props) => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
     axios.get(`/responses/${id}`)
-        .then(res=>setResponses(res.data))
+      .then(res => setResponses(res.data))
   }, [flagCount])
 
   const updateFlagCount = () => {
     console.log("ID = ", id)
     axios.put(`/letters/${id}`)
-    .then((res) => setFlagCount([res.data]))
+      .then((res) => setFlagCount([res.data]))
   }
 
   const report = () => {
@@ -41,60 +47,59 @@ export const LetterDetail = (props) => {
 
   return (
     <div className="letterDetail">
-    {/* //   <style>
-    //     @import url('https://fonts.googleapis.com/css2?family=Square+Peg&display=swap');
-    //   </style>
-    //   <h5>Hello friend</h5>
-    //   <p className="letterMessage">{data.letter_message}</p>
-    //   {<p className="letterMessage">FLAG_COUNT: {data.flag_count}</p>}
-    //   <footer className="letterType">
-    //     Type:{data.type}
-    //   </footer> */}
 
-      <Card className="cardStyle letter-item-vh"
-      sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
-    >
-      <div className='letter-wrapper-primary'>
-          <div>
-            <p>🎈</p>
+      <div className="letter-report-component">
+
+        <Card className="cardStyle letter-item-vh"
+          sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
+        >
+          <div className='letter-wrapper-primary'>
+            <div>
+              <p>🎈</p>
+            </div>
+            <div className='letter-wrapper-secondary'>
+              <div className='letter-text-area'>
+                {<p className="letterMessage">{data.letter_message}</p>}
+              </div>
+            </div>
           </div>
-        <div className='letter-wrapper-secondary'>
-          <div className='letter-text-area'>
-            {<p className="letterMessage">{data.letter_message}</p>}
-          </div>
+        </Card>
+
+        <div className="report-button">
+          {userID && userID !== data.sender_id && !reported &&
+            <Button
+              color="error"
+              size="small"
+              variant="outlined"
+              endIcon={<ReportGmailerrorredOutlinedIcon />}
+              onClick={() => { report() }}
+            >
+              Flag
+            </Button>
+
+          }
         </div>
       </div>
-    </Card>
 
+      {userID !== data.sender_id && <Form letterID={id} isResponse={true} />}
 
-      {userID !== data.sender_id && <Form letterID={id} isResponse={true}/>}
-      
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
-      {userID === data.sender_id && responses.map(e=>      <Card className="response-cardStyle letter-item-vh"
-      sx={{ padding: 1, backgroundColor: deepPurple[100] }}
-    >
-      <div className='letter-wrapper-primary'>
+      {userID === data.sender_id && responses.map(e => <Card className="response-cardStyle letter-item-vh"
+        sx={{ padding: 1, backgroundColor: deepPurple[100] }}
+      >
+        <div className='letter-wrapper-primary'>
           <div>
             <p>🎈</p>
           </div>
-        <div className='letter-wrapper-secondary'>
-          <div className='letter-text-area'>
-            {<p className="letterMessage">{e.message}</p>}
+          <div className='letter-wrapper-secondary'>
+            <div className='letter-text-area'>
+              {<p className="letterMessage">{e.message}</p>}
+            </div>
           </div>
         </div>
-      </div>
-    </Card>)} 
+      </Card>)}
 
 
-
-
-
-
-
-
-
-      {userID && userID !== data.sender_id && !reported && <Button onClick={() =>{ report()}}> Flag</Button>}
-      
     </div>
   )
 }
