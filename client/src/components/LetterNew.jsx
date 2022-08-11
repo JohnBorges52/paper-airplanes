@@ -10,10 +10,10 @@ export const LetterNew = () => {
 
   return (
     <div className="letterDetail">
-           
-        { userID && <Form />}
-        {!userID && <h1>{notLoggedIn}</h1>} 
-        {!userID && <Login />}
-      </div>
+
+      {userID && <Form />}
+      {!userID && <div className='login-error'>{notLoggedIn}</div>}
+      {!userID && <Login />}
+    </div >
   )
 }

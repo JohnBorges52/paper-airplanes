@@ -94,6 +94,13 @@
   margin: 0 auto;
 }
 
+.login-error{
+  font-size: 1.3rem;
+  text-align: center;
+  margin:0 auto;
+  color:#880176;
+}
+
 //Desktop View
 @media (min-width: 481px) {
   .letterItem {
