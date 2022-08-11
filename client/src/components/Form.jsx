@@ -1,4 +1,5 @@
 import { useState } from "react"
+import { useNavigate } from "react-router-dom";
 import { TypeSelector } from "./TypeSelector"
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
@@ -8,8 +9,7 @@ import "../styles/letterItem.scss";
 // Material UI
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { createTheme } from '@mui/material/styles';
-import {purple, red} from "@mui/material/colors"; 
+import { purple } from "@mui/material/colors";
 
 
 // Material Icons
@@ -18,6 +18,8 @@ import ClearIcon from '@mui/icons-material/Clear';
 
 
 export const Form = (props) => {
+  const navigate = useNavigate();
+
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
@@ -31,17 +33,15 @@ export const Form = (props) => {
       .then(alert(`Response Sent!`))
   }
 
-
   return (
     <div className="form-component">
       {!props.isResponse &&
         <TypeSelector
-        
           onChange={(event) => { setLetterType(event.target.value) }}>
         </TypeSelector>}
 
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px", marginBottom: "15px" }}
-        
+
         id="filled-multiline-flexible"
         label="What is on your mind?"
         multiline
@@ -53,10 +53,11 @@ export const Form = (props) => {
 
       <div className="form-buttons">
 
+        {/* Form for new letter submission */}
         {!props.isResponse &&
           <>
             <Button
-            sx={{color: purple[500], borderColor: purple[500]}}
+              sx={{ color: purple[500], borderColor: purple[500] }}
               size="small"
               variant="outlined"
               // clear message text from text field
@@ -65,24 +66,28 @@ export const Form = (props) => {
             >
               Clear
             </Button>
-          
+
             <Button
-            sx={{backgroundColor: purple[500]}}
-             style={{ marginLeft: "10px" }}
-             size="small"
-             variant="contained"
-             endIcon={<SendIcon />}
-             onClick={() => { submitMessage(message, letterType, userID); }}
-             >
+              sx={{ backgroundColor: purple[500] }}
+              style={{ marginLeft: "10px" }}
+              size="small"
+              variant="contained"
+              endIcon={<SendIcon />}
+              onClick={() => {
+                submitMessage(message, letterType, userID);
+                navigate("/letters/profile");
+              }}
+            >
               Submit
             </Button>
           </>
         }
 
+        {/* Form for response submission */}
         {props.isResponse &&
           <>
             <Button
-            sx={{color: purple[500]}}
+              sx={{ color: purple[500] }}
               size="small"
               variant="outlined"
               endIcon={<ClearIcon />}
@@ -91,17 +96,20 @@ export const Form = (props) => {
               Clear
             </Button>
             <Button
-            sx={{backgroundColor: purple[500]}}
+              sx={{ backgroundColor: purple[500] }}
               style={{ marginLeft: "10px" }}
               size="small" variant="contained"
-              endIcon={<SendIcon />} onClick={() => { submitResponse(message, props.letterID, userID); }}
+              endIcon={<SendIcon />} onClick={() => {
+                submitResponse(message, props.letterID, userID);
+                navigate("/letters");
+              }}
             >
               Submit
             </Button>
           </>
         }
-       
-      </div>           
+
+      </div>
     </div >
   )
 }

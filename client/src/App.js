@@ -1,7 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 // import "./styles/letterItem.scss";
-import { Navbar } from "./components/Navbar";
+// import { Navbar } from "./components/Navbar";
 // import { Form } from "./components/Form";
 // import { UserInformation } from "./components/UserInfomation";
 import { UserProvider } from "./UserContext";
@@ -26,7 +26,8 @@ function App(props) {
   return (
     <div className="App">
       <UserProvider>
-        <Paper className="nav-bar"
+        <Paper
+          className="nav-bar"
           sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
           elevation={0}
         >
