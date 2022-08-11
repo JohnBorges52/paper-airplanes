@@ -7,7 +7,7 @@ import Select from '@mui/material/Select';
 export const TypeSelector = (props) => {
 
   return (
-    <FormControl fullWidth placeholder="Letter Type">
+    <FormControl fullWidth size="small">
       <InputLabel id="letter-type-label" style={{ backgroundColor: "white" }}>Choose a Letter Type&nbsp;</InputLabel>
       <Select
         label="Letter-Type"
