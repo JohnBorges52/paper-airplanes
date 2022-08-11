@@ -3,15 +3,15 @@ import { createContext, useState } from "react";
 
 export const UserContext = createContext();
 
-export const UserProvider = ({children}) => {
+export const UserProvider = ({ children }) => {
 
-const [userID, setUserID] = useState(1)//please change back to null
+  const [userID, setUserID] = useState(null)//please change back to null
 
   return (
-    <UserContext.Provider value={{userID, setUserID}} >
+    <UserContext.Provider value={{ userID, setUserID }} >
 
       {children}
-    
+
     </UserContext.Provider>
   )
 }
