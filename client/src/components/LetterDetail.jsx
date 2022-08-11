@@ -24,7 +24,7 @@ export const LetterDetail = (props) => {
   const { userID } = useContext(UserContext);
   const [data, setData] = useState("")
   const [responses, setResponses] = useState([])
-  const [flagCount, setFlagCount] = useState([])
+  const [letterStatus, setLetterStatus] = useState([])
   const [reported, setReported] = useState(false)
   // const expandedDiv = classNames("cardStyle",'letter-item-vh');
   useEffect(() => {
@@ -32,18 +32,18 @@ export const LetterDetail = (props) => {
       .then(res => setData(res.data[0]))
     axios.get(`/responses/${id}`)
       .then(res => setResponses(res.data))
-  }, [flagCount])
+  }, [letterStatus, id])
 
   const updateFlagCount = () => {
     console.log("ID = ", id)
     axios.put(`/letters/${id}/flag`)
-      .then((res) => setFlagCount([res.data]))
+      .then((res) => setLetterStatus([res.data]))
   }
 
   const updateLetterStatus = () => {
     console.log("ID = ", id)
     axios.put(`/letters/${id}/delete`)
-      .then((res) => setFlagCount([res.data]))
+      .then((res) => setLetterStatus([res.data]))
   }
 
   const deleteLetter = () => {
