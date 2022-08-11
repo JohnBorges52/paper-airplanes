@@ -79,7 +79,8 @@ export const LetterDetail = (props) => {
 
       <div className="letter-report-component">
 
-        <Card className="cardStyle letter-item-vh"
+       
+       <Card className="cardStyle letter-item-vh"
           sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
         >
           <div className='letter-wrapper-primary'>
@@ -93,6 +94,7 @@ export const LetterDetail = (props) => {
             </div>
           </div>
         </Card>
+ 
 
         {userID !== data.sender_id ?
           /* Render delete button when it is NOT your letter */

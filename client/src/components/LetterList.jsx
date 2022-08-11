@@ -24,7 +24,8 @@ export const LetterList = (props) => {
 
   return (
     <>
-
+       {data.length !== 0 ?
+      <>
       {data.map((letter) =>
         <LetterListItem className = "letterItem"
           key={letter.id}
@@ -39,7 +40,10 @@ export const LetterList = (props) => {
         //   navigate("/letters/detail", { state: { id: letter.id } });
         // }}
         />)}
-
+        </>
+        :
+      <div>NOTHING HERE</div>
+      }
     </>
   );
 
