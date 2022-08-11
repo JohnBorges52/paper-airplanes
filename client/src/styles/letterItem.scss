@@ -87,6 +87,13 @@
   justify-content: flex-end;
 }
 
+.login{
+  display:flex;
+  flex-direction: column;
+  width: 100%;
+  margin: 0 auto;
+}
+
 //Desktop View
 @media (min-width: 481px) {
   .letterItem {

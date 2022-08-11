@@ -3,21 +3,49 @@ import { useState } from "react"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 
-export const Login = () => {
-  const[userEmail, setUserEmail] = useState("")
-  const{userID, setUserID} = useContext(UserContext);
-  const getUserId =  (email) => {
-    axios.get('/users/login/success', {params:{email}})
-    .then(res=>{setUserID(res.data[0].id)})
+// Material UI
+import TextField from '@mui/material/TextField';
+import Button from '@mui/material/Button';
+import { purple } from "@mui/material/colors";
 
+export const Login = () => {
+
+  const [userEmail, setUserEmail] = useState("")
+  const { userID, setUserID } = useContext(UserContext);
+  const getUserId = (email) => {
+    axios.get('/users/login/success', { params: { email } })
+      .then(res => { setUserID(res.data[0].id) })
   }
 
-  return(
+  return (
     <div className="login">
-      <input type="email" id="email" placeholder="email" onChange={(event)=>{setUserEmail(event.target.value)}}/>
-      <input type="text" placeholder="password" />
-      <button onClick={()=>{getUserId(userEmail)}}>Submit</button>
-      <button onClick={()=>{console.log(userID)}}>Other</button>
+      <TextField
+        style={{ margin: "20px auto 10px", width: "70%" }}
+        id="outlined-basic"
+        label="email"
+        onChange={(event) => { setUserEmail(event.target.value) }}
+      />
+      <TextField
+        style={{ margin: "0 auto 10px", width: "70%" }}
+        id="outlined-basic"
+        label="password"
+      />
+
+      <Button
+        sx={{ backgroundColor: purple[500] }}
+        style={{ margin: "10px auto 10px", width: "25%" }}
+        size="small"
+        variant="contained"
+        onClick={() => { getUserId(userEmail) }}>Submit
+      </Button>
+
+      <Button
+        sx={{ backgroundColor: purple[500] }}
+        style={{ margin: "0 auto 10px", width: "25%" }}
+        size="small"
+        variant="contained"
+        onClick={() => { console.log(userID) }}>Other
+      </Button>
     </div>
   )
 }
