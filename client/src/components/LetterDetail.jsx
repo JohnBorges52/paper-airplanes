@@ -13,6 +13,8 @@ import { useContext } from "react";
 import { Card } from "@mui/material"
 import Button from '@mui/material/Button';
 import { purple, red, deepPurple } from "@mui/material/colors"
+import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
+
 
 // Material Icons
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
@@ -30,7 +32,8 @@ export const LetterDetail = (props) => {
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
-    axios.get(`/responses/${id}`)
+    
+      axios.get(`/responses/${id}`)
       .then(res => setResponses(res.data))
   }, [letterStatus, id])
 
@@ -46,11 +49,24 @@ export const LetterDetail = (props) => {
       .then((res) => setLetterStatus([res.data]))
   }
 
+  const updateResponseStatus = (responseId) => {
+   
+    axios.put(`/responses/${responseId}/delete`)
+      .then((res) => setLetterStatus([res.data]))
+  }
+
   const deleteLetter = () => {
     updateLetterStatus()
     alert("The letter has been deleted.")
     navigate("/letters/profile");
   }
+
+  const deleteResponse = (responseId) => {
+    updateResponseStatus(responseId)
+    alert("The response has been deleted.")
+  
+  }
+  
 
   const report = () => {
     updateFlagCount()
@@ -68,7 +84,7 @@ export const LetterDetail = (props) => {
         >
           <div className='letter-wrapper-primary'>
             <div>
-              <p>🎈</p>
+              <p>{data.id}</p> {/*CHANGE TO EMOTE AFTER*/}
             </div>
             <div className='letter-wrapper-secondary'>
               <div className='letter-text-area'>
@@ -101,7 +117,7 @@ export const LetterDetail = (props) => {
                 color="error"
                 size="small"
                 variant="outlined"
-                endIcon={<ReportGmailerrorredOutlinedIcon />}
+                endIcon={<DeleteForeverOutlinedIcon />}
                 onClick={() => { deleteLetter() }}
               >
                 Delete
@@ -115,18 +131,23 @@ export const LetterDetail = (props) => {
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {/* If user is sender, show all responses */}
-      {userID === data.sender_id && responses.map(e => <Card className="response-cardStyle letter-item-vh"
-        sx={{ padding: 1, backgroundColor: deepPurple[100] }}
+      {userID === data.sender_id && responses.map(response => 
+      <Card className="response-cardStyle letter-item-vh"
+      sx={{ padding: 1, backgroundColor: deepPurple[100] }}
       >
+     
         <div className='letter-wrapper-primary'>
           <div>
-            <p>🎈</p>
+            <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
           </div>
           <div className='letter-wrapper-secondary'>
             <div className='letter-text-area'>
-              {<p className="letterMessage">{e.message}</p>}
+              {<p className="letterMessage">{response.message}</p>}
             </div>
           </div>
+        <DeleteForeverOutlinedIcon sx={{color:red[600], alignSelf: "end" }}
+        onClick={() => { deleteResponse(response.id) }}
+      />
         </div>
       </Card>)}
 
