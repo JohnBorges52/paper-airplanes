@@ -65,25 +65,43 @@ export const LetterDetail = (props) => {
           </div>
         </Card>
 
-        <div className="report-button">
-          {userID && userID !== data.sender_id && !reported &&
-            <Button
-              color="error"
-              size="small"
-              variant="outlined"
-              endIcon={<ReportGmailerrorredOutlinedIcon />}
-              onClick={() => { report() }}
-            >
-              Flag
-            </Button>
-
-          }
-        </div>
+        {userID !== data.sender_id ?
+          /* Render delete button when it is NOT your letter */
+          <div className="report-button">
+            {userID && userID !== data.sender_id && !reported &&
+              <Button
+                color="error"
+                size="small"
+                variant="outlined"
+                endIcon={<ReportGmailerrorredOutlinedIcon />}
+                onClick={() => { report() }}
+              >
+                Flag
+              </Button>
+            }
+          </div>
+          :
+          /* Render delete button when it is your letter */
+          <div className="report-button">
+            {
+              <Button
+                color="error"
+                size="small"
+                variant="outlined"
+                endIcon={<ReportGmailerrorredOutlinedIcon />}
+                onClick={() => { report() }}
+              >
+                Delete
+              </Button>
+            }
+          </div>}
       </div>
 
+      {/* If user is not sender, show form */}
       {userID !== data.sender_id && <Form letterID={id} isResponse={true} />}
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
+      {/* If user is sender, show all responses */}
       {userID === data.sender_id && responses.map(e => <Card className="response-cardStyle letter-item-vh"
         sx={{ padding: 1, backgroundColor: deepPurple[100] }}
       >

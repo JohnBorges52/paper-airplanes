@@ -73,19 +73,23 @@ export const LetterListItem = (props) => {
             </div>
 
             <CardActions className="letter-actions" >
-
-              {userID && props.type === 'request' ?
+              {/* If logged in */}
+              {userID ?
+                // If user is not the author of the letter
                 (userID !== props.senderID ?
-                  (<DriveFileRenameOutlineOutlinedIcon
+                  // If letter type is request show letter detail button
+                  (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
                     color="action"
                     onClick={() => navigate(`/letters/${props.id}`)}
                   />)
                   :
+                  // Show letter detail button, regardless of type
                   (<ChatOutlinedIcon
                     color="action"
                     onClick={() => navigate(`/letters/${props.id}`)}
                   />))
                 :
+                // Hide letter detail
                 (<DriveFileRenameOutlineOutlinedIcon
                   className="hidden-component"
                 />)}
