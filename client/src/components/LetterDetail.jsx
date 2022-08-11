@@ -3,7 +3,8 @@ import axios from "axios"
 import { useEffect } from "react"
 // import { Button } from "./Button"
 import { useState } from "react"
-import { useParams } from "react-router-dom"
+import { Navigate, useParams } from "react-router-dom"
+import { useNavigate } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
@@ -17,6 +18,7 @@ import { purple, red, deepPurple } from "@mui/material/colors"
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
 export const LetterDetail = (props) => {
+  const navigate = useNavigate();
   let { id } = useParams();
   // alert(id)
   const { userID } = useContext(UserContext);
@@ -34,8 +36,20 @@ export const LetterDetail = (props) => {
 
   const updateFlagCount = () => {
     console.log("ID = ", id)
-    axios.put(`/letters/${id}`)
+    axios.put(`/letters/${id}/flag`)
       .then((res) => setFlagCount([res.data]))
+  }
+
+  const updateLetterStatus = () => {
+    console.log("ID = ", id)
+    axios.put(`/letters/${id}/delete`)
+      .then((res) => setFlagCount([res.data]))
+  }
+
+  const deleteLetter = () => {
+    updateLetterStatus()
+    alert("The letter has been deleted.")
+    navigate("/letters/profile");
   }
 
   const report = () => {
@@ -43,7 +57,6 @@ export const LetterDetail = (props) => {
     setReported(true)
     alert("The post have been reported")
   }
-
 
   return (
     <div className="letterDetail">
@@ -89,7 +102,7 @@ export const LetterDetail = (props) => {
                 size="small"
                 variant="outlined"
                 endIcon={<ReportGmailerrorredOutlinedIcon />}
-                onClick={() => { report() }}
+                onClick={() => { deleteLetter() }}
               >
                 Delete
               </Button>

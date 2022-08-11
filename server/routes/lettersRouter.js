@@ -8,7 +8,7 @@ module.exports = (db) => {
     if (!req.query.userID) {
       const queryString = `
       SELECT * FROM letters
-      WHERE active = true AND flag_count <= 3 
+      WHERE active IS true AND flag_count <= 3 
       ORDER BY created_at DESC`;
       db.query(queryString)
         .then((data) => {
@@ -20,7 +20,7 @@ module.exports = (db) => {
     } else {
       const queryString = `
         SELECT * FROM letters
-        WHERE active = true
+        WHERE active IS true
         AND sender_id != $1 AND flag_count <= 3
         ORDER BY created_at DESC`;
       db.query(queryString, [req.query.userID])
@@ -36,7 +36,8 @@ module.exports = (db) => {
   router.get("/profile", (req, res) => {
     const queryString = `
     SELECT * FROM letters 
-    WHERE sender_id = $1 AND flag_count <= 3 
+    WHERE active IS true 
+    AND sender_id = $1 AND flag_count <= 3 
     ORDER BY created_at DESC`;
     db.query(queryString, [req.query.userID])
       .then((data) => {
@@ -62,12 +63,23 @@ module.exports = (db) => {
     return;
   });
 
-  router.put("/:id", (req, res) => {
+  router.put("/:id/flag", (req, res) => {
     const queryString = `
       UPDATE letters SET flag_count = flag_count + 1
       WHERE id = $1`;
     db.query(queryString, [req.params.id])
       .then(res.send("updated"))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+  router.put("/:id/delete", (req, res) => {
+    const queryString = `
+      UPDATE letters SET active = false
+      WHERE id = $1`;
+    db.query(queryString, [req.params.id])
+      .then(res.send("deleted"))
       .catch((err) => {
         res.status(500).json({ error: err.message });
       });
