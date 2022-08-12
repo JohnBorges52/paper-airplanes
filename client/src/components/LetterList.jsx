@@ -21,7 +21,7 @@ export const LetterList = (props) => {
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
       .then(res => setData(res.data))
-      .then(console.log(props.path));
+      .then(data=>console.log(data));
 
   }, [props.path]);
 
@@ -39,6 +39,7 @@ export const LetterList = (props) => {
           letterMessage={letter.letter_message}
           senderID = {letter.sender_id}
           setCurrentLetter={setCurrentLetter}
+          senderUserName = {letter.username}
           type={letter.type}/>
           )).slice(0,(3*props.page))}
           <Button onClick={()=>{props.setPage(props.page + 1)}}>See more Letters</Button>

@@ -16,6 +16,7 @@ import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import axios from "axios";
 
 
 const ExpandMore = styled((props) => {
@@ -51,6 +52,7 @@ export const LetterListItem = (props) => {
     }
   };
 
+
   return (
     <Card className={expandedDiv}
       sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
@@ -69,6 +71,7 @@ export const LetterListItem = (props) => {
           </div>
           <footer className="letter-footer">
             <div className="letter-userID"> {/*change here after*/}
+              Username: {props.senderUserName}
               Type: {props.type}
             </div>
 

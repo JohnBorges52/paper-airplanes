@@ -7,7 +7,7 @@ module.exports = (db) => {
     console.log(req.query.userID);
     if (!req.query.userID) {
       const queryString = `
-      SELECT * FROM letters
+      Select * from letters join users on users.id = letters.sender_id
       WHERE active IS true AND flag_count <= 3 
       ORDER BY created_at DESC`;
       db.query(queryString)
@@ -19,7 +19,7 @@ module.exports = (db) => {
         });
     } else {
       const queryString = `
-        SELECT * FROM letters
+        Select * from letters join users on users.id = letters.sender_id
         WHERE active IS true
         AND sender_id != $1 AND flag_count <= 3
         ORDER BY created_at DESC`;
