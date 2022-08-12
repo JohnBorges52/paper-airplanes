@@ -46,7 +46,7 @@ export const Form = (props) => {
           onChange={(event) => { setLetterType(event.target.value) }}>
         </TypeSelector>}
 
-      <TextField sx={{ width: 1 }} style={{ marginTop: "25px", marginBottom: "15px" }}
+      <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
 
         id="filled-multiline-flexible"
         label="What is on your mind?"
@@ -58,9 +58,9 @@ export const Form = (props) => {
         setCountCharacters(700 - event.target.value.length)}}
         variant="outlined"
       />
-  <div className={colorCharacter} >
-              {countCharacters }              
-            </div>
+      <div className={colorCharacter} >
+        remaining: {countCharacters}              
+      </div>
       <div className="form-buttons">
         
         {/* Form for new letter submission */}

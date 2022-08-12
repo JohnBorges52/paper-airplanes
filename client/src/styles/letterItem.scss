@@ -118,13 +118,22 @@
   height: 68vh; 
 }
 .character-color-lesser{
-
-  color: red;
+  color:red;
+  font-weight: 600;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 .character-color-greater{
-  border: 2px solid black;
   color:purple;
   font-weight: 600;
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  margin-bottom: 10px;
+  margin-right: 10px;
 }
 
 //Desktop View
