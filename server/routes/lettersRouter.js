@@ -5,6 +5,7 @@ module.exports = (db) => {
   router.get("/", (req, res) => {
     // let queryString = "";
     console.log(req.query.userID);
+    //// This query is to show all letters when I am not logged in
     if (!req.query.userID) {
       const queryString = `
       Select * from letters join users on users.id = letters.sender_id
@@ -17,7 +18,7 @@ module.exports = (db) => {
         .catch((err) => {
           res.status(500).json({ error: err.message });
         });
-    } else {
+    } else { //// This query is for the 'all letters' page to show all letters that are not mine when I am logged in
       const queryString = `
         Select * from letters join users on users.id = letters.sender_id
         WHERE active IS true
@@ -32,7 +33,7 @@ module.exports = (db) => {
         });
     }
   });
-
+  ///// This query is for the 'my letters' page
   router.get("/profile", (req, res) => {
     const queryString = `
     SELECT * FROM letters 
