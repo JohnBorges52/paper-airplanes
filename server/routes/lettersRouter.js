@@ -8,7 +8,7 @@ module.exports = (db) => {
     //// This query is to show all letters when I am not logged in
     if (!req.query.userID) {
       const queryString = `
-      Select * from letters join users on users.id = letters.sender_id
+      select users.id as user_id, letters.id as letter_id, letter_message, type, username,flag_count, sender_id from users join letters on users.id = letters.sender_id
       WHERE active IS true AND flag_count <= 3 
       ORDER BY created_at DESC`;
       db.query(queryString)
@@ -18,9 +18,10 @@ module.exports = (db) => {
         .catch((err) => {
           res.status(500).json({ error: err.message });
         });
-    } else { //// This query is for the 'all letters' page to show all letters that are not mine when I am logged in
+    } else {
+      //// This query is for the 'all letters' page to show all letters that are not mine when I am logged in
       const queryString = `
-        Select * from letters join users on users.id = letters.sender_id
+      select users.id as user_id, letters.id as letter_id, letter_message, type, username,flag_count, sender_id from users join letters on users.id = letters.sender_id
         WHERE active IS true
         AND sender_id != $1 AND flag_count <= 3
         ORDER BY created_at DESC`;
@@ -36,7 +37,7 @@ module.exports = (db) => {
   ///// This query is for the 'my letters' page
   router.get("/profile", (req, res) => {
     const queryString = `
-    SELECT * FROM letters 
+    select letters.id as letter_id, letter_message, type, flag_count, sender_id from letters
     WHERE active IS true 
     AND sender_id = $1 AND flag_count <= 3 
     ORDER BY created_at DESC`;

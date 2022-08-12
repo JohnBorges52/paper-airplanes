@@ -20,7 +20,7 @@ import Paper from "@mui/material/Paper";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
-import { HomePage } from "./components/HomePage";
+import { LoginError } from "./components/LoginError";
 
 function App(props) {
   const navigate = useNavigate();
@@ -46,7 +46,7 @@ function App(props) {
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters/profile");
-                setPage(1)
+                setPage(1);
               }}
               label="My Letters"
               icon={<MarkunreadMailboxOutlinedIcon />}
@@ -63,14 +63,26 @@ function App(props) {
         </Paper>
         <Routes>
           <Route path="/" element={<LetterList path={"/letters"} />} />
-          <Route path="/letters" element={<LetterList page={page} setPage={setPage} path={"/letters"} />} />
+          <Route
+            path="/letters"
+            element={
+              <LetterList page={page} setPage={setPage} path={"/letters"} />
+            }
+          />
           <Route path="/letters/new" element={<LetterNew />} />
           <Route
             path="/letters/profile"
-            element={<LetterList path={"/letters/profile"} page={page} setPage={setPage} />}
+            element={
+              <LetterList
+                path={"/letters/profile"}
+                page={page}
+                setPage={setPage}
+              />
+            }
           />
           <Route path="/letters/:id" element={<LetterDetail />} />
-          <Route path="/users/login" element={<HomePage />} />
+          <Route path="/users/login" element={<Login />} />
+          <Route path="/users/login/error" element={<LoginError />} />
         </Routes>
       </UserProvider>
     </div>

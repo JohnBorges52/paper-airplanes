@@ -18,32 +18,36 @@ export const Login = () => {
   }
 
   return (
-    <div className="login">
-      <TextField
-        style={{ margin: "20px auto 10px", width: "70vw" }}
-        id="outlined-basic"
-        label="email"
-        onChange={(event) => { setUserEmail(event.target.value) }}
-      />
-      <TextField
-        style={{ margin: "0 auto 10px", width: "70vw" }}
-        id="outlined-basic"
-        label="password"
-      />
 
-      <Button
-        sx={{ backgroundColor: purple[500] }}
-        style={{ margin: "10px auto 10px", width: "25vw" }}
-        variant="contained"
-        onClick={() => { getUserId(userEmail) }}>LOGIN
-      </Button>
+    <div className="homepage">
+      <div className="login">
 
-      <Button
-        sx={{ backgroundColor: purple[500] }}
-        style={{ margin: "0 auto 10px", width: "25vw" }}
-        variant="contained"
-        onClick={() => { console.log("A NEW USER HAS BEEN REGISTERED") }}>REGISTER
-      </Button>
+        <TextField
+          style={{ margin: "20px auto 10px", width: "70vw", backgroundColor: "white" }}
+          id="outlined-basic"
+          label="email"
+          onChange={(event) => { setUserEmail(event.target.value) }}
+        />
+        <TextField
+          style={{ margin: "0 auto 10px", width: "70vw", backgroundColor: "white" }}
+          id="outlined-basic"
+          label="password"
+        />
+
+        <Button
+          sx={{ backgroundColor: purple[500] }}
+          style={{ margin: "10px auto 10px", width: "25vw" }}
+          variant="contained"
+          onClick={() => { getUserId(userEmail) }}>LOGIN
+        </Button>
+
+        <Button
+          sx={{ backgroundColor: purple[500] }}
+          style={{ margin: "0 auto 10px", width: "25vw" }}
+          variant="contained"
+          onClick={() => { console.log("A NEW USER HAS BEEN REGISTERED") }}>Register
+        </Button>
+      </div>
     </div>
   )
 }

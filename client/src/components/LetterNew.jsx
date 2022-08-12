@@ -2,19 +2,20 @@ import React from "react"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
-import { Login } from "./Login"
-import { HomePage } from "./HomePage";
+import { LoginError } from "./LoginError";
 
 export const LetterNew = () => {
   const { userID } = useContext(UserContext);
-  const notLoggedIn = "You are not logged in, please log in."
 
   return (
-    <div className="letterDetail">
-      {userID && <h1>New Letter</h1>}
-      {userID && <Form />}
-      {!userID && <div className='login-error'>{notLoggedIn}</div>}
-      {!userID && <HomePage />}
-    </div >
+    <>
+      {/* If not logged in, render Login component with error */}
+      {!userID && <LoginError />}
+      {/* If logged in, render new letter form */}
+      <div className="letterDetail">
+        {userID && <h1>New Letter</h1>}
+        {userID && <Form />}
+      </div >
+    </>
   )
 }

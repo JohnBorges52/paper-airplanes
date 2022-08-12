@@ -60,7 +60,7 @@ export const LetterListItem = (props) => {
     >
       <div className='letter-wrapper-primary'>
         <div>
-          <p>🎈</p>
+          <p>{props.id}</p> {/*Change back to emoji */}
         </div>
         <div className='letter-wrapper-secondary'>
           <div className='letter-text-area'>
@@ -94,9 +94,9 @@ export const LetterListItem = (props) => {
                 :
                 // Hide letter detail
                 (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
-                    color="action"
-                    onClick={() => navigate(`/users/login`)}
-                  />)}
+                  color="action"
+                  onClick={() => navigate(`/users/login/error`)}
+                />)}
 
               <ExpandMore
                 className={disabled}

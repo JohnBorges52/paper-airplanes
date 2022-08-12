@@ -32,8 +32,8 @@ export const LetterDetail = (props) => {
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
-    
-      axios.get(`/responses/${id}`)
+
+    axios.get(`/responses/${id}`)
       .then(res => setResponses(res.data))
   }, [letterStatus, id])
 
@@ -50,7 +50,7 @@ export const LetterDetail = (props) => {
   }
 
   const updateResponseStatus = (responseId) => {
-   
+
     axios.put(`/responses/${responseId}/delete`)
       .then((res) => setLetterStatus([res.data]))
   }
@@ -64,9 +64,9 @@ export const LetterDetail = (props) => {
   const deleteResponse = (responseId) => {
     updateResponseStatus(responseId)
     alert("The response has been deleted.")
-  
+
   }
-  
+
 
   const report = () => {
     updateFlagCount()
@@ -79,8 +79,8 @@ export const LetterDetail = (props) => {
 
       <div className="letter-report-component">
 
-       
-       <Card className="cardStyle letter-item-vh"
+
+        <Card className="cardStyle letter-item-vh"
           sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
         >
           <div className='letter-wrapper-primary'>
@@ -94,7 +94,7 @@ export const LetterDetail = (props) => {
             </div>
           </div>
         </Card>
- 
+
 
         {userID !== data.sender_id ?
           /* Render delete button when it is NOT your letter */
@@ -115,45 +115,45 @@ export const LetterDetail = (props) => {
           /* Render delete button when it is your letter */
           <div className="report-button">
             {<Button
-                color="error"
-                size="small"
-                variant="outlined"
-                endIcon={<DeleteForeverOutlinedIcon />}
-                onClick={() => { deleteLetter() }}
-              >
-                Delete
-              </Button>
+              color="error"
+              size="small"
+              variant="outlined"
+              endIcon={<DeleteForeverOutlinedIcon />}
+              onClick={() => { deleteLetter() }}
+            >
+              Delete
+            </Button>
             }
           </div>}
       </div>
-      <br/>
-      <hr/>
-      <br/>
+      <br />
+      <hr />
+      <br />
       {/* If user is not sender, show form */}
       {userID !== data.sender_id && <Form letterID={id} isResponse={true} />}
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {/* If user is sender, show all responses */}
-      
-      {userID === data.sender_id && responses.map(response => 
-      <Card className="response-cardStyle letter-item-vh"
-      sx={{ padding: 1, backgroundColor: deepPurple[100] }}
-      >
-     
-        <div className='letter-wrapper-primary'>
-          <div>
-            <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
-          </div>
-          <div className='letter-wrapper-secondary'>
-            <div className='letter-text-area'>
-              {<p className="letterMessage">{response.message}</p>}
+
+      {userID === data.sender_id && responses.map(response =>
+        <Card className="response-cardStyle letter-item-vh"
+          sx={{ padding: 1, backgroundColor: deepPurple[100] }}
+        >
+
+          <div className='letter-wrapper-primary'>
+            <div>
+              <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
             </div>
+            <div className='letter-wrapper-secondary'>
+              <div className='letter-text-area'>
+                {<p className="letterMessage">{response.message}</p>}
+              </div>
+            </div>
+            <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
+              onClick={() => { deleteResponse(response.id) }}
+            />
           </div>
-        <DeleteForeverOutlinedIcon sx={{color:red[600], alignSelf: "end" }}
-        onClick={() => { deleteResponse(response.id) }}
-      />
-        </div>
-      </Card>)}
+        </Card>)}
 
 
     </div>

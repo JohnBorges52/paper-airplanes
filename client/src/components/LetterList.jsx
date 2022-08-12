@@ -11,7 +11,7 @@ import { purple } from "@mui/material/colors";
 
 
 export const LetterList = (props) => {
- 
+
   const { userID, setUserID } = useContext(UserContext);
   console.log(userID);
 
@@ -21,7 +21,7 @@ export const LetterList = (props) => {
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
       .then(res => setData(res.data))
-      .then(data=>console.log(data));
+      .then(data => console.log(data));
 
   }, [props.path]);
 
@@ -29,34 +29,34 @@ export const LetterList = (props) => {
 
   return (
     <>
-    {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
-       {data.length !== 0 ?
-      <div>
-      {(data.map((letter) =>
-        <LetterListItem className = "letterItem"
-          key={letter.id}
-          id={letter.id}
-          letterMessage={letter.letter_message}
-          senderID = {letter.sender_id}
-          setCurrentLetter={setCurrentLetter}
-          senderUserName = {letter.username}
-          type={letter.type}/>
-          )).slice(0,(3*props.page))}
-          <Button onClick={()=>{props.setPage(props.page + 1)}}>See more Letters</Button>
+      {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
+      {data.length !== 0 ?
+        <div>
+          {(data.map((letter) =>
+            <LetterListItem className="letterItem"
+              key={letter.letter_id}
+              id={letter.letter_id}
+              letterMessage={letter.letter_message}
+              senderID={letter.sender_id}
+              setCurrentLetter={setCurrentLetter}
+              senderUserName={letter.username}
+              type={letter.type} />
+          )).slice(0, (3 * props.page))}
+          <Button onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
         </div>
         :
         <div className="login-error">
-        <p>You do not have any letters. </p>
-        <div className="empty-letter-img"></div>
-        {/* <p>Write a  here!</p> */}
-        <Button
-        variant="contained"
-        sx={{ backgroundColor: purple[500], marginTop: "20px" }}
-        onClick={() => navigate("/letters/new")}
-        >new Letter
-        </Button>
-       
-      </div>
+          <p>You do not have any letters. </p>
+          <div className="empty-letter-img"></div>
+          {/* <p>Write a  here!</p> */}
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: purple[500], marginTop: "20px" }}
+            onClick={() => navigate("/letters/new")}
+          >new Letter
+          </Button>
+
+        </div>
       }
 
     </>
