@@ -58,7 +58,7 @@ function App(props) {
           </BottomNavigation>
         </Paper>
         <Routes>
-          <Route path="/" element={<HomePage path={"/"} />} />
+          <Route path="/" element={<LetterList path={"/letters"} />} />
           <Route path="/letters" element={<LetterList path={"/letters"} />} />
           <Route path="/letters/new" element={<LetterNew />} />
           <Route
@@ -66,7 +66,7 @@ function App(props) {
             element={<LetterList path={"/letters/profile"} />}
           />
           <Route path="/letters/:id" element={<LetterDetail />} />
-          <Route path="/users/login" element={<Login />} />
+          <Route path="/users/login" element={<HomePage />} />
         </Routes>
       </UserProvider>
     </div>

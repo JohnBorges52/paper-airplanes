@@ -3,6 +3,7 @@ import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { Login } from "./Login"
+import { HomePage } from "./HomePage";
 
 export const LetterNew = () => {
   const { userID } = useContext(UserContext);
@@ -13,7 +14,7 @@ export const LetterNew = () => {
       {userID && <h1>New Letter</h1>}
       {userID && <Form />}
       {!userID && <div className='login-error'>{notLoggedIn}</div>}
-      {!userID && <Login />}
+      {!userID && <HomePage />}
     </div >
   )
 }
