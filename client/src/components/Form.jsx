@@ -5,6 +5,7 @@ import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import axios from "axios";
 import "../styles/letterItem.scss";
+import classNames from "classnames";
 
 // Material UI
 import TextField from '@mui/material/TextField';
@@ -34,6 +35,10 @@ export const Form = (props) => {
       .then(alert(`Response Sent!`))
   }
 
+  const colorCharacter = classNames({"character-color-lesser": countCharacters < 0, "character-color-greater": countCharacters >= 0});
+
+
+
   return (
     <div className="form-component">
       {!props.isResponse &&
@@ -53,17 +58,21 @@ export const Form = (props) => {
         setCountCharacters(700 - event.target.value.length)}}
         variant="outlined"
       />
-
+  <div className={colorCharacter} >
+              {countCharacters }              
+            </div>
       <div className="form-buttons">
         
         {/* Form for new letter submission */}
         {!props.isResponse &&
           <>
-           <Button variant= "outlined">
+          
 
-           {countCharacters}
+            
 
-          </Button>
+
+
+
             <Button
               sx={{ color: purple[500], borderColor: purple[500] }}
               size="small"
