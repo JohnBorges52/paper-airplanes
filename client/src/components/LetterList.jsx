@@ -41,7 +41,8 @@ export const LetterList = (props) => {
           senderID = {letter.sender_id}
           setCurrentLetter={setCurrentLetter}
           type={letter.type}/>
-          )).slice(0,(3*page))}
+          )).slice(0,(3*props.page))}
+           <Button onClick={()=>{props.setPage(props.page + 1)}}>See more Letters</Button>
         </div>
         :
         <div className="login-error">
@@ -54,10 +55,10 @@ export const LetterList = (props) => {
         onClick={() => navigate("/letters/new")}
         >new Letter
         </Button>
+       
       </div>
       }
 
-      <Button onClick={()=>{setPage(page + 1)}}>See more Letters</Button>
     </>
   );
 

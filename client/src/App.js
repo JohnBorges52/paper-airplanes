@@ -10,6 +10,7 @@ import { LetterNew } from "./components/LetterNew";
 import { LetterList } from "./components/LetterList";
 import { LetterDetail } from "./components/LetterDetail";
 import { Login } from "./components/Login";
+import { useState } from "react";
 
 // Material UI
 import { BottomNavigation, BottomNavigationAction } from "@mui/material";
@@ -23,7 +24,7 @@ import { HomePage } from "./components/HomePage";
 
 function App(props) {
   const navigate = useNavigate();
-
+  const [page, setPage] = useState(1);
   return (
     <div className="App">
       <UserProvider>
@@ -36,6 +37,7 @@ function App(props) {
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters");
+                setPage(1);
               }}
               label="All Letters"
               icon={<MailOutlineIcon />}
@@ -44,6 +46,7 @@ function App(props) {
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters/profile");
+                setPage(1)
               }}
               label="My Letters"
               icon={<MarkunreadMailboxOutlinedIcon />}
@@ -51,6 +54,7 @@ function App(props) {
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters/new");
+                setPage(1);
               }}
               label="Write New"
               icon={<CreateOutlinedIcon />}
@@ -59,11 +63,11 @@ function App(props) {
         </Paper>
         <Routes>
           <Route path="/" element={<LetterList path={"/letters"} />} />
-          <Route path="/letters" element={<LetterList path={"/letters"} />} />
+          <Route path="/letters" element={<LetterList page={page} setPage={setPage} path={"/letters"} />} />
           <Route path="/letters/new" element={<LetterNew />} />
           <Route
             path="/letters/profile"
-            element={<LetterList path={"/letters/profile"} />}
+            element={<LetterList path={"/letters/profile"} page={page} setPage={setPage} />}
           />
           <Route path="/letters/:id" element={<LetterDetail />} />
           <Route path="/users/login" element={<HomePage />} />
