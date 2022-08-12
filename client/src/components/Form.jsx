@@ -31,17 +31,15 @@ export const Form = (props) => {
      alert("Message need to be 700 chararacters or less")
      return false
     }
+    return true
   }
 
   const submitMessage = (message, letterType, senderID) => {
-    if(validateMessage(message) === false) {
-      return
-    }
-
+    if(validateMessage(message)) {
     axios.post(`/letters/new`, { message, letterType, senderID })
     .then(alert(`Letter Saved!`))
     .then (navigate("/letters/profile"))
-    
+    }
   }
   const submitResponse = (message, letterID, responderID) => {
     axios.post(`/responses/new`, { message, letterID, responderID })
