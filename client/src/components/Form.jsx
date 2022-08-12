@@ -26,9 +26,22 @@ export const Form = (props) => {
   const [letterType, setLetterType] = useState("request");
   const [countCharacters, setCountCharacters] = useState(700)
 
+  const validateMessage = (message) => {
+    if (message.length > 700) {
+     alert("Message need to be 700 chararacters or less")
+     return false
+    }
+  }
+
   const submitMessage = (message, letterType, senderID) => {
+    if(validateMessage(message) === false) {
+      return
+    }
+
     axios.post(`/letters/new`, { message, letterType, senderID })
-      .then(alert(`Letter Saved!`))
+    .then(alert(`Letter Saved!`))
+    .then (navigate("/letters/profile"))
+    
   }
   const submitResponse = (message, letterID, responderID) => {
     axios.post(`/responses/new`, { message, letterID, responderID })
@@ -37,6 +50,8 @@ export const Form = (props) => {
 
   const colorCharacter = classNames({"character-color-lesser": countCharacters < 0, "character-color-greater": countCharacters >= 0});
 
+
+ 
 
 
   return (
@@ -66,13 +81,6 @@ export const Form = (props) => {
         {/* Form for new letter submission */}
         {!props.isResponse &&
           <>
-          
-
-            
-
-
-
-
             <Button
               sx={{ color: purple[500], borderColor: purple[500] }}
               size="small"
@@ -92,7 +100,7 @@ export const Form = (props) => {
               endIcon={<SendIcon />}
               onClick={() => {
                 submitMessage(message, letterType, userID);
-                navigate("/letters/profile");
+                
               }}
             >
               Submit
