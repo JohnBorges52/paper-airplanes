@@ -29,7 +29,8 @@ export const LetterList = (props) => {
 
   return (
     <>
-       {data ?
+    {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
+       {data.length !== 0 ?
       <div>
       {data.map((letter) =>
         <LetterListItem className = "letterItem"

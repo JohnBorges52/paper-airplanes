@@ -10,7 +10,7 @@ export const LetterNew = () => {
 
   return (
     <div className="letterDetail">
-
+      {userID && <h1>New Letter</h1>}
       {userID && <Form />}
       {!userID && <div className='login-error'>{notLoggedIn}</div>}
       {!userID && <Login />}
