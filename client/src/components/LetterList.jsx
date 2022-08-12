@@ -11,26 +11,31 @@ import { purple } from "@mui/material/colors";
 
 
 export const LetterList = (props) => {
+  //STATES
 
   const { userID, setUserID } = useContext(UserContext);
   console.log(userID);
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
+  // const [letterEmpty, setLetterEmpty] = useState(false)
+  ///////////
+
+  let letterEmpty = false
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
-      .then(res => setData(res.data))
-      .then(data => console.log(data))
+      .then((res) =>{ setData(res.data); if(res.data.length === 0){letterEmpty = true}})
       .catch(() => setData([]));
   }, [props.path]);
 
   const navigate = useNavigate();
 
+  
   return (
     <>
       {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
-      {data.length !== 0 ?
+      {!letterEmpty ?
         <div>
           {(data.map((letter) =>
             <LetterListItem className="letterItem"
