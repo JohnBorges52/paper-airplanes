@@ -17,7 +17,6 @@ export const LetterList = (props) => {
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
-  const [page, setPage] = useState(1);
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
@@ -42,7 +41,7 @@ export const LetterList = (props) => {
           setCurrentLetter={setCurrentLetter}
           type={letter.type}/>
           )).slice(0,(3*props.page))}
-           <Button onClick={()=>{props.setPage(props.page + 1)}}>See more Letters</Button>
+          <Button onClick={()=>{props.setPage(props.page + 1)}}>See more Letters</Button>
         </div>
         :
         <div className="login-error">
