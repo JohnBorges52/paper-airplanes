@@ -6,9 +6,12 @@ import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import '../styles/letterItem.scss'
+import { Button } from "@mui/material";
+import { purple } from "@mui/material/colors";
+
 
 export const LetterList = (props) => {
-  const navigate = useNavigate();
+ 
   const { userID, setUserID } = useContext(UserContext);
   console.log(userID);
 
@@ -22,27 +25,35 @@ export const LetterList = (props) => {
 
   }, [props.path]);
 
+  const navigate = useNavigate();
+
   return (
     <>
-       {data.length !== 0 ?
-      <>
+       {data ?
+      <div>
       {data.map((letter) =>
         <LetterListItem className = "letterItem"
           key={letter.id}
           id={letter.id}
           letterMessage={letter.letter_message}
-     //     letter={letter}
           senderID = {letter.sender_id}
           setCurrentLetter={setCurrentLetter}
-          type={letter.type}
-        // onClick={() => {
-        //   console.log('hello');
-        //   navigate("/letters/detail", { state: { id: letter.id } });
-        // }}
-        />)}
-        </>
+          type={letter.type}/>
+          )}
+        </div>
         :
-      <div>NOTHING HERE</div>
+        <div className="login-error">
+        <p>You do not have any letters. </p>
+        <div className="empty-letter-img"></div>
+        {/* <p>Write a  here!</p> */}
+        <Button
+        variant="contained"
+        sx={{ backgroundColor: purple[500], marginTop: "20px" }}
+        onClick={() => navigate("/letters/new")}
+        >new Letter
+        </Button>
+      </div>
+
       }
     </>
   );

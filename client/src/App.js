@@ -19,6 +19,7 @@ import Paper from "@mui/material/Paper";
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
+import { HomePage } from "./components/HomePage";
 
 function App(props) {
   const navigate = useNavigate();
@@ -57,6 +58,7 @@ function App(props) {
           </BottomNavigation>
         </Paper>
         <Routes>
+          <Route path="/" element={<HomePage path={"/"} />} />
           <Route path="/letters" element={<LetterList path={"/letters"} />} />
           <Route path="/letters/new" element={<LetterNew />} />
           <Route

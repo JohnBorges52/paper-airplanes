@@ -82,7 +82,6 @@ export const Form = (props) => {
             </Button>
           </>
         }
-
         {/* Form for response submission */}
         {props.isResponse &&
           <>
@@ -108,7 +107,6 @@ export const Form = (props) => {
             </Button>
           </>
         }
-
       </div>
     </div >
   )

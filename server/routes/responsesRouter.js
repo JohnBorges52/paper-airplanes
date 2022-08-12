@@ -12,11 +12,14 @@ module.exports = (db) => {
 
   // GET a specific response
   router.get("/:id", (req, res) => {
+
     db.query(`SELECT * FROM responses WHERE active IS true AND letter_id = $1 ORDER BY created_at DESC;`, [req.params.id]).then(
       (data) => {
+
         res.json(data.rows);
       }
     );
+
   });
 
 

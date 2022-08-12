@@ -114,8 +114,7 @@ export const LetterDetail = (props) => {
           :
           /* Render delete button when it is your letter */
           <div className="report-button">
-            {
-              <Button
+            {<Button
                 color="error"
                 size="small"
                 variant="outlined"
@@ -133,6 +132,7 @@ export const LetterDetail = (props) => {
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {/* If user is sender, show all responses */}
+      
       {userID === data.sender_id && responses.map(response => 
       <Card className="response-cardStyle letter-item-vh"
       sx={{ padding: 1, backgroundColor: deepPurple[100] }}
