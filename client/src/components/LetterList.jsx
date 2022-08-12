@@ -18,14 +18,11 @@ export const LetterList = (props) => {
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
-  // const [letterEmpty, setLetterEmpty] = useState(false)
-  ///////////
-
-  let letterEmpty = false
+  const [letterEmpty, setLetterEmpty] = useState(false)
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
-      .then((res) =>{ setData(res.data); if(res.data.length === 0){letterEmpty = true}})
+      .then((res) =>{ setData(res.data); if(res.data.length === 0){setLetterEmpty(true)}})
       .catch(() => setData([]));
   }, [props.path]);
 

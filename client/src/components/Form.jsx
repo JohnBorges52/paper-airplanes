@@ -39,7 +39,7 @@ export const Form = (props) => {
     }
 
     axios.post(`/letters/new`, { message, letterType, senderID })
-    .then(alert(`Letter Saved!`))
+    .then(alert(`Letter Saved!`)) //Replace with popover
     .then (navigate("/letters/profile"))
     
   }
