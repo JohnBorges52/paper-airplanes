@@ -27,6 +27,7 @@ export const Form = (props) => {
   const [letterType, setLetterType] = useState("request");
   const [countCharacters, setCountCharacters] = useState(700);
 
+  const [errorMsg, setErrorMsg] = useState("")
   const [pos, setPos] = useState(null);
   const something = Boolean(pos)
 
@@ -35,7 +36,13 @@ export const Form = (props) => {
     if (message.length > 700) {
       //  {alert("Message need to be 700 chararacters or less")}//Replace with popover
       setPos(eventTarget);
+      setErrorMsg("Message need to be 700 chararacters or less")
       return false;
+    }
+    else if(message.length < 1){
+      setPos(eventTarget)
+      setErrorMsg("Message need have some characters")
+      return false
     }
   };
 
@@ -123,7 +130,7 @@ export const Form = (props) => {
                 onClose={() => { setPos(null);}}
           
 
-              > <Typography>Letters can only contain 700 characters</Typography></Popover>
+              > <Typography sx={{p:1}}>{errorMsg}</Typography></Popover>
           </>
         }
         {/* Form for response submission */}
