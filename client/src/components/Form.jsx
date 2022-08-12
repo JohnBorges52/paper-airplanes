@@ -23,6 +23,7 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
+  const [countCharacters, setCountCharacters] = useState(700)
 
   const submitMessage = (message, letterType, senderID) => {
     axios.post(`/letters/new`, { message, letterType, senderID })
@@ -47,15 +48,22 @@ export const Form = (props) => {
         multiline
         minRows={10}
         value={message}
-        onChange={event => setMessage(event.target.value)}
+        onChange={event => 
+        {setMessage(event.target.value);
+        setCountCharacters(700 - event.target.value.length)}}
         variant="outlined"
       />
 
       <div className="form-buttons">
-
+        
         {/* Form for new letter submission */}
         {!props.isResponse &&
           <>
+           <Button variant= "outlined">
+
+           {countCharacters}
+
+          </Button>
             <Button
               sx={{ color: purple[500], borderColor: purple[500] }}
               size="small"
@@ -85,6 +93,8 @@ export const Form = (props) => {
         {/* Form for response submission */}
         {props.isResponse &&
           <>
+           
+
             <Button
               sx={{ color: purple[500] }}
               size="small"

@@ -62,7 +62,7 @@ function App(props) {
           </BottomNavigation>
         </Paper>
         <Routes>
-          <Route path="/" element={<LetterList path={"/letters"} />} />
+          <Route path="/" element={<LetterList page={page} setPage={setPage} path={"/letters"} />} />
           <Route
             path="/letters"
             element={
