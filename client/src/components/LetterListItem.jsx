@@ -62,7 +62,7 @@ export const LetterListItem = (props) => {
         </div>
         <div className='letter-wrapper-secondary'>
           <div className='letter-text-area'>
-            {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 60)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
+            {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 54)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
             <Collapse in={expanded} timeout={100} unmountOnExit>
               <p className="letterMessage">{props.letterMessage}</p>
             </Collapse>

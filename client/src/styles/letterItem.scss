@@ -2,7 +2,7 @@
 .letterItem {
   display: flex;
   flex-direction: column;
-  height: 30vh;
+  height: fit-content;
   margin: 20px;
   justify-content: space-between;
 }
@@ -14,15 +14,16 @@
   align-items: center;
 }
 
-.letter-item-vh footer{
+.letter-item-vh{
   display: flex;
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+  
 }
 
 .cardStyle {
-  width: 85vw;
+  max-width: 85vw;
   margin: 20px;
   display: flex;
   flex-direction: row;
@@ -119,7 +120,23 @@
 
 //Desktop View
 @media (min-width: 481px) {
-  .letterItem {
-
+  .cardStyle{
+    max-width: 481px;
   }
+  .letter-text-area{
+    width: 90%;
+  };
+
+  .letter-wrapper-primary{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    width: 100%;
+  };
+  .letter-wrapper-secondary{
+    display: flex;
+    flex-direction: column;
+    width: 90%;
+    justify-content: space-between;
+  };
 }
