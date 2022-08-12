@@ -23,7 +23,7 @@
 }
 
 .cardStyle {
-  max-width: 85vw;
+  width: 85vw;
   margin: 20px;
   display: flex;
   flex-direction: row;
@@ -122,21 +122,16 @@
 @media (min-width: 481px) {
   .cardStyle{
     max-width: 481px;
+    margin: 20px;
+    
   }
-  .letter-text-area{
-    width: 90%;
-  };
 
-  .letter-wrapper-primary{
+  .letter-item-vh{
+    height: fit-content;
+    max-width : 481px;
+    margin: 20px;
     display: flex;
     flex-direction: row;
-    justify-content: space-between;
-    width: 100%;
-  };
-  .letter-wrapper-secondary{
-    display: flex;
-    flex-direction: column;
-    width: 90%;
-    justify-content: space-between;
-  };
+  }
+  
 }
