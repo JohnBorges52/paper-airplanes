@@ -126,7 +126,9 @@ export const LetterDetail = (props) => {
             }
           </div>}
       </div>
-
+      <br/>
+      <hr/>
+      <br/>
       {/* If user is not sender, show form */}
       {userID !== data.sender_id && <Form letterID={id} isResponse={true} />}
 
