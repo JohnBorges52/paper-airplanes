@@ -93,9 +93,10 @@ export const LetterListItem = (props) => {
                   />))
                 :
                 // Hide letter detail
-                (<DriveFileRenameOutlineOutlinedIcon
-                  className="hidden-component"
-                />)}
+                (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
+                    color="action"
+                    onClick={() => navigate(`/users/login`)}
+                  />)}
 
               <ExpandMore
                 className={disabled}
