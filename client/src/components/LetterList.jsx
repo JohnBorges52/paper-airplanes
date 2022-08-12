@@ -21,8 +21,8 @@ export const LetterList = (props) => {
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
       .then(res => setData(res.data))
-      .then(data => console.log(data));
-
+      .then(data => console.log(data))
+      .catch(() => setData([]));
   }, [props.path]);
 
   const navigate = useNavigate();
@@ -55,10 +55,8 @@ export const LetterList = (props) => {
             onClick={() => navigate("/letters/new")}
           >new Letter
           </Button>
-
         </div>
       }
-
     </>
   );
 
