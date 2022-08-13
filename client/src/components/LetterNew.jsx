@@ -3,9 +3,12 @@ import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { LoginError } from "./LoginError";
+import { useEffect } from "react";
 
 export const LetterNew = () => {
   const { userID } = useContext(UserContext);
+
+  useEffect(()=>{},[userID])
 
   return (
     <>
