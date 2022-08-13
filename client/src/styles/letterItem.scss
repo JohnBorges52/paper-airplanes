@@ -5,6 +5,8 @@
   height: fit-content;
   margin: 20px;
   justify-content: space-between;
+  margin-bottom: 90px;
+  
 }
 
 .letter-footer{
@@ -19,6 +21,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   
 }
 
@@ -27,6 +30,12 @@
   margin: 20px;
   display: flex;
   flex-direction: row;
+  font-family: 'Poiret One', cursive;
+  border: 2px solid mediumpurple;
+  box-shadow: 10px 23px rebeccapurple;
+  
+  
+
 };
 .letter-wrapper-primary{
   display: flex;
@@ -139,6 +148,30 @@
   margin-right: 10px;
 }
 
+.guy-heart-container{
+  display: flex;
+  width: 100%;
+  height: 150px;
+ 
+  justify-content: center;
+}
+
+.guy-heart{
+  margin-top: 33px;
+  width: 25%;
+  height: 100%;
+
+  background-image: url("../assests/heart-guy.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+  
+}
+
+.test{
+  margin-bottom: 50px;
+}
+
 //Desktop View
 @media (min-width: 481px) {
   .cardStyle{
@@ -146,6 +179,7 @@
     margin: 20px;
     
   }
+ 
 
   .letter-item-vh{
     height: fit-content;

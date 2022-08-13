@@ -176,7 +176,16 @@ export const Form = (props) => {
             }
           </>
         }
+        
+        
       </div>
+
+      {!props.isResponse &&
+      
+        <div className="guy-heart-container">
+        <div className="guy-heart"> </div>
+      </div>
+        }
     </div >
   );
 };

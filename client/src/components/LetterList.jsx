@@ -6,6 +6,7 @@ import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import '../styles/letterItem.scss'
+import '../styles/letterlist.scss'
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
 
@@ -22,7 +23,9 @@ export const LetterList = (props) => {
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
-      .then((res) =>{ setData(res.data); if(res.data.length === 0){setLetterEmpty(true)}})
+      .then((res) =>{ setData(res.data); 
+        if(res.data.length === 0){setLetterEmpty(true)}
+        else{setLetterEmpty(false)} })
       .catch(() => setData([]));
   }, [props.path]);
 
@@ -31,7 +34,7 @@ export const LetterList = (props) => {
   
   return (
     <>
-      {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
+      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : <h1 className="letterListHeader">My Letters</h1>}
       {!letterEmpty ?
         <div>
           {(data.map((letter) =>
@@ -44,7 +47,10 @@ export const LetterList = (props) => {
               senderUserName={letter.username}
               type={letter.type} />
           )).slice(0, (3 * props.page))}
-          <Button onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
+        
+          <Button sx={{color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
+          
+
         </div>
         :
         <div className="login-error">
