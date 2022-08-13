@@ -42,18 +42,21 @@ function App() {
         > */}
 
         <nav className="top-nav-bar">
-          <div className="logo"></div>
+          <div className="logo"
+            onClick={() => { navigate("/letters") }}></div>
 
           <div className="top-nav-bar-rightcontainer">
 
             <li> <Button
               variant="outlined"
               sx={{ color: purple[800], border: "1px solid purple" }}
+              onClick={() => { navigate("/users/login") }}
             >LOGIN</Button> </li>
             <li className="notification-bell"> <NotificationsActiveOutlinedIcon
               sx={{ color: purple[700] }}
 
-            /> {page === 2 && <span id="notification-counter">+1</span>} </li>
+
+            /> <span id="notification-counter" className="notification-counter"> +1</span> </li>
           </div>
 
         </nav>
