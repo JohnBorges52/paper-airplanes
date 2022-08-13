@@ -5,6 +5,7 @@
   height: fit-content;
   margin: 20px;
   justify-content: space-between;
+  
 }
 
 .letter-footer{
@@ -19,6 +20,7 @@
   flex-direction: row;
   justify-content: space-between;
   align-items: center;
+
   
 }
 
@@ -27,7 +29,13 @@
   margin: 20px;
   display: flex;
   flex-direction: row;
+  border: 2px solid mediumpurple;
+  box-shadow: 10px 23px rebeccapurple;
+  
+  
 };
+
+
 .letter-wrapper-primary{
   display: flex;
   flex-direction: row;
@@ -158,6 +166,8 @@
   
   
 }
+
+
 
 //Desktop View
 @media (min-width: 481px) {

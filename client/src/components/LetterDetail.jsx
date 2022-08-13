@@ -8,6 +8,7 @@ import { useNavigate } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import { makeStyles } from "@mui/material"
 
 // Material UI
 import { Card } from "@mui/material"
@@ -73,6 +74,7 @@ export const LetterDetail = (props) => {
     setReported(true)
     alert("The post have been reported")
   }
+
 
   return (
     <div className="letterDetail">

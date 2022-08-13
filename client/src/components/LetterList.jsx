@@ -22,7 +22,9 @@ export const LetterList = (props) => {
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
-      .then((res) =>{ setData(res.data); if(res.data.length === 0){setLetterEmpty(true)}})
+      .then((res) =>{ setData(res.data); 
+        if(res.data.length === 0){setLetterEmpty(true)}
+        else{setLetterEmpty(false)} })
       .catch(() => setData([]));
   }, [props.path]);
 
@@ -45,7 +47,7 @@ export const LetterList = (props) => {
               type={letter.type} />
           )).slice(0, (3 * props.page))}
         
-          <Button onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
+          <Button sx={{color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
           
 
         </div>
