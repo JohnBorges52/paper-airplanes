@@ -13,14 +13,16 @@ import { Login } from "./components/Login";
 import { useState } from "react";
 
 // Material UI
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import { purple } from "@mui/material/colors";
 
 // Material UI Icons
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 
 function App() {
   const navigate = useNavigate();
@@ -40,14 +42,18 @@ function App() {
         > */}
 
         <nav className="top-nav-bar">
-          <div className="top-nav-bar-leftcontainer">
+          <div className="logo"></div>
 
-            <li> LOGO</li>
-          </div>
           <div className="top-nav-bar-rightcontainer">
 
-            <li> LOGIN</li>
-            <li> BELL</li>
+            <li> <Button
+              variant="outlined"
+              sx={{ color: purple[800], border: "1px solid purple" }}
+            >LOGIN</Button> </li>
+            <li className="notification-bell"> <NotificationsActiveOutlinedIcon
+              sx={{ color: purple[700] }}
+
+            /> {page === 2 && <span id="notification-counter">+1</span>} </li>
           </div>
 
         </nav>
