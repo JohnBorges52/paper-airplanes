@@ -20,4 +20,4 @@ INSERT INTO letters (letter_message, type, sender_id) VALUES ('You''re beautiful
 INSERT INTO letters (letter_message, type, flag_count, sender_id) VALUES ('*Insert Feel Good Message Here*', 'encourage', 2, 2);
 INSERT INTO letters (letter_message, type, flag_count, sender_id) VALUES ('I hope you have a good day.', 'encourage', 1, 3);
 INSERT INTO letters (letter_message, type, sender_id) VALUES ('You''re beautiful', 'encourage', 1);
-INSERT INTO letters (letter_message, type, flag_count, sender_id) VALUES ('*Insert Feel Good Message Here*', 'encourage', 2, 2);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, read) VALUES ('*Insert Feel Good Message Here*', 'encourage', 2, 2, TRUE);
