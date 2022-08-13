@@ -44,7 +44,10 @@ export const LetterList = (props) => {
               senderUserName={letter.username}
               type={letter.type} />
           )).slice(0, (3 * props.page))}
+        
           <Button onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>
+          
+
         </div>
         :
         <div className="login-error">

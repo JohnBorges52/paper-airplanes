@@ -139,6 +139,26 @@
   margin-right: 10px;
 }
 
+.guy-heart-container{
+  display: flex;
+  width: 100%;
+  height: 150px;
+ 
+  justify-content: center;
+}
+
+.guy-heart{
+  margin-top: 33px;
+  width: 25%;
+  height: 100%;
+
+  background-image: url("../assests/heart-guy.gif");
+  background-repeat: no-repeat;
+  background-size: contain;
+  
+  
+}
+
 //Desktop View
 @media (min-width: 481px) {
   .cardStyle{
@@ -146,6 +166,7 @@
     margin: 20px;
     
   }
+ 
 
   .letter-item-vh{
     height: fit-content;
