@@ -11,13 +11,25 @@ import classNames from "classnames";
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { purple } from "@mui/material/colors";
-import { Popover, Typography } from "@mui/material";
+import { Popover, Typography, Box, Modal } from "@mui/material";
 
 
 // Material Icons
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
+import { useEffect } from "react";
 
+const style = {
+  position: 'absolute',
+  top: '50%',
+  left: '50%',
+  transform: 'translate(-50%, -50%)',
+  width: 300,
+  bgcolor: 'background.paper',
+  border: '2px solid #000',
+  boxShadow: 24,
+  p: 4,
+};
 
 export const Form = (props) => {
   const navigate = useNavigate();
@@ -29,30 +41,36 @@ export const Form = (props) => {
 
   const [popoverMsg, setPopoverMsg] = useState("")
   const [pos, setPos] = useState(null);
+  const [isModal, setIsModal] = useState(true)
   const open = Boolean(pos)
 
   const validateMessage = (message, eventTarget) => {
     if (message.length > 700) {
+      setIsModal(false);
       setPos(eventTarget);
       setPopoverMsg("Letter needs to be 700 chararacters or less")
       return false;
     }
     else if (message.length < 1) {
+      setIsModal(false);
       setPos(eventTarget)
       setPopoverMsg("Letter needs to have characters")
       return false
     }
     setPos(eventTarget)
-    setPopoverMsg("Letter saved!")
+    setIsModal(true);
     return true
   };
+
+  useEffect(() => { }, [isModal])
 
   const submitMessage = (message, letterType, senderID, eventTarget) => {
     if (validateMessage(message, eventTarget)) {
       axios.post(`/letters/new`, { message, letterType, senderID })
         .then(setTimeout(() => {
           navigate("/letters/profile")
-        }, 1000))
+        }, 1500))
+
     }
   };
 
@@ -61,7 +79,7 @@ export const Form = (props) => {
       axios.post(`/responses/new`, { message, letterID, responderID })
         .then(setTimeout(() => {
           navigate("/letters/")
-        }, 1000))
+        }, 1500))
     }
   };
 
@@ -107,9 +125,9 @@ export const Form = (props) => {
           Clear
         </Button>
 
-        {/* Submit button for both new letter and response forms */}
         {
           <>
+            {/* Submit button for both new letter and response forms */}
             <Button
               sx={{ backgroundColor: purple[500] }}
               style={{ marginLeft: "10px" }}
@@ -128,16 +146,34 @@ export const Form = (props) => {
               Submit
             </Button>
 
-            {/* Popover alert on submit when message is too short or too long */}
-            <Popover
-              open={open}
-              anchorEl={pos}
-              anchorOrigin={{
-                vertical: 'bottom',
-                horizontal: 'left',
-              }}
-              onClose={() => { setPos(null); }}
-            > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
+            {isModal ?
+              <Modal
+                open={open}
+                onClose={() => setPos(null)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                    Message Saved!💖
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Redirecting...
+                  </Typography>
+                </Box>
+              </Modal>
+              :
+              //* Popover alert on submit when message is too short or too long *
+              <Popover
+                open={open}
+                anchorEl={pos}
+                anchorOrigin={{
+                  vertical: 'bottom',
+                  horizontal: 'left',
+                }}
+                onClose={() => { setPos(null); }}
+              > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
+            }
           </>
         }
       </div>
