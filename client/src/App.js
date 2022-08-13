@@ -13,14 +13,16 @@ import { Login } from "./components/Login";
 import { useState } from "react";
 
 // Material UI
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation, BottomNavigationAction, Button } from "@mui/material";
 import Paper from "@mui/material/Paper";
+import { purple } from "@mui/material/colors";
 
 // Material UI Icons
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
+import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
 
 function App() {
   const navigate = useNavigate();
@@ -33,57 +35,107 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        <Paper
+        {/* <Paper
           className="nav-bar"
           sx={{ position: "fixed", bottom: 10, left: 0, right: 0 }}
           elevation={0}
-        >
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={handleChange}
-            sx={{
-              // bgcolor: "purple",
-              "& .Mui-selected": {
-                "& .MuiBottomNavigationAction-label": {
-                  fontSize: (theme) => theme.typography.caption,
-                  transition: "none",
-                  fontWeight: "bold",
-                  lineHeight: "20px",
-                },
-                "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
-                  color: (theme) => theme.palette.secondary.main,
-                },
-              },
-            }}
-          >
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters");
-                setPage(1);
-              }}
-              label="All Letters"
-              icon={<MailOutlineIcon fontSize="large" />}
-            />
+        > */}
 
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters/profile");
-                setPage(1);
-              }}
-              label="My Letters"
-              icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
-            />
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters/new");
-                setPage(1);
-              }}
-              label="Write New"
-              icon={<CreateOutlinedIcon fontSize="large" />}
-            />
-          </BottomNavigation>
-        </Paper>
+        <nav className="top-nav-bar">
+          <div className="logo"></div>
+
+          <div className="top-nav-bar-rightcontainer">
+
+            <li> <Button
+              variant="outlined"
+              sx={{ color: purple[800], border: "1px solid purple" }}
+            >LOGIN</Button> </li>
+            <li className="notification-bell"> <NotificationsActiveOutlinedIcon
+              sx={{ color: purple[700] }}
+
+            /> {page === 2 && <span id="notification-counter">+1</span>} </li>
+          </div>
+
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={handleChange}
+          className="nav-bar"
+          sx={{
+
+            // bgcolor: "purple",
+            "& .Mui-selected": {
+              "& .MuiBottomNavigationAction-label": {
+                fontSize: (theme) => theme.typography.caption,
+                transition: "none",
+                fontWeight: "bold",
+              },
+              "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
+                color: (theme) => theme.palette.secondary.main,
+              },
+            },
+            position: "fixed", bottom: 0, left: 0, right: 0, height: "76px"
+          }}
+        >
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters");
+              setPage(1);
+            }}
+            label="All Letters"
+            icon={<MailOutlineIcon fontSize="large" />}
+          />
+
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters/profile");
+              setPage(1);
+            }}
+            label="My Letters"
+            icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
+          />
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters/new");
+              setPage(1);
+            }}
+            label="Write New"
+            icon={<CreateOutlinedIcon fontSize="large" />}
+          />
+        </BottomNavigation>
+        {/* </Paper> */}
         <Routes>
           <Route
             path="/"

@@ -32,6 +32,7 @@ export const LetterList = (props) => {
   }, [props.path]);
 
   const navigate = useNavigate();
+
   
   return (
     <>
@@ -53,18 +54,18 @@ export const LetterList = (props) => {
           
 
         </div>
-        : (!userID ? navigate('/users/login/error') : (<div className="login-error">
-        <p>You do not have any letters. </p>
-        <div className="empty-letter-img"></div>
-        {/* <p>Write a  here!</p> */}
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: purple[500], marginTop: "20px" }}
-          onClick={() => navigate("/letters/new")}
-        >new Letter
-        </Button>
-      </div>))
-        
+        :
+        <div className="login-error">
+          <p>You do not have any letters. </p>
+          <div className="empty-letter-img"></div>
+          {/* <p>Write a  here!</p> */}
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: purple[500], marginTop: "20px" }}
+            onClick={() => navigate("/letters/new")}
+          >new Letter
+          </Button>
+        </div>
       }
     </>
   );
