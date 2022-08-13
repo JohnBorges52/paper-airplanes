@@ -10,7 +10,7 @@ import classNames from "classnames";
 // Material UI
 import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
-import { purple } from "@mui/material/colors";
+import { purple, red } from "@mui/material/colors";
 import { Popover, Typography, Box, Modal } from "@mui/material";
 
 
@@ -87,12 +87,14 @@ export const Form = (props) => {
 
   return (
     <div className="form-component">
+      <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
         <TypeSelector
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
       {/* Text field for form */}
+      
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
         id="filled-multiline-flexible"
         label="What is on your mind?"
@@ -175,9 +177,7 @@ export const Form = (props) => {
               > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
             }
           </>
-        }
-        
-        
+        }        
       </div>
 
       {!props.isResponse &&

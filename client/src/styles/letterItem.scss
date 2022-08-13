@@ -5,7 +5,6 @@
   height: fit-content;
   margin: 20px;
   justify-content: space-between;
-  margin-bottom: 90px;
   
 }
 
@@ -60,9 +59,6 @@
 .hidden-component{
   opacity: 0%;
 }
-.hidden{
-  
-}
 
 .response-cardStyle {
   width: 72vw;
@@ -94,8 +90,8 @@
 
 }
 .report-button {
-  margin-right: 8px;
-  margin-top: 15px;
+  width: 90%;
+  margin: 15px auto 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -171,6 +167,38 @@
 .test{
   margin-bottom: 50px;
 }
+
+.letterList-container{
+  margin-top: 85px;
+
+}
+.letterDetail{
+  margin-top: 65px;
+}
+
+.top-nav-bar{
+  width: 100%;
+  background-color: yellow;
+  display: flex;
+  justify-content: space-between;
+  height: 76px;
+  align-items: center;
+
+
+}
+.top-nav-bar li {
+  list-style: none;
+  display: inline-block;
+  padding:10px;
+
+}
+.top-nav-bar-rightcontainer{
+  margin-right: 15px;
+}
+.top-nav-bar-leftcontainer{
+  margin-left: 20px;
+}
+
 
 //Desktop View
 @media (min-width: 481px) {

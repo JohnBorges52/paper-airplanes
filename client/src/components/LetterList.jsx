@@ -33,7 +33,7 @@ export const LetterList = (props) => {
 
   
   return (
-    <>
+    <div className="letterList-container">
       {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : <h1 className="letterListHeader">My Letters</h1>}
       {!letterEmpty ?
         <div>
@@ -65,7 +65,7 @@ export const LetterList = (props) => {
           </Button>
         </div>
       }
-    </>
+    </div>
   );
 
 };

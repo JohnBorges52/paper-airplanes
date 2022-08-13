@@ -33,57 +33,103 @@ function App() {
   return (
     <div className="App">
       <UserProvider>
-        <Paper
+        {/* <Paper
           className="nav-bar"
           sx={{ position: "fixed", bottom: 10, left: 0, right: 0 }}
           elevation={0}
-        >
-          <BottomNavigation
-            showLabels
-            value={value}
-            onChange={handleChange}
-            sx={{
-              // bgcolor: "purple",
-              "& .Mui-selected": {
-                "& .MuiBottomNavigationAction-label": {
-                  fontSize: (theme) => theme.typography.caption,
-                  transition: "none",
-                  fontWeight: "bold",
-                  lineHeight: "20px",
-                },
-                "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
-                  color: (theme) => theme.palette.secondary.main,
-                },
-              },
-            }}
-          >
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters");
-                setPage(1);
-              }}
-              label="All Letters"
-              icon={<MailOutlineIcon fontSize="large" />}
-            />
+        > */}
 
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters/profile");
-                setPage(1);
-              }}
-              label="My Letters"
-              icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
-            />
-            <BottomNavigationAction
-              onClick={() => {
-                navigate("/letters/new");
-                setPage(1);
-              }}
-              label="Write New"
-              icon={<CreateOutlinedIcon fontSize="large" />}
-            />
-          </BottomNavigation>
-        </Paper>
+        <nav className="top-nav-bar">
+          <div className="top-nav-bar-leftcontainer">
+
+            <li> LOGO</li>
+          </div>
+          <div className="top-nav-bar-rightcontainer">
+
+            <li> LOGIN</li>
+            <li> BELL</li>
+          </div>
+
+        </nav>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        <BottomNavigation
+          showLabels
+          value={value}
+          onChange={handleChange}
+          className="nav-bar"
+          sx={{
+
+            // bgcolor: "purple",
+            "& .Mui-selected": {
+              "& .MuiBottomNavigationAction-label": {
+                fontSize: (theme) => theme.typography.caption,
+                transition: "none",
+                fontWeight: "bold",
+              },
+              "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
+                color: (theme) => theme.palette.secondary.main,
+              },
+            },
+            position: "fixed", bottom: 0, left: 0, right: 0, height: "76px"
+          }}
+        >
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters");
+              setPage(1);
+            }}
+            label="All Letters"
+            icon={<MailOutlineIcon fontSize="large" />}
+          />
+
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters/profile");
+              setPage(1);
+            }}
+            label="My Letters"
+            icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
+          />
+          <BottomNavigationAction
+            onClick={() => {
+              navigate("/letters/new");
+              setPage(1);
+            }}
+            label="Write New"
+            icon={<CreateOutlinedIcon fontSize="large" />}
+          />
+        </BottomNavigation>
+        {/* </Paper> */}
         <Routes>
           <Route
             path="/"
