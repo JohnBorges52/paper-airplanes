@@ -2,6 +2,7 @@ import axios from "axios";
 import { useState } from "react"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import { useNavigate } from "react-router-dom";
 
 // Material UI
 import TextField from '@mui/material/TextField';
@@ -10,6 +11,7 @@ import { purple } from "@mui/material/colors";
 
 export const Login = () => {
 
+  const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("")
   const { userID, setUserID } = useContext(UserContext);
   const getUserId = (email) => {
@@ -38,7 +40,10 @@ export const Login = () => {
           sx={{ backgroundColor: purple[500] }}
           style={{ margin: "10px auto 10px", width: "25vw" }}
           variant="contained"
-          onClick={() => { getUserId(userEmail) }}>LOGIN
+          onClick={() => {
+            getUserId(userEmail)
+            navigate("/letters/profile")
+          }}>LOGIN
         </Button>
 
         <Button
