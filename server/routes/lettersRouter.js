@@ -67,8 +67,19 @@ module.exports = (db) => {
 
   // Get a specific user's unread letters
   router.get('/unread', (req, res) =>{
-    
-  })
+    const queryString = `
+      select count(*) from letters where read IS false and sender_id = $1;
+    `
+    db.query(queryString, [req.query.userID])
+      .then((data) => {
+        res.json(data.rows);
+      })
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  });
+
+
 
   router.put("/:id/flag", (req, res) => {
     const queryString = `
