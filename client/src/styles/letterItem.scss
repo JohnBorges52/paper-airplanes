@@ -169,15 +169,16 @@
 }
 
 .letterList-container{
-  margin-top: 85px;
+  margin-top: 15px;
 
 }
 .letterDetail{
-  margin-top: 65px;
+  margin-top: 6px;
 }
 
 .top-nav-bar{
   width: 100%;
+  
  
   display: flex;
   justify-content: space-between;
@@ -198,9 +199,11 @@
   display: flex;
   margin-right: 15px;
   justify-content: center;
+  align-items: center;
  
     
 }
+
 .top-nav-bar-leftcontainer{
   margin-left: 20px;
 }
@@ -215,8 +218,27 @@
   background-size: contain;
 
 }
+
 .notification-bell{
-  
+
+  position: relative;
+
+
+}
+
+
+.notification-counter{
+  position: absolute;
+  right: 0px;
+  top: -9px; 
+  border-radius: 50%;
+  padding: 2px;
+  background: #fff;
+  border: 1px solid rgb(81, 12, 99);
+  color: rgb(250, 0, 0);
+  text-align: center;
+  font: 12px Arial, sans-serif;
+
 }
 
 
