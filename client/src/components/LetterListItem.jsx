@@ -55,7 +55,7 @@ export const LetterListItem = (props) => {
 
   return (
     <Card className={expandedDiv}
-      sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
+      sx={{ margin: 1, padding: 1, backgroundColor: purple[100], marginBottom: "40px", boxShadow: "7px 7px purple", border: "1px solid", borderColor: purple[600] }}
     //    onClick={() => setCurrentLetter(letter)}>
     >
       <div className='letter-wrapper-primary'>
