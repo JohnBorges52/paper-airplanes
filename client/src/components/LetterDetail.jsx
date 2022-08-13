@@ -81,10 +81,9 @@ export const LetterDetail = (props) => {
 
       <div className="letter-report-component">
 
-
         <Card className="cardStyle letter-item-vh"
-          sx={{ margin: 1, padding: 1, backgroundColor: purple[100] }}
-        >
+          sx={{ backgroundColor: purple[100], marginBotton: "50px" }}
+          >
           <div className='letter-wrapper-primary'>
             <div>
               <p>{data.id}</p> {/*CHANGE TO EMOTE AFTER*/}
@@ -96,7 +95,7 @@ export const LetterDetail = (props) => {
             </div>
           </div>
         </Card>
-
+        
 
         {userID !== data.sender_id ?
           /* Render delete button when it is NOT your letter */
