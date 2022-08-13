@@ -52,6 +52,10 @@ export const LetterListItem = (props) => {
     }
   };
 
+  const markRead = (letterId) => {
+    axios.put(`/responses/${letterId}/read`)
+  }
+
 
   return (
     <Card className={expandedDiv}
@@ -89,7 +93,7 @@ export const LetterListItem = (props) => {
                   // Show letter detail button, regardless of type
                   (<ChatOutlinedIcon
                     color="action"
-                    onClick={() => navigate(`/letters/${props.id}`)}
+                    onClick={() => {markRead(props.id); navigate(`/letters/${props.id}`)}}
                   />))
                 :
                 // Hide letter detail
