@@ -9,6 +9,7 @@ import '../styles/letterItem.scss'
 import '../styles/letterlist.scss'
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
+import { LoginError } from "./LoginError";
 
 
 export const LetterList = (props) => {
@@ -52,18 +53,18 @@ export const LetterList = (props) => {
           
 
         </div>
-        :
-        <div className="login-error">
-          <p>You do not have any letters. </p>
-          <div className="empty-letter-img"></div>
-          {/* <p>Write a  here!</p> */}
-          <Button
-            variant="contained"
-            sx={{ backgroundColor: purple[500], marginTop: "20px" }}
-            onClick={() => navigate("/letters/new")}
-          >new Letter
-          </Button>
-        </div>
+        : (userID ? (<div className="login-error">
+        <p>You do not have any letters. </p>
+        <div className="empty-letter-img"></div>
+        {/* <p>Write a  here!</p> */}
+        <Button
+          variant="contained"
+          sx={{ backgroundColor: purple[500], marginTop: "20px" }}
+          onClick={() => navigate("/letters/new")}
+        >new Letter
+        </Button>
+      </div>): <LoginError />)
+        
       }
     </>
   );
