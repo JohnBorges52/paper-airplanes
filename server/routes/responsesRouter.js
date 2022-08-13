@@ -1,27 +1,51 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  // GET all responses
-  // router.get("/", (req, res) => {
-  //   const queryString =
-  //     "SELECT * FROM responses WHERE active IS true"; /* <= THINK ABOUT PUTTING A LIMIT OVER HOW MANY WILL APPEAR ON THE PAGE*/
-  //   db.query(queryString).then((data) => {
-  //     res.json(data.rows);
-  //   });
-  // });
-
-  // GET a specific response
-  router.get("/:id", (req, res) => {
-
-    db.query(`SELECT * FROM responses WHERE active IS true AND letter_id = $1 ORDER BY created_at DESC;`, [req.params.id]).then(
-      (data) => {
-
-        res.json(data.rows);
-      }
-    );
-
-  });
-
+    // Get a specific user's unread responses
+    router.get('/unread', (req, res) =>{
+      const queryString = `
+      select count(*) 
+      from responses 
+      join letters on letters.id = responses.letter_id  
+      join users on users.id = letters.sender_id 
+      where users.id = $1 
+      and responses.read is false;
+      `
+      db.query(queryString, [req.query.userID])
+        .then((data) => {
+          res.json(data.rows);
+        })
+        .catch((err) => {
+          res.status(500).json({ error: err.message });
+        });
+    });
+  
+    
+    
+    // GET a specific response
+    router.get("/:id", (req, res) => {
+      
+      db.query(`SELECT * FROM responses WHERE active IS true AND letter_id = $1 ORDER BY created_at DESC;`, [req.params.id]).then(
+        (data) => {
+          
+          res.json(data.rows);
+        }
+        );
+        
+      });
+      
+      router.put('/:id/read', (req, res) => {
+        const queryString = `
+        UPDATE responses 
+        SET read = true 
+        WHERE letter_id = $1
+        `;
+        db.query(queryString, [req.params.id])
+          .then(res.send("updated"))
+          .catch((err) => {
+            res.status(500).json({ error: err.message });
+          });
+      })
 
   router.put("/:id/delete", (req, res) => {
     const queryString = `

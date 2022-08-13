@@ -5,7 +5,6 @@
   height: fit-content;
   margin: 20px;
   justify-content: space-between;
-  margin-bottom: 90px;
   
 }
 
@@ -60,9 +59,6 @@
 .hidden-component{
   opacity: 0%;
 }
-.hidden{
-  
-}
 
 .response-cardStyle {
   width: 72vw;
@@ -94,8 +90,8 @@
 
 }
 .report-button {
-  margin-right: 8px;
-  margin-top: 15px;
+  width: 90%;
+  margin: 15px auto 0;
   display: flex;
   justify-content: flex-end;
 }
@@ -112,6 +108,7 @@
   text-align: center;
   margin:0 auto;
   color:#880176;
+  margin-top: 10px;
 }
 .empty-letter-img{
   width: 100%;
@@ -127,7 +124,7 @@
   background-repeat: no-repeat;
   background-position: bottom right;
   width: 100%;
-  height: 68vh; 
+  height: 555px; 
 }
 .character-color-lesser{
   color:red;
@@ -168,9 +165,83 @@
   
 }
 
-.test{
-  margin-bottom: 50px;
+
+
+.letterList-container{
+  margin-top: 15px;
+
 }
+.letterDetail{
+  margin-top: 6px;
+}
+
+.top-nav-bar{
+  width: 100%;
+  display: flex;
+  justify-content: space-between;
+  height: 76px;
+  align-items: center;
+  border-bottom: 1px solid rgb(160, 160, 160);
+
+
+}
+.top-nav-bar li {
+  list-style: none;
+  display: inline-block;
+  padding: 0 10px 0 10px;
+  height: 100%;
+  
+
+}
+.top-nav-bar-rightcontainer{
+  display: flex;
+  margin-right: 15px;
+  justify-content: center;
+  align-items: center;
+ 
+    
+}
+
+.top-nav-bar-leftcontainer{
+  margin-left: 20px;
+}
+
+.logo{
+  margin-top: 7px;
+  margin-left: 10px;
+  width: 50%;
+  height: 80%;
+  background-image: url("../assests/logo.png");
+  background-repeat: no-repeat;
+  background-size: contain;
+
+}
+
+.notification-bell{
+
+  position: relative;
+
+
+}
+
+
+.notification-counter{
+  position: absolute;
+  right: 6px;
+  top: -9px;
+  border-radius: 50%;
+  padding: 3px;
+  background: #fff;
+  border: 1px solid rgb(81, 12, 99);
+  color: rgb(250, 0, 0);
+  text-align: center;
+  font: 12px Arial, sans-serif;
+  height: 12px;
+
+
+}
+
+
 
 //Desktop View
 @media (min-width: 481px) {
@@ -189,4 +260,14 @@
     flex-direction: row;
   }
   
+}
+
+@media ( max-height: 700px) {
+  .homepage{
+    background-image: url("../assests/bg-img.gif.gif");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    width: 100%;
+    height: 66vh; 
+  }
 }

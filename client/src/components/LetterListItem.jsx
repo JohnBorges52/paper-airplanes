@@ -16,6 +16,8 @@ import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
+import axios from "axios";
+
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -49,6 +51,11 @@ export const LetterListItem = (props) => {
       return false;
     }
   };
+
+  const markRead = (letterId) => {
+    axios.put(`/responses/${letterId}/read`)
+  }
+
 
   return (
     <Card className={expandedDiv}
@@ -86,7 +93,7 @@ export const LetterListItem = (props) => {
                   // Show letter detail button, regardless of type
                   (<ChatOutlinedIcon
                     color="action"
-                    onClick={() => navigate(`/letters/${props.id}`)}
+                    onClick={() => { markRead(props.id); navigate(`/letters/${props.id}`) }}
                   />))
                 :
                 // Hide letter detail
