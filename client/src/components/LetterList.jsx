@@ -10,6 +10,7 @@ import '../styles/letterlist.scss'
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
 import { LoginError } from "./LoginError";
+import { Login } from "./Login";
 
 
 export const LetterList = (props) => {
@@ -31,11 +32,10 @@ export const LetterList = (props) => {
   }, [props.path]);
 
   const navigate = useNavigate();
-
   
   return (
     <>
-      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : <h1 className="letterListHeader">My Letters</h1>}
+      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : (userID && <h1 className="letterListHeader">My Letters</h1>)}
       {!letterEmpty ?
         <div>
           {(data.map((letter) =>
@@ -53,7 +53,7 @@ export const LetterList = (props) => {
           
 
         </div>
-        : (userID ? (<div className="login-error">
+        : (!userID ? navigate('/users/login/error') : (<div className="login-error">
         <p>You do not have any letters. </p>
         <div className="empty-letter-img"></div>
         {/* <p>Write a  here!</p> */}
@@ -63,7 +63,7 @@ export const LetterList = (props) => {
           onClick={() => navigate("/letters/new")}
         >new Letter
         </Button>
-      </div>): <LoginError />)
+      </div>))
         
       }
     </>
