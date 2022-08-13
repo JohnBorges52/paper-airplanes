@@ -31,9 +31,11 @@ export const LetterList = (props) => {
 
   const navigate = useNavigate();
 
+  { console.log(letterEmpty) }
+
   return (
     <>
-      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : (userID && <h1 className="letterListHeader">My Letters</h1>)}
+      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : (<h1 className="letterListHeader">My Letters</h1>)}
       {!letterEmpty ?
         <div>
           {(data.map((letter) =>
@@ -48,8 +50,6 @@ export const LetterList = (props) => {
           )).slice(0, (3 * props.page))}
 
           {((3 * props.page) < data.length) && <Button sx={{ color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>}
-
-
         </div>
         :
         <div className="login-error">
