@@ -6,6 +6,7 @@ import "./App.css";
 // import { UserInformation } from "./components/UserInfomation";
 import { UserProvider } from "./UserContext";
 import { LetterNew } from "./components/LetterNew";
+import { NotificationCounter } from "./components/NotificationCounter";
 
 import { LetterList } from "./components/LetterList";
 import { LetterDetail } from "./components/LetterDetail";
@@ -36,7 +37,7 @@ function App() {
   };
 
   axios.get('/responses/unread', {params:{userID : 3}}).then((res)=>setNotifcationNumber(res.data[0].count))
-  
+
   return (
     <div className="App">
       <UserProvider>
@@ -59,9 +60,11 @@ function App() {
             >LOGIN</Button> </li>
             <li className="notification-bell"> <NotificationsActiveOutlinedIcon
               sx={{ color: purple[700] }}
-
-
-            /> <span id="notification-counter" className="notification-counter">{notificationNumber}</span> </li>
+            /> 
+     
+            
+            <NotificationCounter/>
+            </li>
           </div>
 
         </nav>
