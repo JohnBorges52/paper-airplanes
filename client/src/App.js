@@ -13,7 +13,8 @@ import { Login } from "./components/Login";
 import { useState } from "react";
 
 // Material UI
-import { BottomNavigation, BottomNavigationAction } from "@mui/material";
+import { BottomNavigation } from "@mui/material";
+import MuiBottomNavigationAction from "@mui/material/BottomNavigationAction";
 import Paper from "@mui/material/Paper";
 
 // Material UI Icons
@@ -21,26 +22,39 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
+import { styled } from "@mui/material/styles";
 
-function App(props) {
+const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
+  color: green;
+  &.Mui-selected {
+    color: red;
+  }
+`);
+
+function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
+  const [value, setValue] = useState("recents");
+
+  const handleChange = (event, newValue) => {
+    setValue(newValue);
+  };
   return (
     <div className="App">
       <UserProvider>
         <Paper
           className="nav-bar"
-          sx={{ position: "fixed", bottom: 0, left: 0, right: 0 }}
+          sx={{ position: "fixed", bottom: 10, left: 0, right: 0 }}
           elevation={0}
         >
-          <BottomNavigation showLabels>
+          <BottomNavigation showLabels value={value} onChange={handleChange}>
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters");
                 setPage(1);
               }}
               label="All Letters"
-              icon={<MailOutlineIcon />}
+              icon={<MailOutlineIcon fontSize="large" />}
             />
 
             <BottomNavigationAction
@@ -49,7 +63,7 @@ function App(props) {
                 setPage(1);
               }}
               label="My Letters"
-              icon={<MarkunreadMailboxOutlinedIcon />}
+              icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
             />
             <BottomNavigationAction
               onClick={() => {
@@ -57,7 +71,7 @@ function App(props) {
                 setPage(1);
               }}
               label="Write New"
-              icon={<CreateOutlinedIcon />}
+              icon={<CreateOutlinedIcon fontSize="large" />}
             />
           </BottomNavigation>
         </Paper>
