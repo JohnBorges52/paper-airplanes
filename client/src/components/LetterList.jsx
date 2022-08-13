@@ -6,6 +6,7 @@ import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import '../styles/letterItem.scss'
+import '../styles/letterlist.scss'
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
 
@@ -31,7 +32,7 @@ export const LetterList = (props) => {
   
   return (
     <>
-      {props.path === "/letters" ? <h1>All Letters</h1> : <h1>My Letters</h1>}
+      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : <h1 className="letterListHeader">My Letters</h1>}
       {!letterEmpty ?
         <div>
           {(data.map((letter) =>
