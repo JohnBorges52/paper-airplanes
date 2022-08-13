@@ -68,7 +68,12 @@ module.exports = (db) => {
   // Get a specific user's unread letters
   router.get('/unread', (req, res) =>{
     const queryString = `
-      select count(*) from letters where read IS false and sender_id = $1;
+    select count(*) 
+    from responses 
+    join letters on letters.id = responses.letter_id  
+    join users on users.id = letters.sender_id 
+    where users.id = 3 
+    and responses.read is false;
     `
     db.query(queryString, [req.query.userID])
       .then((data) => {
