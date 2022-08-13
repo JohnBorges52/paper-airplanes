@@ -72,7 +72,7 @@ module.exports = (db) => {
     from responses 
     join letters on letters.id = responses.letter_id  
     join users on users.id = letters.sender_id 
-    where users.id = 3 
+    where users.id = $1 
     and responses.read is false;
     `
     db.query(queryString, [req.query.userID])
@@ -83,6 +83,19 @@ module.exports = (db) => {
         res.status(500).json({ error: err.message });
       });
   });
+
+  router.put('/read', (req, res) => {
+    const queryString = `
+    UPDATE responses 
+    SET read = true 
+    WHERE letter_id = $1
+    `;
+    db.query(queryString, [req.params.id])
+      .then(res.send("updated"))
+      .catch((err) => {
+        res.status(500).json({ error: err.message });
+      });
+  })
 
 
 
