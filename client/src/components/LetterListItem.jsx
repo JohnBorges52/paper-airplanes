@@ -16,8 +16,6 @@ import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
 import ChatOutlinedIcon from '@mui/icons-material/ChatOutlined';
-import axios from "axios";
-
 
 const ExpandMore = styled((props) => {
   const { expand, ...other } = props;
@@ -33,7 +31,7 @@ const ExpandMore = styled((props) => {
 export const LetterListItem = (props) => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-  const { letter, setCurrentLetter } = props;
+  // const { letter, setCurrentLetter } = props;
   const { userID, setUserID } = useContext(UserContext);
 
   const handleExpandClick = () => {
@@ -51,7 +49,6 @@ export const LetterListItem = (props) => {
       return false;
     }
   };
-
 
   return (
     <Card className={expandedDiv}

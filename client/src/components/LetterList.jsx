@@ -1,17 +1,13 @@
 import React from "react";
-import { useEffect, useState } from "react";
-import { useNavigate } from "react-router-dom";
 import axios from 'axios';
+import { useEffect, useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
 import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
-import { useContext } from "react";
 import '../styles/letterItem.scss'
 import '../styles/letterlist.scss'
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
-import { LoginError } from "./LoginError";
-import { Login } from "./Login";
-
 
 export const LetterList = (props) => {
   //STATES
@@ -25,14 +21,16 @@ export const LetterList = (props) => {
 
   useEffect(() => {
     axios.get(`${props.path}`, { params: { userID } })
-      .then((res) =>{ setData(res.data); 
-        if(res.data.length === 0){setLetterEmpty(true)}
-        else{setLetterEmpty(false)} })
+      .then((res) => {
+        setData(res.data);
+        if (res.data.length === 0) { setLetterEmpty(true) }
+        else { setLetterEmpty(false) }
+      })
       .catch(() => setData([]));
-  }, [props.path]);
+  }, [props.path, userID]);
 
   const navigate = useNavigate();
-  
+
   return (
     <>
       {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : (userID && <h1 className="letterListHeader">My Letters</h1>)}
@@ -48,23 +46,21 @@ export const LetterList = (props) => {
               senderUserName={letter.username}
               type={letter.type} />
           )).slice(0, (3 * props.page))}
-        
-          {((3*props.page) < data.length) && <Button sx={{color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>}
-          
 
+          {((3 * props.page) < data.length) && <Button sx={{ color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>}
         </div>
-        : (!userID ? navigate('/users/login/error') : (<div className="login-error">
-        <p>You do not have any letters. </p>
-        <div className="empty-letter-img"></div>
-        {/* <p>Write a  here!</p> */}
-        <Button
-          variant="contained"
-          sx={{ backgroundColor: purple[500], marginTop: "20px" }}
-          onClick={() => navigate("/letters/new")}
-        >new Letter
-        </Button>
-      </div>))
-        
+        :
+        <div className="login-error">
+          <p>You do not have any letters. </p>
+          <div className="empty-letter-img"></div>
+          <Button
+            variant="contained"
+            sx={{ backgroundColor: purple[500], marginTop: "20px" }}
+            onClick={() => navigate("/letters/new")}
+          >
+            New Letter
+          </Button>
+        </div>
       }
     </>
   );
