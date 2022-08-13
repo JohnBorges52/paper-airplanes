@@ -23,15 +23,20 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
 import NotificationsActiveOutlinedIcon from '@mui/icons-material/NotificationsActiveOutlined';
+import axios from "axios";
 
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
+  const [notificationNumber, setNotifcationNumber] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
+
+  axios.get('/responses/unread', {params:{userID : 3}}).then((res)=>setNotifcationNumber(res.data[0].count))
+  
   return (
     <div className="App">
       <UserProvider>
@@ -56,7 +61,7 @@ function App() {
               sx={{ color: purple[700] }}
 
 
-            /> <span id="notification-counter" className="notification-counter"> +1</span> </li>
+            /> <span id="notification-counter" className="notification-counter">{notificationNumber}</span> </li>
           </div>
 
         </nav>
