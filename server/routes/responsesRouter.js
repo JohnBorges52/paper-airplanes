@@ -1,16 +1,6 @@
 const router = require("express").Router();
 
 module.exports = (db) => {
-  // GET all responses
-  // router.get("/", (req, res) => {
-  //   const queryString =
-  //     "SELECT * FROM responses WHERE active IS true"; /* <= THINK ABOUT PUTTING A LIMIT OVER HOW MANY WILL APPEAR ON THE PAGE*/
-  //   db.query(queryString).then((data) => {
-  //     res.json(data.rows);
-  //   });
-  // });
-
-
     // Get a specific user's unread responses
     router.get('/unread', (req, res) =>{
       const queryString = `
