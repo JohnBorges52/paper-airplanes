@@ -87,9 +87,12 @@ export const Form = (props) => {
 
   return (
     <div className="form-component">
+      <h1 class="letterListHeader">{props.headerText}</h1>
       {!props.isResponse &&
+
+
         <TypeSelector
-          onChange={(event) => { setLetterType(event.target.value); }}>
+        onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
       {/* Text field for form */}

@@ -16,8 +16,7 @@ export const LetterNew = () => {
       {!userID && <LoginError />}
       {/* If logged in, render new letter form */}
       <div className="letterDetail">
-        {userID && <h1 class="letterListHeader">New Letter</h1>}
-        {userID && <Form />}
+        {userID && <Form headerText={"New Letter"} />}
       </div >
     </>
   )
