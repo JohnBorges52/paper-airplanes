@@ -13,8 +13,7 @@ import { Login } from "./components/Login";
 import { useState } from "react";
 
 // Material UI
-import { BottomNavigation } from "@mui/material";
-import MuiBottomNavigationAction from "@mui/material/BottomNavigationAction";
+import { BottomNavigation, BottomNavigationAction } from "@mui/material";
 import Paper from "@mui/material/Paper";
 
 // Material UI Icons
@@ -22,14 +21,15 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
-import { styled } from "@mui/material/styles";
 
-const BottomNavigationAction = styled(MuiBottomNavigationAction)(`
-  color: green;
-  &.Mui-selected {
-    color: red;
-  }
-`);
+// const styles = {
+//   root: {
+//     color: "green"
+//   },
+//   selected: {
+//      color: "red"
+//   }
+// };
 
 function App() {
   const navigate = useNavigate();
@@ -47,7 +47,25 @@ function App() {
           sx={{ position: "fixed", bottom: 10, left: 0, right: 0 }}
           elevation={0}
         >
-          <BottomNavigation showLabels value={value} onChange={handleChange}>
+          <BottomNavigation
+            showLabels
+            value={value}
+            onChange={handleChange}
+            sx={{
+              // bgcolor: "purple",
+              "& .Mui-selected": {
+                "& .MuiBottomNavigationAction-label": {
+                  fontSize: (theme) => theme.typography.caption,
+                  transition: "none",
+                  fontWeight: "bold",
+                  lineHeight: "20px",
+                },
+                "& .MuiSvgIcon-root, & .MuiBottomNavigationAction-label": {
+                  color: (theme) => theme.palette.secondary.main,
+                },
+              },
+            }}
+          >
             <BottomNavigationAction
               onClick={() => {
                 navigate("/letters");
