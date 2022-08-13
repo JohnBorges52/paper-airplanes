@@ -27,45 +27,45 @@ export const Form = (props) => {
   const [letterType, setLetterType] = useState("request");
   const [countCharacters, setCountCharacters] = useState(700);
 
-  const [errorMsg, setErrorMsg] = useState("")
+  const [popoverMsg, setPopoverMsg] = useState("")
   const [pos, setPos] = useState(null);
-  const something = Boolean(pos)
-
+  const open = Boolean(pos)
 
   const validateMessage = (message, eventTarget) => {
     if (message.length > 700) {
-      //  {alert("Message need to be 700 chararacters or less")}//Replace with popover
       setPos(eventTarget);
-      setErrorMsg("Message need to be 700 chararacters or less")
+      setPopoverMsg("Letter needs to be 700 chararacters or less")
       return false;
     }
-    else if(message.length < 1){
+    else if (message.length < 1) {
       setPos(eventTarget)
-      setErrorMsg("Message need have some characters")
+      setPopoverMsg("Letter needs to have characters")
       return false
     }
+    setPos(eventTarget)
+    setPopoverMsg("Letter saved!")
+    return true
   };
 
   const submitMessage = (message, letterType, senderID, eventTarget) => {
-    if (validateMessage(message, eventTarget) === false) {
-      return;
+    if (validateMessage(message, eventTarget)) {
+      axios.post(`/letters/new`, { message, letterType, senderID })
+        .then(setTimeout(() => {
+          navigate("/letters/profile")
+        }, 1000))
     }
-
-    axios.post(`/letters/new`, { message, letterType, senderID })
-      .then(alert(`Letter Saved!`))
-      .then(navigate("/letters/profile"));
-
   };
-  const submitResponse = (message, letterID, responderID) => {
-    axios.post(`/responses/new`, { message, letterID, responderID })
-      .then(alert(`Response Sent!`));
+
+  const submitResponse = (message, letterID, responderID, eventTarget) => {
+    if (validateMessage(message, eventTarget)) {
+      axios.post(`/responses/new`, { message, letterID, responderID })
+        .then(setTimeout(() => {
+          navigate("/letters/")
+        }, 1000))
+    }
   };
 
   const colorCharacter = classNames({ "character-color-lesser": countCharacters < 0, "character-color-greater": countCharacters >= 0 });
-
-
-
-
 
   return (
     <div className="form-component">
@@ -74,8 +74,8 @@ export const Form = (props) => {
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
+      {/* Text field for form */}
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
-
         id="filled-multiline-flexible"
         label="What is on your mind?"
         multiline
@@ -87,25 +87,29 @@ export const Form = (props) => {
         }}
         variant="outlined"
       />
+
+      {/* Character counter for message form */}
       <div className={colorCharacter} >
         remaining: {countCharacters}
       </div>
+
       <div className="form-buttons">
 
-        {/* Form for new letter submission */}
-        {!props.isResponse &&
-          <>
-            <Button
-              sx={{ color: purple[500], borderColor: purple[500] }}
-              size="small"
-              variant="outlined"
-              // clear message text from text field
-              endIcon={<ClearIcon />}
-              onClick={() => { setMessage(""); setCountCharacters(700) }}
-            >
-              Clear
-            </Button>
+        {/* Clear button for both new letter and response forms */}
+        <Button
+          sx={{ color: purple[500], borderColor: purple[500] }}
+          size="small"
+          variant="outlined"
+          // clear message text from text field
+          endIcon={<ClearIcon />}
+          onClick={() => { setMessage(""); setCountCharacters(700) }}
+        >
+          Clear
+        </Button>
 
+        {/* Submit button for both new letter and response forms */}
+        {
+          <>
             <Button
               sx={{ backgroundColor: purple[500] }}
               style={{ marginLeft: "10px" }}
@@ -113,51 +117,27 @@ export const Form = (props) => {
               variant="contained"
               endIcon={<SendIcon />}
               onClick={(event) => {
-                submitMessage(message, letterType, userID, event.currentTarget);
-               
-
-              }}
-            >
-              Submit
-              </Button>
-              <Popover
-                open={something}
-                anchorEl={pos}
-                anchorOrigin={{
-                  vertical: 'bottom',
-                  horizontal: 'left',
-                }}
-                onClose={() => { setPos(null);}}
-          
-
-              > <Typography sx={{p:1}}>{errorMsg}</Typography></Popover>
-          </>
-        }
-        {/* Form for response submission */}
-        {props.isResponse &&
-          <>
-
-
-            <Button
-              sx={{ color: purple[500] }}
-              size="small"
-              variant="outlined"
-              endIcon={<ClearIcon />}
-              onClick={() => { setMessage(""); }}
-            >
-              Clear
-            </Button>
-            <Button
-              sx={{ backgroundColor: purple[500] }}
-              style={{ marginLeft: "10px" }}
-              size="small" variant="contained"
-              endIcon={<SendIcon />} onClick={() => {
-                submitResponse(message, props.letterID, userID);
-                navigate("/letters");
+                !props.isResponse ?
+                  // Submit new message form
+                  submitMessage(message, letterType, userID, event.currentTarget)
+                  :
+                  // Submit reponse form
+                  submitResponse(message, props.letterID, userID, event.currentTarget)
               }}
             >
               Submit
             </Button>
+
+            {/* Popover alert on submit when message is too short or too long */}
+            <Popover
+              open={open}
+              anchorEl={pos}
+              anchorOrigin={{
+                vertical: 'bottom',
+                horizontal: 'left',
+              }}
+              onClose={() => { setPos(null); }}
+            > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
           </>
         }
       </div>
