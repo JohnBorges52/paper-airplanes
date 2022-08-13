@@ -22,15 +22,6 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import { LoginError } from "./components/LoginError";
 
-// const styles = {
-//   root: {
-//     color: "green"
-//   },
-//   selected: {
-//      color: "red"
-//   }
-// };
-
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
