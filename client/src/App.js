@@ -30,13 +30,10 @@ function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
-  const [notificationNumber, setNotifcationNumber] = useState(0)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
   };
-
-  axios.get('/responses/unread', {params:{userID : 3}}).then((res)=>setNotifcationNumber(res.data[0].count))
 
   return (
     <div className="App">
@@ -60,10 +57,10 @@ function App() {
             >LOGIN</Button> </li>
             <li className="notification-bell"> <NotificationsActiveOutlinedIcon
               sx={{ color: purple[700] }}
-            /> 
-     
-            
-            <NotificationCounter/>
+            />
+
+
+              <NotificationCounter />
             </li>
           </div>
 

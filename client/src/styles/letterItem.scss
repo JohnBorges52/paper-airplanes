@@ -108,6 +108,7 @@
   text-align: center;
   margin:0 auto;
   color:#880176;
+  margin-top: 10px;
 }
 .empty-letter-img{
   width: 100%;
@@ -123,7 +124,7 @@
   background-repeat: no-repeat;
   background-position: bottom right;
   width: 100%;
-  height: 68vh; 
+  height: 555px; 
 }
 .character-color-lesser{
   color:red;
@@ -164,9 +165,7 @@
   
 }
 
-.test{
-  margin-bottom: 50px;
-}
+
 
 .letterList-container{
   margin-top: 15px;
@@ -178,12 +177,11 @@
 
 .top-nav-bar{
   width: 100%;
-  
- 
   display: flex;
   justify-content: space-between;
   height: 76px;
   align-items: center;
+  border-bottom: 1px solid rgb(160, 160, 160);
 
 
 }
@@ -229,15 +227,17 @@
 
 .notification-counter{
   position: absolute;
-  right: 0px;
-  top: -9px; 
+  right: 6px;
+  top: -9px;
   border-radius: 50%;
-  padding: 2px;
+  padding: 3px;
   background: #fff;
   border: 1px solid rgb(81, 12, 99);
   color: rgb(250, 0, 0);
   text-align: center;
   font: 12px Arial, sans-serif;
+  height: 12px;
+
 
 }
 
@@ -260,4 +260,14 @@
     flex-direction: row;
   }
   
+}
+
+@media ( max-height: 700px) {
+  .homepage{
+    background-image: url("../assests/bg-img.gif.gif");
+    background-repeat: no-repeat;
+    background-position: bottom right;
+    width: 100%;
+    height: 66vh; 
+  }
 }
