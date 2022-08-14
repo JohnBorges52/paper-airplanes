@@ -10,6 +10,7 @@ import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { makeStyles, responsiveFontSizes } from "@mui/material"
 import { Link } from "react-router-dom";
+import {selectEmote} from "../helper/emoteManager"
 
 // Material UI
 import { Card } from "@mui/material"
@@ -47,6 +48,7 @@ export const ChildModal= (props) => {
     boxShadow: 24,
     p: 4,
   };
+
 
   return(        
     
@@ -148,6 +150,7 @@ export const LetterDetail = (props) => {
     p: 4,
   };
 
+  
   return (
     <div className="letterDetail">
       <div className="letter-report-component">
@@ -156,7 +159,8 @@ export const LetterDetail = (props) => {
           >
           <div className='letter-wrapper-primary'>
             <div>
-              <p>{data.id}</p> {/*CHANGE TO EMOTE AFTER*/}
+              <p>{selectEmote(data.emote)}</p> {/*CHANGE TO EMOTE AFTER*/}
+              
             </div>
             <div className='letter-wrapper-secondary'>
               <div className='letter-text-area'>
@@ -250,6 +254,7 @@ export const LetterDetail = (props) => {
           <div className='letter-wrapper-primary'>
             <div>
               <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
+              
             </div>
             <div className='letter-wrapper-secondary'>
               <div className='letter-text-area'>
