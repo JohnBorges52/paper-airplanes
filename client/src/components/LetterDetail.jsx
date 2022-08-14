@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
-import { makeStyles } from "@mui/material"
+import { makeStyles, responsiveFontSizes } from "@mui/material"
+import { Link } from "react-router-dom";
 
 // Material UI
 import { Card } from "@mui/material"
@@ -16,6 +17,7 @@ import Button from '@mui/material/Button';
 import { purple, red, deepPurple } from "@mui/material/colors"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {Modal, Box, Typography } from "@mui/material"
+
 
 // Material Icons
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
@@ -25,6 +27,7 @@ export const ChildModal= (props) => {
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(true)
+
   
 
   const handleOpen = () => {
@@ -57,12 +60,8 @@ export const ChildModal= (props) => {
         {props.message} has been deleted!
       </Typography>
 
-      <Button
-      onClick={() => { handleClose();
-      navigate(props.path)
-      }}> 
-      OK
-      </Button>
+      Deleting response...
+      
     </Box>
   </Modal> 
 
@@ -129,14 +128,13 @@ export const LetterDetail = (props) => {
   }
 
 
-
- 
   const [open, setOpen] = useState(false)
   const [responseOpen, setResponseOpen] = useState(false)
-  const [childModal, setChildModal] = useState(false)
-  const [childModal2, setChildModal2] = useState(false)
+  const [letterChildModal, letterSetChildModal] = useState(false)
+  const [responseChildModal2, responseSetChildModal2] = useState(false)
+  const [responseToDeleteId, setResponseToDeleteId] = useState(0)
 
-  
+ // useEffect=(() => {}, [responseOpen])
   
   const style = {
     position: 'absolute',
@@ -217,7 +215,7 @@ export const LetterDetail = (props) => {
                   <Button
                   onClick={() => { 
                     deleteLetter()
-                    setChildModal(true)                     
+                    letterSetChildModal(true)                     
                   }}
                   > CONFIRM
                   </Button>
@@ -228,7 +226,7 @@ export const LetterDetail = (props) => {
                   >
                      CANCEL 
                      </Button>
-                     {childModal === true && <ChildModal message={"The letter"} path={"/letters/profile"} />}
+                     {letterChildModal === true && <ChildModal message={"The letter"} path={"/letters/profile"} />}
                      
                 </Box>
               </Modal>  
@@ -262,10 +260,16 @@ export const LetterDetail = (props) => {
             </div>
             <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
               onClick={() => { 
+                responseSetChildModal2(false)
+                setResponseToDeleteId(response.id)
                 setResponseOpen(true)
                 
               }}
             />
+               
+             
+          </div>
+        </Card>)}
                 <Modal    /// modal response
                 open={responseOpen}
                 onClose={() => setOpen(false)}
@@ -282,27 +286,25 @@ export const LetterDetail = (props) => {
 
                   <Button
                   onClick={() => { 
-                    deleteResponse(response.id)
-                    setChildModal2(true)
+                    deleteResponse(responseToDeleteId);
+                    responseSetChildModal2(true);
+                    
+                    setTimeout(() => {setResponseOpen(false)}, 2200);
+
                                         
                   }}
                   > CONFIRM
                   </Button>
-                  
-
                   <Button
-                    onClick={() => setResponseOpen(false) }
+                    onClick={() => {setResponseOpen(false); setResponseToDeleteId(0)}}
                   >
                      CANCEL 
                      </Button>
-                     {childModal2 && <ChildModal message={"The response"} path={`${id}`} />}
+                     {responseChildModal2 && <ChildModal message={"The response"} id={id} path={`/letters/profile`}/> }
+                 
                      
                 </Box>
               </Modal> 
-          </div>
-        </Card>)}
-
-
     </div>
   )
 }
