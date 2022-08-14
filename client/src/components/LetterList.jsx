@@ -46,7 +46,10 @@ export const LetterList = (props) => {
               senderID={letter.sender_id}
               setCurrentLetter={setCurrentLetter}
               senderUserName={letter.username}
-              type={letter.type} />
+              type={letter.type} 
+              emote={letter.emote}
+              />
+              
           )).slice(0, (3 * props.page))}
 
           {((3 * props.page) < data.length) && <Button sx={{ color: purple[400], marginLeft: "10px" }} onClick={() => { props.setPage(props.page + 1) }}>See more Letters</Button>}

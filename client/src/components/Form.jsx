@@ -6,6 +6,7 @@ import { UserContext } from "../UserContext";
 import axios from "axios";
 import "../styles/letterItem.scss";
 import classNames from "classnames";
+import { EmoteSelector } from "./EmoteSelector";
 
 // Material UI
 import TextField from '@mui/material/TextField';
@@ -37,6 +38,7 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
+  const [emote, setEmote] = useState(1);
   const [countCharacters, setCountCharacters] = useState(700);
 
   const [popoverMsg, setPopoverMsg] = useState("")
@@ -64,12 +66,12 @@ export const Form = (props) => {
 
   useEffect(() => { }, [isModal])
 
-  const submitMessage = (message, letterType, senderID, eventTarget) => {
+  const submitMessage = (message, letterType, senderID, emote, eventTarget) => {
     if (validateMessage(message, eventTarget)) {
-      axios.post(`/letters/new`, { message, letterType, senderID })
+      axios.post(`/letters/new`, { message, letterType, senderID, emote })
         .then(setTimeout(() => {
           navigate("/letters/profile")
-        }, 1500))
+        }, 2200))
 
     }
   };
@@ -79,7 +81,7 @@ export const Form = (props) => {
       axios.post(`/responses/new`, { message, letterID, responderID })
         .then(setTimeout(() => {
           navigate("/letters/")
-        }, 1500))
+        }, 2200))
     }
   };
 
@@ -90,8 +92,13 @@ export const Form = (props) => {
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
         <TypeSelector
-          onChange={(event) => { setLetterType(event.target.value); }}>
+          onChange={(event) => { setLetterType(event.target.value);  }}>
         </TypeSelector>}
+
+        <EmoteSelector
+          onChange={(event) => { setEmote(event.target.value)}}>
+        </EmoteSelector>
+
 
       {/* Text field for form */}
       
@@ -139,7 +146,7 @@ export const Form = (props) => {
               onClick={(event) => {
                 !props.isResponse ?
                   // Submit new message form
-                  submitMessage(message, letterType, userID, event.currentTarget)
+                  submitMessage(message, letterType, userID, emote, event.currentTarget)
                   :
                   // Submit reponse form
                   submitResponse(message, props.letterID, userID, event.currentTarget)

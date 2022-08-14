@@ -39,7 +39,7 @@
 .letter-wrapper-primary{
   display: flex;
   flex-direction: row;
-  justify-content: space-between;
+  justify-content: space-around;
   width: 100%;
 };
 .letter-wrapper-secondary{
@@ -239,6 +239,10 @@
   height: 12px;
 
 
+}
+.inputSelector{
+  display: flex;
+  width: 100%
 }
 
 

@@ -3,6 +3,7 @@ import { useNavigate } from "react-router-dom";
 import classNames from "classnames";
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
+import {selectEmote} from "../helper/emoteManager"
 
 // Material UI
 import Card from '@mui/material/Card';
@@ -64,7 +65,7 @@ export const LetterListItem = (props) => {
     >
       <div className='letter-wrapper-primary'>
         <div>
-          <p>{props.id}</p> {/*Change back to emoji */}
+          <p>{selectEmote(props.emote)}</p> {/*Change back to emoji */}
         </div>
         <div className='letter-wrapper-secondary'>
           <div className='letter-text-area'>
@@ -75,7 +76,7 @@ export const LetterListItem = (props) => {
           </div>
           <footer className="letter-footer">
             <div className="letter-userID"> {/*change here after*/}
-              <div className="letterMessageTags">
+              <div className="letterMessage">
 
               {props.senderUserName}
               Type: {props.type}
