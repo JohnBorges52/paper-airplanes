@@ -174,7 +174,7 @@ function App() {
         />
         <Route path="/letters/:id" element={<LetterDetail />} />
         <Route path="/users/login" element={<Login />} />
-        <Route path="/users/login/error" element={<LoginError />} />
+        <Route path="/users/login/error" element={<LoginError redirectPath={"/letters/profile"}/>} />
       </Routes>
     </div >
   );
