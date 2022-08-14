@@ -75,8 +75,11 @@ export const LetterListItem = (props) => {
           </div>
           <footer className="letter-footer">
             <div className="letter-userID"> {/*change here after*/}
+              <div className="letterMessageTags">
+
               {props.senderUserName}
               Type: {props.type}
+              </div>
             </div>
 
             <CardActions className="letter-actions" >

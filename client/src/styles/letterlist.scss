@@ -1,7 +1,23 @@
 .letterListHeader{
   color: rgba(198, 30, 198, 0.695);
-  font-family: 'Poiret One', cursive;
-  text-decoration: underline;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+
   font-size: 1.8rem;
 
+}
+.letterMessage{
+  color: rgb(0, 0, 0);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  
+  font-size: 0.9rem;
+
+}
+.letterMessageTags{
+  color: rgb(0, 0, 0);
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 300;
+
+  font-size: 1rem;
 }
