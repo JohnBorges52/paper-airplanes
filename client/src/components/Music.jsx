@@ -25,9 +25,8 @@ export const Music = (props) => {
 
     <Card id="music-controls"
       sx={{ 
-        display: 'flex',
-        flexDirection: 'column',
-        alignItems: 'center',
+        
+        
         margin: 1, 
         padding: 1, 
         backgroundColor: purple[50], 
