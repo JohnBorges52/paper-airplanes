@@ -24,7 +24,8 @@ import {
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { purple } from "@mui/material/colors";
-
+import song1 from "./assests/test2.mp3"
+import song2 from "./assests/test.mp4"
 // Material UI Icons
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
@@ -37,7 +38,6 @@ function App() {
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
-  const [music, setMusic] = useState(null)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -47,6 +47,18 @@ function App() {
     navigate("/letters/profile");
     setPage(1);
   };
+  const audio = new Audio(song1)
+  const [music, setMusic] = useState(audio)
+
+
+  const playFunc = (music) => {
+    music.volume = 0.2
+    music.play()
+  }
+
+  const pauseFunc = (music) => {
+    music.pause()
+  }
 
   return (
     <div className="App">
@@ -179,7 +191,7 @@ function App() {
         <Route path="/users/login/error" element={<LoginError redirectPath={"/letters/profile"}/>} />
         <Route path="/chill" element={<Music/>} />
       </Routes>
-      <Music></Music>
+      <Music play={playFunc} pause={pauseFunc} music={music}></Music>
     </div >
   );
 }
