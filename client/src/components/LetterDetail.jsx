@@ -15,10 +15,63 @@ import { Card } from "@mui/material"
 import Button from '@mui/material/Button';
 import { purple, red, deepPurple } from "@mui/material/colors"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
-
+import {Modal, Box, Typography } from "@mui/material"
 
 // Material Icons
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
+
+
+export const ChildModal= (props) => {
+
+  const navigate = useNavigate();
+  const [open, setOpen] = useState(true)
+  
+
+  const handleOpen = () => {
+    setOpen(true);
+  };
+  const handleClose = () => {
+    setOpen(false);
+  };
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 380,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
+
+  return(        
+    
+    <Modal
+    open={open}
+    aria-labelledby="modal-modal-title"
+    aria-describedby="modal-modal-description"
+  >
+    <Box sx={style}>
+      <Typography id="modal-modal-title" variant="h6" component="h2">
+        {props.message} has been deleted!
+      </Typography>
+
+      <Button
+      onClick={() => { handleClose();
+      navigate(props.path)
+      }}> 
+      OK
+      </Button>
+    </Box>
+  </Modal> 
+
+  )}
+
+
+
+
+
 
 export const LetterDetail = (props) => {
   const navigate = useNavigate();
@@ -58,13 +111,13 @@ export const LetterDetail = (props) => {
 
   const deleteLetter = () => {
     updateLetterStatus()
-    alert("The letter has been deleted.")
-    navigate("/letters/profile");
+    
+    
   }
 
   const deleteResponse = (responseId) => {
     updateResponseStatus(responseId)
-    alert("The response has been deleted.")
+    
 
   }
 
@@ -74,6 +127,28 @@ export const LetterDetail = (props) => {
     setReported(true)
     alert("The post have been reported")
   }
+
+
+
+ 
+  const [open, setOpen] = useState(false)
+  const [responseOpen, setResponseOpen] = useState(false)
+  const [childModal, setChildModal] = useState(false)
+  const [childModal2, setChildModal2] = useState(false)
+
+  
+  
+  const style = {
+    position: 'absolute',
+    top: '50%',
+    left: '50%',
+    transform: 'translate(-50%, -50%)',
+    width: 280,
+    bgcolor: 'background.paper',
+    border: '2px solid #000',
+    boxShadow: 24,
+    p: 4,
+  };
 
 
   return (
@@ -120,13 +195,48 @@ export const LetterDetail = (props) => {
               size="small"
               variant="outlined"
               endIcon={<DeleteForeverOutlinedIcon />}
-              onClick={() => { deleteLetter() }}
+              onClick={() => {setOpen(true) }}
             >
               Delete
             </Button>
             }
-          </div>}
-      </div>
+              <Modal  ////// modal letter
+                open={open}
+                onClose={() => setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                  ⚠️ Warning ⚠️
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Do you want to delete this letter?
+                  </Typography>
+
+                  <Button
+                  onClick={() => { 
+                    deleteLetter()
+                    setChildModal(true)                     
+                  }}
+                  > CONFIRM
+                  </Button>
+                  
+
+                  <Button
+                    onClick={() => setOpen(false) }
+                  >
+                     CANCEL 
+                     </Button>
+                     {childModal === true && <ChildModal message={"The letter"} path={"/letters/profile"} />}
+                     
+                </Box>
+              </Modal>  
+
+
+          </div>
+          }
+        </div>
       <br />
       <hr />
       <br />
@@ -151,8 +261,44 @@ export const LetterDetail = (props) => {
               </div>
             </div>
             <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
-              onClick={() => { deleteResponse(response.id) }}
+              onClick={() => { 
+                setResponseOpen(true)
+                
+              }}
             />
+                <Modal    /// modal response
+                open={responseOpen}
+                onClose={() => setOpen(false)}
+                aria-labelledby="modal-modal-title"
+                aria-describedby="modal-modal-description"
+              >
+                <Box sx={style}>
+                  <Typography id="modal-modal-title" variant="h6" component="h2">
+                  ⚠️ Warning ⚠️
+                  </Typography>
+                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                    Do you want to delete this response?
+                  </Typography>
+
+                  <Button
+                  onClick={() => { 
+                    deleteResponse(response.id)
+                    setChildModal2(true)
+                                        
+                  }}
+                  > CONFIRM
+                  </Button>
+                  
+
+                  <Button
+                    onClick={() => setResponseOpen(false) }
+                  >
+                     CANCEL 
+                     </Button>
+                     {childModal2 && <ChildModal message={"The response"} path={`${id}`} />}
+                     
+                </Box>
+              </Modal> 
           </div>
         </Card>)}
 

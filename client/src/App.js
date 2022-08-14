@@ -48,11 +48,6 @@ function App() {
 
   return (
     <div className="App">
-      {/* <Paper
-          className="nav-bar"
-          sx={{ position: "fixed", bottom: 10, left: 0, right: 0 }}
-          elevation={0}
-        > */}
 
       <nav className="top-nav-bar">
         <div
@@ -63,25 +58,46 @@ function App() {
         ></div>
 
         <div className="top-nav-bar-rightcontainer">
-          <li>
-            {" "}
-            <Button
-              variant="outlined"
-              sx={{ color: purple[800], border: "1px solid purple" }}
-              onClick={() => {
-                navigate("/users/login");
-              }}
-            >
-              LOGIN
-            </Button>{" "}
-          </li>
-          <li className="notification-bell">
-            {" "}
-            <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
-            <NotificationCounter />
-          </li>
+          {!userID ?
+
+            <li>
+              <Button
+                variant="outlined"
+                sx={{ color: purple[800], border: "1px solid purple" }}
+                onClick={() => {
+                  navigate("/users/login");
+                }}
+              >
+                LOGIN
+              </Button>
+            </li>
+            :
+
+            <>
+              <li>
+                <Button
+                  variant="outlined"
+                  sx={{ color: purple[800], border: "1px solid purple" }}
+                  onClick={() => {
+                    setUserID(null);
+                    navigate("/users/login")
+                  }}
+                >
+                  LOGOUT
+                </Button>
+              </li>
+              <li className="notification-bell">
+
+                <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
+                <NotificationCounter />
+              </li>
+            </>
+          }
+
+
+
         </div>
-      </nav>
+      </nav >
 
       <BottomNavigation
         showLabels
@@ -160,7 +176,7 @@ function App() {
         <Route path="/users/login" element={<Login />} />
         <Route path="/users/login/error" element={<LoginError />} />
       </Routes>
-    </div>
+    </div >
   );
 }
 
