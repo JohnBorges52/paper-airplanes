@@ -14,6 +14,7 @@ import { Login } from "./components/Login";
 import { LoginError } from "./components/LoginError";
 import { useState, useContext } from "react";
 import { UserContext } from "./UserContext";
+import { Music } from "./components/Music";
 
 // Material UI
 import {
@@ -175,6 +176,7 @@ function App() {
         <Route path="/letters/:id" element={<LetterDetail />} />
         <Route path="/users/login" element={<Login redirectPath={"/letters/profile"}/>} />
         <Route path="/users/login/error" element={<LoginError redirectPath={"/letters/profile"}/>} />
+        <Route path="/chill" element={<Music/>} />
       </Routes>
     </div >
   );
