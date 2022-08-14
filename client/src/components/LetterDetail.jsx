@@ -8,7 +8,8 @@ import { useNavigate } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
-import { makeStyles } from "@mui/material"
+import { makeStyles, responsiveFontSizes } from "@mui/material"
+import { Link } from "react-router-dom";
 
 // Material UI
 import { Card } from "@mui/material"
@@ -16,6 +17,7 @@ import Button from '@mui/material/Button';
 import { purple, red, deepPurple } from "@mui/material/colors"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {Modal, Box, Typography } from "@mui/material"
+
 
 // Material Icons
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
@@ -25,6 +27,7 @@ export const ChildModal= (props) => {
 
   const navigate = useNavigate();
   const [open, setOpen] = useState(true)
+
   
 
   const handleOpen = () => {
@@ -54,23 +57,16 @@ export const ChildModal= (props) => {
   >
     <Box sx={style}>
       <Typography id="modal-modal-title" variant="h6" component="h2">
-        {props.message} has been deleted!
+      Deleting {props.message}...
       </Typography>
+      <Typography id="modal-modal-description" sx={{ mt: 2 }}>
 
-      <Button
-      onClick={() => { handleClose();
-      navigate(props.path)
-      }}> 
-      OK
-      </Button>
+      The {props.message} has been deleted!
+      </Typography>
     </Box>
   </Modal> 
 
   )}
-
-
-
-
 
 
 export const LetterDetail = (props) => {
@@ -125,18 +121,20 @@ export const LetterDetail = (props) => {
   const report = () => {
     updateFlagCount()
     setReported(true)
-    alert("The post have been reported")
+    
   }
 
 
-
- 
   const [open, setOpen] = useState(false)
   const [responseOpen, setResponseOpen] = useState(false)
-  const [childModal, setChildModal] = useState(false)
-  const [childModal2, setChildModal2] = useState(false)
+  const [flagOpen, setFlagOpen] = useState(false)
 
-  
+
+  const [letterChildModal, letterSetChildModal] = useState(false)
+  const [responseChildModal, responseSetChildModal] = useState(false)
+  const [responseToDeleteId, setResponseToDeleteId] = useState(0)
+
+ // useEffect=(() => {}, [responseOpen])
   
   const style = {
     position: 'absolute',
@@ -150,12 +148,9 @@ export const LetterDetail = (props) => {
     p: 4,
   };
 
-
   return (
     <div className="letterDetail">
-
       <div className="letter-report-component">
-
         <Card className="cardStyle letter-item-vh"
           sx={{ backgroundColor: purple[100], marginBotton: "50px" }}
           >
@@ -181,7 +176,7 @@ export const LetterDetail = (props) => {
                 size="small"
                 variant="outlined"
                 endIcon={<ReportGmailerrorredOutlinedIcon />}
-                onClick={() => { report() }}
+                onClick={() => { setFlagOpen(true) }}
               >
                 Flag
               </Button>
@@ -217,18 +212,19 @@ export const LetterDetail = (props) => {
                   <Button
                   onClick={() => { 
                     deleteLetter()
-                    setChildModal(true)                     
+                    letterSetChildModal(true)
+                    setTimeout(() => {setOpen(false); 
+                    navigate("/letters/profile")}, 2200);                  
                   }}
                   > CONFIRM
                   </Button>
-                  
 
                   <Button
                     onClick={() => setOpen(false) }
                   >
                      CANCEL 
                      </Button>
-                     {childModal === true && <ChildModal message={"The letter"} path={"/letters/profile"} />}
+                     {letterChildModal && <ChildModal message={"letter"} path={"/letters/profile"} />}
                      
                 </Box>
               </Modal>  
@@ -262,45 +258,82 @@ export const LetterDetail = (props) => {
             </div>
             <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
               onClick={() => { 
+                responseSetChildModal(false)
+                setResponseToDeleteId(response.id)
                 setResponseOpen(true)
                 
               }}
             />
-                <Modal    /// modal response
-                open={responseOpen}
-                onClose={() => setOpen(false)}
-                aria-labelledby="modal-modal-title"
-                aria-describedby="modal-modal-description"
-              >
-                <Box sx={style}>
-                  <Typography id="modal-modal-title" variant="h6" component="h2">
-                  ⚠️ Warning ⚠️
-                  </Typography>
-                  <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Do you want to delete this response?
-                  </Typography>
-
-                  <Button
-                  onClick={() => { 
-                    deleteResponse(response.id)
-                    setChildModal2(true)
-                                        
-                  }}
-                  > CONFIRM
-                  </Button>
-                  
-
-                  <Button
-                    onClick={() => setResponseOpen(false) }
-                  >
-                     CANCEL 
-                     </Button>
-                     {childModal2 && <ChildModal message={"The response"} path={`${id}`} />}
-                     
-                </Box>
-              </Modal> 
+               
+             
           </div>
         </Card>)}
+        
+        <Modal    /// modal response
+        open={responseOpen}
+        onClose={() => setOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          ⚠️ Warning ⚠️
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Do you want to delete this response?
+          </Typography>
+
+          <Button
+          onClick={() => { 
+            deleteResponse(responseToDeleteId);
+            responseSetChildModal(true);                   
+            setTimeout(() => {setResponseOpen(false)}, 2200);                   
+          }}
+          > CONFIRM
+          </Button>
+          <Button
+            onClick={() => {setResponseOpen(false); setResponseToDeleteId(0)}}
+          >
+            CANCEL 
+            </Button>
+            {responseChildModal && <ChildModal message={"response"} id={id} path={`/letters/profile`}/> }
+        </Box>
+      </Modal> 
+
+
+
+
+      <Modal    /// modal flag
+        open={flagOpen}
+        onClose={() => setFlagOpen(false)}
+        aria-labelledby="modal-modal-title"
+        aria-describedby="modal-modal-description"
+      >
+        <Box sx={style}>
+          <Typography id="modal-modal-title" variant="h6" component="h2">
+          ⚠️ Warning ⚠️
+          </Typography>
+          <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+            Do you want to flag this letter?
+          </Typography>
+
+          <Button
+          onClick={() => { 
+            report()            
+            setFlagOpen(false)                   
+          }}
+          > CONFIRM
+          </Button>
+          <Button
+            onClick={() => {setFlagOpen(false)}}
+          >
+            CANCEL 
+            </Button>
+        </Box>
+      </Modal> 
+
+
+
 
 
     </div>
