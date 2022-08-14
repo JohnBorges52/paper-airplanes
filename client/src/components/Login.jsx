@@ -17,6 +17,7 @@ export const Login = (props) => {
   const getUserId = (email, specPath) => {
     axios.get('/users/login/success', { params: { email } })
       .then(res => { setUserID(res.data[0].id); })
+      .then(()=>console.log(specPath))
       .then(()=>{navigate(specPath)})
   }
 

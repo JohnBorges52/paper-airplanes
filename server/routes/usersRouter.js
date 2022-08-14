@@ -54,8 +54,11 @@ module.exports = (db) => {
     db.query(queryString, [req.query.email])
       .then((data) => {
         res.json(data.rows);
-      });
-    console.log(req.query.email)
+      })
+      .then(()=>{
+        console.log(12,req.query.email)
+
+      })
   });
 
   // POST login
