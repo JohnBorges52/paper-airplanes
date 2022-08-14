@@ -37,6 +37,7 @@ function App() {
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
+  const [music, setMusic] = useState(null)
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -178,6 +179,7 @@ function App() {
         <Route path="/users/login/error" element={<LoginError redirectPath={"/letters/profile"}/>} />
         <Route path="/chill" element={<Music/>} />
       </Routes>
+      <Music></Music>
     </div >
   );
 }

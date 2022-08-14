@@ -2,21 +2,23 @@ import React from "react";
 import {Card} from "@mui/material"
 import {Button} from "@mui/material";
 import { purple } from "@mui/material/colors";
+import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
+import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 
 import song1 from "../assests/test2.mp3"
 import song2 from "../assests/test.mp4"
 
 export const Music = () => {
 
-  const audio = new Audio(song2)
+  const audio = new Audio(song1)
 
-  const playFunc = () => {
-    audio.volume = 0.2
-    audio.play()
+  const playFunc = (music) => {
+    music.volume = 0.2
+    music.play()
   }
 
-  const pauseFunc = () => {
-    audio.pause()
+  const pauseFunc = (music) => {
+    music.pause()
   }
   
   
@@ -29,27 +31,20 @@ export const Music = () => {
         alignItems: 'center',
         margin: 1, 
         padding: 1, 
-        backgroundColor: purple[100], 
+        backgroundColor: purple[50], 
         marginBottom: "40px", 
-        boxShadow: "7px 7px purple", 
+        boxShadow: "3px 3px purple", 
         border: "1px solid", 
         borderColor: purple[600] }}
       >
-        <h1 className="letterListHeader">Music</h1>
-      <Button 
-        variant="outlined"
-        sx={{ width: 0.8 ,color: purple[800], border: "1px solid purple" }} 
-        onClick={()=>{playFunc()}}
-        >
-          Play
-      </Button>
-      <Button 
-        variant="outlined"
-        sx={{ width: 0.8 ,color: purple[800], border: "1px solid purple" }} 
-        onClick={()=>{pauseFunc()}}
-        >
-          Pause
-      </Button>
+        <PlayCircleOutlineOutlinedIcon  
+          color="primary" 
+          onClick={()=>{playFunc(audio)}}
+        />
+        <PauseCircleOutlineOutlinedIcon 
+          color="primary" 
+          onClick={()=>{pauseFunc(audio)}} 
+        />
     </Card>
   )
 }
