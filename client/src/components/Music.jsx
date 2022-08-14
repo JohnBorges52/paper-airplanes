@@ -19,7 +19,7 @@ export const Music = (props) => {
   // const pauseFunc = (music) => {
   //   music.pause()
   // }
-  
+  //Something
   
   return(
 
