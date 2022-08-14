@@ -1,5 +1,6 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
+import "./styles/musicwidget.scss"
 // import "./styles/letterItem.scss";
 // import { Navbar } from "./components/Navbar";
 // import { Form } from "./components/Form";
@@ -47,7 +48,7 @@ function App() {
     navigate("/letters/profile");
     setPage(1);
   };
-  const audio = new Audio(song1)
+  const audio = new Audio(new URL('https://www.youtube.com/watch?v=Xc1Le3CSdrM'))
   const [music, setMusic] = useState(audio)
 
 
@@ -59,7 +60,6 @@ function App() {
   const pauseFunc = (music) => {
     music.pause()
   }
-
   return (
     <div className="App">
 
@@ -191,7 +191,9 @@ function App() {
         <Route path="/users/login/error" element={<LoginError redirectPath={"/letters/profile"}/>} />
         <Route path="/chill" element={<Music/>} />
       </Routes>
-      <Music play={playFunc} pause={pauseFunc} music={music}></Music>
+      <div id="music-widget">
+        <Music play={playFunc} pause={pauseFunc} music={music}></Music>
+      </div>
     </div >
   );
 }
