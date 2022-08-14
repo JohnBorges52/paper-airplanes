@@ -14,7 +14,7 @@ export const LetterNew = () => {
   return (
     <>
       {/* If not logged in, render Login component with error */}
-      {!userID && <LoginError />}
+      {!userID && <LoginError redirectPath='/letters/new' />}
       {/* If logged in, render new letter form */}
       <div className="letterDetail">
         {userID && <Form headerText={"New Letter"} />}

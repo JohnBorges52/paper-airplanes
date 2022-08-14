@@ -9,14 +9,15 @@ import TextField from '@mui/material/TextField';
 import Button from '@mui/material/Button';
 import { purple } from "@mui/material/colors";
 
-export const Login = () => {
+export const Login = (props) => {
 
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("")
   const { userID, setUserID } = useContext(UserContext);
-  const getUserId = (email) => {
+  const getUserId = (email, specPath) => {
     axios.get('/users/login/success', { params: { email } })
-      .then(res => { setUserID(res.data[0].id) })
+      .then(res => { setUserID(res.data[0].id); })
+      .then(()=>{navigate(specPath)})
   }
 
   return (
@@ -41,8 +42,7 @@ export const Login = () => {
           style={{ margin: "10px auto 10px", width: "25vw" }}
           variant="contained"
           onClick={() => {
-            getUserId(userEmail)
-            navigate("/letters/profile")
+            getUserId(userEmail, props.redirectPath)
           }}>LOGIN
         </Button>
 
