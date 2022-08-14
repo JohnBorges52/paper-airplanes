@@ -25,8 +25,11 @@ import {
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
 import { purple } from "@mui/material/colors";
-import song1 from "./assests/test2.mp3"
-import song2 from "./assests/test.mp4"
+//Music Imports
+import song_one from "./assests/music/song_one.mp3"
+import song_two from "./assests/music/song_two.mp3"
+import song_three from "./assests/music/song_three.mp3"
+
 // Material UI Icons
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
@@ -48,12 +51,15 @@ function App() {
     navigate("/letters/profile");
     setPage(1);
   };
-  const audio = new Audio(new URL('https://www.youtube.com/watch?v=Xc1Le3CSdrM'))
+
+  const songs = [song_one, song_two, song_three]
+
+  const audio = new Audio(songs[Math.floor(Math.random() * 3)])
   const [music, setMusic] = useState(audio)
 
 
   const playFunc = (music) => {
-    music.volume = 0.2
+    music.volume = 0.08
     music.play()
   }
 

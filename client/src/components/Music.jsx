@@ -5,10 +5,6 @@ import { purple } from "@mui/material/colors";
 import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 
-import song1 from "../assests/test2.mp3"
-import song2 from "../assests/test.mp4"
-import { useState } from "react";
-
 export const Music = (props) => {
 
   // const audio = new Audio(song1)
