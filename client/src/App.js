@@ -27,8 +27,8 @@ import Paper from "@mui/material/Paper";
 import { purple } from "@mui/material/colors";
 //Music Imports
 import song_one from "./assests/music/song_one.mp3"
-import song_two from "./assests/music/song_two.mp3"
-import song_three from "./assests/music/song_three.mp3"
+// import song_two from "./assests/music/song_two.mp3"
+// import song_three from "./assests/music/song_three.mp3"
 
 // Material UI Icons
 import MailOutlineIcon from "@mui/icons-material/MailOutline";
@@ -52,10 +52,10 @@ function App() {
     setPage(1);
   };
 
-  const songs = [song_one, song_two, song_three]
+  // const songs = [song_one, song_two, song_three]
 
-  const audio = new Audio(songs[Math.floor(Math.random() * 3)])
-  const [music, setMusic] = useState(audio)
+  const audio = new Audio(song_one)
+  const [music] = useState(audio)
 
 
   const playFunc = (music) => {
