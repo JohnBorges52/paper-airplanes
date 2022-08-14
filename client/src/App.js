@@ -27,7 +27,7 @@ import Paper from "@mui/material/Paper";
 import { purple } from "@mui/material/colors";
 //Music Imports
 import song_one from "./assests/music/song_one.mp3"
-// import song_two from "./assests/music/song_two.mp3"
+import song_two from "./assests/music/song_two.mp3"
 // import song_three from "./assests/music/song_three.mp3"
 
 // Material UI Icons
@@ -52,9 +52,9 @@ function App() {
     setPage(1);
   };
 
-  // const songs = [song_one, song_two, song_three]
+  const songs = [song_one, song_two]
 
-  const audio = new Audio(song_one)
+  const audio = new Audio(songs[Math.floor(Math.random() * 2)])
   const [music] = useState(audio)
 
 
