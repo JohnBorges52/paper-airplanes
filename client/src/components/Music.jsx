@@ -36,11 +36,14 @@ export const Music = (props) => {
         border: "1px solid", 
         borderColor: purple[600] }}
       >
-        <PlayCircleOutlineOutlinedIcon  
+        <p>Music</p>
+        <PlayCircleOutlineOutlinedIcon
+          className="music-control"  
           color="primary" 
           onClick={()=>{props.play(props.music)}}
         />
         <PauseCircleOutlineOutlinedIcon 
+          className="music-control"
           color="primary" 
           onClick={()=>{props.pause(props.music)}} 
         />

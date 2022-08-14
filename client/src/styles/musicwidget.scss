@@ -3,5 +3,25 @@
   justify-content: flex-end;
   position: fixed;
   right: 2vw;
-  bottom: 6vh;
+  bottom: 5vh;
+  z-index: 2;
+  p {
+    font-size: 0.4em;
+    margin: 0px;
+    color: #FFFFFF
+    ;
+    
+  }
+  #music-controls{
+    box-shadow: 3px 3px #414141;
+    background-color: #aca4b4;
+    border-color: #626273;
+  }
+  .music-control{
+    color: #FFFFFF
+
+
+
+    ;
+  }
 }
