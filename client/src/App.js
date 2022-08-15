@@ -38,7 +38,6 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
-
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -70,7 +69,6 @@ function App() {
     setPage(1);
   };
 
-  // Music widget
   const songs = [song_one, song_two];
 
   const audio = new Audio(songs[Math.floor(Math.random() * 2)]);
@@ -94,12 +92,7 @@ function App() {
           }}
         ></div>
 
-        <div
-          onClick={() => {
-            navigate("/letters/profile");
-          }}
-          className="top-nav-bar-rightcontainer"
-        >
+        <div className="top-nav-bar-rightcontainer">
           {!userID ? (
             <li>
               <Button
@@ -126,7 +119,12 @@ function App() {
                   LOGOUT
                 </Button>
               </li>
-              <li className="notification-bell">
+              <li
+                className="notification-bell"
+                onClick={() => {
+                  navigate("/letters/profile");
+                }}
+              >
                 <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
                 <NotificationCounter />
               </li>
