@@ -1,7 +1,7 @@
 export const selectEmote = (emoteID) => {
 
   if (emoteID === 1) {
-    return "🙂 "
+    return "🙂"
   }
   else if (emoteID === 2) {
     return "😃"
