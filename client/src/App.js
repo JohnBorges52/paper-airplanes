@@ -42,6 +42,11 @@ function App() {
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
+  const { io } = require("socket.io-client");
+
+  const socket = io('/admin');
+
+  socket.connect()
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
