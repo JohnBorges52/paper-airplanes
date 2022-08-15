@@ -14,11 +14,12 @@ import Button from '@mui/material/Button';
 import { purple, red } from "@mui/material/colors";
 import { Popover, Typography, Box, Modal } from "@mui/material";
 
-
 // Material Icons
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 import { useEffect } from "react";
+
+import { load } from "@tensorflow-models/toxicity";
 
 const style = {
   position: 'absolute',
@@ -31,6 +32,7 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
+
 
 export const Form = (props) => {
   const navigate = useNavigate();
@@ -45,6 +47,30 @@ export const Form = (props) => {
   const [pos, setPos] = useState(null);
   const [isModal, setIsModal] = useState(true)
   const open = Boolean(pos)
+
+  const threshold = 0.9;
+  const [toxicity, setToxicity] = useState("");
+
+  const checkToxic = (message, eventTarget) => {
+    load(threshold)
+      .then((model) => {
+        console.log("Model loaded...");
+        model.classify(message)
+          .then((predictions) => {
+            const isToxic = predictions[6].results[0].match;
+            console.log(predictions)
+            if (isToxic) {
+              setToxicity(true);
+            } else {
+              setToxicity(false)
+            }
+          })
+      });
+    console.log(toxicity);
+    setPos(eventTarget);
+    setPopoverMsg("Too toxic!")
+    return toxicity
+  }
 
   const validateMessage = (message, eventTarget) => {
     if (message.length > 700) {
@@ -92,16 +118,16 @@ export const Form = (props) => {
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
         <TypeSelector
-          onChange={(event) => { setLetterType(event.target.value);  }}>
+          onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
-        <EmoteSelector
-          onChange={(event) => { setEmote(event.target.value)}}>
-        </EmoteSelector>
+      <EmoteSelector
+        onChange={(event) => { setEmote(event.target.value) }}>
+      </EmoteSelector>
 
 
       {/* Text field for form */}
-      
+
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
         id="filled-multiline-flexible"
         label="What is on your mind?"
@@ -184,15 +210,15 @@ export const Form = (props) => {
               > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
             }
           </>
-        }        
+        }
       </div>
 
       {!props.isResponse &&
-      
+
         <div className="guy-heart-container">
-        <div className="guy-heart"> </div>
-      </div>
-        }
+          <div className="guy-heart"> </div>
+        </div>
+      }
     </div >
   );
 };

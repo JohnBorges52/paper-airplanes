@@ -13,7 +13,7 @@ export const LetterList = (props) => {
   //STATES
 
   const { userID, setUserID } = useContext(UserContext);
-  console.log(userID);
+  console.log("userID", userID);
 
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
@@ -31,7 +31,7 @@ export const LetterList = (props) => {
 
   const navigate = useNavigate();
 
-  { console.log(letterEmpty) }
+  console.log("Letter Empty", letterEmpty)
 
   return (
     <>
