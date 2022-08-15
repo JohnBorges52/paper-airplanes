@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { makeStyles, responsiveFontSizes } from "@mui/material"
 import { Link } from "react-router-dom";
 import {selectEmote} from "../helper/emoteManager"
+import io from 'socket.io-client'; 
 
 // Material UI
 import { Card } from "@mui/material"
@@ -150,7 +151,7 @@ export const LetterDetail = (props) => {
     p: 4,
   };
 
-  
+
   return (
     <div className="letterDetail">
       <div className="letter-report-component">
@@ -238,7 +239,7 @@ export const LetterDetail = (props) => {
           }
         </div>
       <br />
-      <hr />
+      <hr className="hr-divider"/>
       <br />
       {/* If user is not sender, show form */}
       {userID !== data.sender_id && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
