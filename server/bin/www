@@ -1,5 +1,6 @@
 #!/usr/bin/env node
 require('dotenv').config()
+const { Server } = require("socket.io");
 /**
  * Module dependencies.
  */
@@ -7,6 +8,7 @@ require('dotenv').config()
 var app = require('../app');
 var debug = require('debug')('server:server');
 var http = require('http');
+const { Socket } = require('dgram');
 
 /**
  * Get port from environment and store in Express.
@@ -20,6 +22,11 @@ app.set('port', port);
  */
 
 var server = http.createServer(app);
+const otherServer = http.createServer(app);
+const io = new Server(server);
+
+io.on('connection', (socket) => {console.log('hello')})
+
 
 /**
  * Listen on provided port, on all network interfaces.

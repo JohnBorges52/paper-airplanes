@@ -10,6 +10,7 @@ const lettersRouter = require('./routes/lettersRouter')
 const responsesRouter = require('./routes/responsesRouter');
 const stickersRouter = require('./routes/stickersRouter');
 
+
 const app = express();
 
 app.use(logger('dev'));
