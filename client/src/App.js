@@ -44,9 +44,15 @@ function App() {
   const { userID, setUserID } = useContext(UserContext);
   const { io } = require("socket.io-client");
 
-  const socket = io('/admin');
+  const socket = io("http://localhost:8080", { transports: ["websocket"] });
 
   socket.connect()
+
+  socket.on("check", ()=>{socket.emit("you")})
+
+  const doSomeTask = () =>{
+    socket.emit("hello")
+  }
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -73,7 +79,9 @@ function App() {
   }
   return (
     <div className="App">
-
+      //////REMOVE LATER
+      <button onClick={()=>doSomeTask()}>YOYOYO</button>
+      //////
       <nav className="top-nav-bar">
         <div
           className="logo"
