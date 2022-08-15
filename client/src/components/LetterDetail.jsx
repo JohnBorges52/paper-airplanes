@@ -191,6 +191,7 @@ export const LetterDetail = (props) => {
           /* Render delete button when it is your letter */
           <div className="report-button">
             {<Button
+              style={{cursor:"pointer"}}
               color="error"
               size="small"
               variant="outlined"
@@ -254,7 +255,7 @@ export const LetterDetail = (props) => {
 
           <div className='letter-wrapper-primary'>
             <div>
-              <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
+               {/*CHANGE TO EMOTE AFTER*/}
               
             </div>
             <div className='letter-wrapper-secondary'>
@@ -262,7 +263,7 @@ export const LetterDetail = (props) => {
                 {<p className="letterMessage">{response.message}</p>}
               </div>
             </div>
-            <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
+            <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end", cursor:"pointer" }}
               onClick={() => { 
                 responseSetChildModal(false)
                 setResponseToDeleteId(response.id)
