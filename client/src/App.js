@@ -51,7 +51,7 @@ function App() {
   //   const socket = io();
   //   setSocket(socket);
   //   socket.on("connect", () => {
-      
+
   //   }); 
 
   //   // clean up
@@ -226,7 +226,8 @@ function App() {
         <Route path="/chill" element={<Music />} />
       </Routes>
       <div id="music-widget">
-        <Music play={playFunc} pause={pauseFunc} music={music}></Music>
+        <Music
+          play={playFunc} pause={pauseFunc} music={music}></Music>
       </div>
     </div>
   );

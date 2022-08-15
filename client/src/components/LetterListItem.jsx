@@ -79,7 +79,7 @@ export const LetterListItem = (props) => {
               <div className="letterMessage">
 
               {props.senderUserName}
-              Type: {props.type}
+              
               </div>
             </div>
 
@@ -90,12 +90,14 @@ export const LetterListItem = (props) => {
                 (userID !== props.senderID ?
                   // If letter type is request show letter detail button
                   (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
+                    style={{cursor: "pointer"}}
                     color="action"
                     onClick={() => navigate(`/letters/${props.id}`)}
                   />)
                   :
                   // Show letter detail button, regardless of type
                   (<ChatOutlinedIcon
+                    style={{cursor: "pointer"}}
                     color="action"
                     onClick={() => { markRead(props.id); navigate(`/letters/${props.id}`) }}
                   />))
