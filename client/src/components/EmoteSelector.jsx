@@ -8,7 +8,7 @@ export const EmoteSelector = (props) => {
   return (
     <div className='inputSelector'>
 
-    <FormControl size="small" style={{marginTop: "10px", width: "25vw", }}>
+    <FormControl size="small" style={{marginTop: "10px", width: "25vw", maxWidth: "168px", minWidth: "145px" }}>
       <InputLabel id="letter-type-label" style={{ backgroundColor: "white" }}>I am feeling... &nbsp;</InputLabel>
       <Select
         label="Letter-Type"

@@ -7,7 +7,8 @@ import Select from '@mui/material/Select';
 export const TypeSelector = (props) => {
 
   return (
-    <FormControl fullWidth size="small" >
+    <div className='inputSelector'>
+    <FormControl size="small" style={{width: "84vw", maxWidth: "1024px", minWidth: "200px" }}>
       <InputLabel id="letter-type-label" size="small" style={{ backgroundColor: "white" }}>Choose a Letter Type&nbsp;</InputLabel>
       <Select
         label="Letter-Type"
@@ -18,6 +19,7 @@ export const TypeSelector = (props) => {
         <MenuItem value={"encourage"}>Encourage</MenuItem>
       </Select>
     </FormControl>
+    </div>
 
   )
 }
