@@ -11,6 +11,7 @@ export const TypeSelector = (props) => {
       <InputLabel id="letter-type-label" size="small" style={{ backgroundColor: "white" }}>Choose a Letter Type&nbsp;</InputLabel>
       <Select
         label="Letter-Type"
+        value={""}
         onChange={event => props.onChange(event)}
       >
         <MenuItem value={"request"}>Request</MenuItem>

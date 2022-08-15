@@ -119,12 +119,12 @@ export const Form = (props) => {
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
         <TypeSelector
-          onChange={(event) => { setLetterType(event.target.value); }}>
+          value={"request"} onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
-      <EmoteSelector
-        onChange={(event) => { setEmote(event.target.value) }}>
-      </EmoteSelector>
+      {/* <EmoteSelector
+        value={'1'} onChange={(event) => { setEmote(event.target.value) }}>
+      </EmoteSelector> */}
 
 
       {/* Text field for form */}
