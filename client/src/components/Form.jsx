@@ -92,16 +92,10 @@ export const Form = (props) => {
 
   useEffect(() => { }, [isModal])
 
-<<<<<<< Updated upstream
-  const submitMessage = (message, letterType, senderID, emote, eventTarget) => {
-    if (validateMessage(message, eventTarget)) {
-      axios.post(`/letters/new`, { message, letterType, senderID, emote })
-=======
   const submitMessage = (message, letterType, senderID, eventTarget) => {
 
     if (validateMessage(message, eventTarget) && !checkToxic(message)) {
       axios.post(`/letters/new`, { message, letterType, senderID })
->>>>>>> Stashed changes
         .then(setTimeout(() => {
           navigate("/letters/profile")
         }, 2200))
