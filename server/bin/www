@@ -30,7 +30,7 @@ const io = new Server(webSocketThing);
 
 io.on('connection', (client) => {
   console.log(client.id)
-  setInterval(()=>{client.emit('update')}, 5000)
+  client.emit('update')
 })
 
 
