@@ -27,20 +27,20 @@ export const Login = (props) => {
       <div className="login">
 
         <TextField
-          style={{ margin: "20px auto 10px", width: "70vw", backgroundColor: "white" }}
+          style={{ margin: "20px auto 10px", width: "70vw", maxWidth:"507px", backgroundColor: "white" }}
           id="outlined-basic"
           label="email"
           onChange={(event) => { setUserEmail(event.target.value) }}
         />
         <TextField
-          style={{ margin: "0 auto 10px", width: "70vw", backgroundColor: "white" }}
+          style={{ margin: "0 auto 10px", width: "70vw", maxWidth:"507px", backgroundColor: "white" }}
           id="outlined-basic"
           label="password"
         />
 
         <Button
           sx={{ backgroundColor: purple[500] }}
-          style={{ margin: "10px auto 10px", width: "25vw" }}
+          style={{ margin: "10px auto 10px", width: "25vw", maxWidth:"135px" }}
           variant="contained"
           onClick={() => {
             getUserId(userEmail, props.redirectPath)
@@ -49,7 +49,7 @@ export const Login = (props) => {
 
         <Button
           sx={{ backgroundColor: purple[500] }}
-          style={{ margin: "0 auto 10px", width: "25vw" }}
+          style={{ margin: "0 auto 10px", width: "25vw", maxWidth:"135px" }}
           variant="contained"
           onClick={() => { console.log("A NEW USER HAS BEEN REGISTERED") }}>Register
         </Button>
