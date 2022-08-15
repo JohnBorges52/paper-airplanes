@@ -36,6 +36,7 @@ export const Login = (props) => {
           style={{ margin: "0 auto 10px", width: "70vw", maxWidth:"507px", backgroundColor: "white" }}
           id="outlined-basic"
           label="password"
+          type = "password"
         />
 
         <Button
