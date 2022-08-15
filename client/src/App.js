@@ -43,7 +43,10 @@ function App() {
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
+  
+  
   const [socket, setSocket] = useState();
+  const [updateNum, setUpdateNum] = useState(0)
   
   
   
@@ -56,7 +59,7 @@ function App() {
       socket.emit('user', data);
     });
 
-    socket.on('update', ()=>{console.log('recieved')})
+    socket.on('update', ()=>{setUpdateNum(updateNum + 1)})
 
 
 
@@ -64,7 +67,7 @@ function App() {
     return () => {
       socket.disconnect();
     };
-  }, []);
+  }, [updateNum]);
 
 
   const handleChange = (event, newValue) => {
@@ -195,13 +198,13 @@ function App() {
         <Route
           path="/"
           element={
-            <LetterList page={page} setPage={setPage} path={"/letters"} />
+            <LetterList update={updateNum} page={page} setPage={setPage} path={"/letters"} />
           }
         />
         <Route
           path="/letters"
           element={
-            <LetterList page={page} setPage={setPage} path={"/letters"} />
+            <LetterList page={page}  update={updateNum} setPage={setPage} path={"/letters"} />
           }
         />
         <Route path="/letters/new" element={<LetterNew />} />
