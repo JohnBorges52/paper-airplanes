@@ -52,20 +52,14 @@ function App() {
     const socket = io();
     setSocket(socket);
     socket.on("connect", () => {
-      const data = { 1: "yes" };
-      console.log("data on client", data);
-      socket.emit("user", data);
-    });
-
-    socket.on("update", () => {
-      setUpdateNum(updateNum + 1);
+      
     });
 
     // clean up
     return () => {
       socket.disconnect();
     };
-  }, [updateNum]);
+  }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -195,7 +189,6 @@ function App() {
           path="/"
           element={
             <LetterList
-              update={updateNum}
               page={page}
               setPage={setPage}
               path={"/letters"}
@@ -207,7 +200,6 @@ function App() {
           element={
             <LetterList
               page={page}
-              update={updateNum}
               setPage={setPage}
               path={"/letters"}
             />
