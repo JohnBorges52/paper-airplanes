@@ -89,7 +89,7 @@ export const LetterListItem = (props) => {
                 // If user is not the author of the letter
                 (userID !== props.senderID ?
                   // If letter type is request show letter detail button
-                  (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
+                  (<DriveFileRenameOutlineOutlinedIcon
                     style={{cursor: "pointer"}}
                     color="action"
                     onClick={() => navigate(`/letters/${props.id}`)}
@@ -103,7 +103,7 @@ export const LetterListItem = (props) => {
                   />))
                 :
                 // Hide letter detail
-                (props.type === 'request' && <DriveFileRenameOutlineOutlinedIcon
+                (<DriveFileRenameOutlineOutlinedIcon
                   color="action"
                   onClick={() => navigate(`/users/login/error`)}
                 />)}

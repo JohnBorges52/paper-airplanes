@@ -243,7 +243,7 @@ export const LetterDetail = (props) => {
       <hr className="hr-divider"/>
       <br />
       {/* If user is not sender, show form */}
-      {userID !== data.sender_id && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
+      {(userID !== data.sender_id && (data.type === 'encourage' || data.type === 'request')) && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {/* If user is sender, show all responses */}
