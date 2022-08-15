@@ -128,19 +128,20 @@ export const Form = (props) => {
 
 
       {/* Text field for form */}
-
-      <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
-        id="filled-multiline-flexible"
-        label="What is on your mind?"
-        multiline
-        minRows={10}
-        value={message}
-        onChange={event => {
-          setMessage(event.target.value);
-          setCountCharacters(700 - event.target.value.length);
-        }}
-        variant="outlined"
-      />
+      <div className='inputSelector'>
+        <TextField sx={{ width: 1 }} style={{ marginTop: "25px", width: "100%", maxWidth: "1024px", minWidth: "200px" }}
+          id="filled-multiline-flexible"
+          label="What is on your mind?"
+          multiline
+          minRows={10}
+          value={message}
+          onChange={event => {
+            setMessage(event.target.value);
+            setCountCharacters(700 - event.target.value.length);
+          }}
+          variant="outlined"
+        />
+      </div>
 
       {/* Character counter for message form */}
       <div className={colorCharacter} >
