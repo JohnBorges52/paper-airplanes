@@ -47,18 +47,18 @@ function App() {
   const [socket, setSocket] = useState();
   const [updateNum, setUpdateNum] = useState(0);
 
-  useEffect(() => {
-    const socket = io();
-    setSocket(socket);
-    socket.on("connect", () => {
+  // useEffect(() => {
+  //   const socket = io();
+  //   setSocket(socket);
+  //   socket.on("connect", () => {
       
-    }); 
+  //   }); 
 
-    // clean up
-    return () => {
-      socket.disconnect();
-    };
-  }, []);
+  //   // clean up
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
