@@ -52,7 +52,7 @@ function App() {
     setSocket(socket);
     socket.on("connect", () => {
       
-    });
+    }); 
 
     // clean up
     return () => {
