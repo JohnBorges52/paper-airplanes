@@ -38,7 +38,7 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
-import MusicNoteTwoToneIcon from '@mui/icons-material/MusicNoteTwoTone';
+import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -236,7 +236,7 @@ function App() {
         <Route path="/chill" element={<Music />} />
       </Routes>
       <div id="music-widget">
-      {!displayMusicControls && <MusicNoteTwoToneIcon onClick={()=>{openMusicControls()}} />}
+      {!displayMusicControls && <MusicNoteOutlinedIcon id="music-widget-show" onClick={()=>{openMusicControls()}} />}
         {displayMusicControls && <Music play={playFunc} pause={pauseFunc} music={music} closeControls={closeMusicControls}></Music>}
       </div>
     </div>
