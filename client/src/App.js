@@ -36,23 +36,36 @@ import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import axios from "axios";
-
+import io from 'socket.io-client';
+import { useEffect } from "react";
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
-  const { io } = require("socket.io-client");
+  const [socket, setSocket] = useState();
+  
+  
+  
+  useEffect(() => {
+    const socket = io();
+    setSocket(socket);
+    socket.on('connect', () => {
+      const data = {1:'yes'}
+      console.log('data on client', data);
+      socket.emit('user', data);
+    });
 
-  const socket = io("http://localhost:8080", { transports: ["websocket"] });
+    socket.on('update', ()=>{console.log('recieved')})
 
-  socket.connect()
 
-  socket.on("check", ()=>{socket.emit("you")})
 
-  const doSomeTask = () =>{
-    socket.emit("hello")
-  }
+    // clean up
+    return () => {
+      socket.disconnect();
+    };
+  }, []);
+
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -79,9 +92,6 @@ function App() {
   }
   return (
     <div className="App">
-      //////REMOVE LATER
-      <button onClick={()=>doSomeTask()}>YOYOYO</button>
-      //////
       <nav className="top-nav-bar">
         <div
           className="logo"

@@ -1,13 +1,13 @@
 #!/usr/bin/env node
 require('dotenv').config()
 const { Server } = require("socket.io");
+
 /**
  * Module dependencies.
  */
 
 var app = require('../app');
 var debug = require('debug')('server:server');
-var http = require('http');
 
 /**
  * Get port from environment and store in Express.
@@ -19,22 +19,21 @@ app.set('port', port);
 /**
  * Create HTTP server.
  */
-
+var http = require('http');
 var server = http.createServer(app);
-const io = new Server(server);
-
-io.on('connect', (socket) => {
-  console.log('hello'); 
-  socket.emit('check')
-  socket.on("you", ()=>console.log('John'))
-})
-
 
 /**
  * Listen on provided port, on all network interfaces.
  */
+webSocketThing = server.listen(port, ()=>{console.log("Now Listening Bro")});
+const io = new Server(webSocketThing);
 
-server.listen(port);
+io.on('connection', (client) => {
+  console.log(client.id)
+  setInterval(()=>{client.emit('update')}, 5000)
+})
+
+
 server.on('error', onError);
 server.on('listening', onListening);
 
