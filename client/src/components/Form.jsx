@@ -38,7 +38,7 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
-  const [emote, setEmote] = useState(1);
+  const [emote, setEmote] = useState(0);
   const [countCharacters, setCountCharacters] = useState(700);
 
   const [popoverMsg, setPopoverMsg] = useState("")
