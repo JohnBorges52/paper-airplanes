@@ -91,13 +91,16 @@ export const Form = (props) => {
     <div className="form-component">
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
+        <>
         <TypeSelector
           onChange={(event) => { setLetterType(event.target.value);  }}>
-        </TypeSelector>}
+        </TypeSelector>
 
         <EmoteSelector
           onChange={(event) => { setEmote(event.target.value)}}>
         </EmoteSelector>
+        </>
+        }
 
 
       {/* Text field for form */}
