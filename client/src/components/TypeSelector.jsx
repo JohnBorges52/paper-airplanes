@@ -21,6 +21,5 @@ export const TypeSelector = (props) => {
         </Select>
       </FormControl>
     </div>
-
   )
 }
