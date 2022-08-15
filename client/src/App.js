@@ -84,6 +84,14 @@ function App() {
   const pauseFunc = (music) => {
     music.pause();
   };
+
+  const openMusicControls = () => {
+    setDisplayMusicControls(true);
+  }
+  const closeMusicControls = () => {
+    setDisplayMusicControls(false);
+  }
+
   return (
     <div className="App">
       <nav className="top-nav-bar">
@@ -228,8 +236,8 @@ function App() {
         <Route path="/chill" element={<Music />} />
       </Routes>
       <div id="music-widget">
-      {!displayMusicControls && <MusicNoteTwoToneIcon onClick={()=>setDisplayMusicControls(true)} />}
-        {displayMusicControls && <Music play={playFunc} pause={pauseFunc} music={music}></Music>}
+      {!displayMusicControls && <MusicNoteTwoToneIcon onClick={()=>{openMusicControls()}} />}
+        {displayMusicControls && <Music play={playFunc} pause={pauseFunc} music={music} closeControls={closeMusicControls}></Music>}
       </div>
     </div>
   );
