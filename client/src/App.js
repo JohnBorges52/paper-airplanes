@@ -39,6 +39,10 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
 import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
+<<<<<<< HEAD
+import AccountMenu from "./components/AccountMenu";
+=======
+>>>>>>> eca08586741d77dcb8368ac9f3eeee60f32fe130
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -141,18 +145,6 @@ function App() {
             </li>
           ) : (
             <>
-              <li>
-                <Button
-                  variant="outlined"
-                  sx={{ color: purple[800], border: "1px solid purple" }}
-                  onClick={() => {
-                    setUserID(null);
-                    navigate("/users/login");
-                  }}
-                >
-                  LOGOUT
-                </Button>
-              </li>
               <li
                 className="notification-bell"
                 onClick={() => {
@@ -164,6 +156,7 @@ function App() {
               </li>
             </>
           )}
+          <AccountMenu />
         </div>
       </nav>
 
