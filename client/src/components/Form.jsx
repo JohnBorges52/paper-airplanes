@@ -69,7 +69,7 @@ export const Form = (props) => {
       setPopoverMsg("Letter needs to be 700 chararacters or less")
       return false;
     }
-    else if (message.length < 1) {
+    else if ((message.length < 1) || (message[0] === ' ')) {
       setIsModal({ open: false, text: "" });
       setPos(eventTarget)
       setPopoverMsg("Letter needs to have characters")
@@ -111,14 +111,14 @@ export const Form = (props) => {
     }
   };
 
-  const submitResponse = async (response, letterID, responderID, eventTarget) => {
+  const submitResponse = async (message, letterID, responderID, eventTarget) => {
     setPos(eventTarget);
     setIsModal({ open: true, text: "Saving response..." });
-    const validateResult = await (isLetterValid(response, eventTarget))
+    const validateResult = await (isLetterValid(message, eventTarget))
     console.log("Save the message? ", validateResult)
     if (validateResult) {
       try {
-        await axios.post(`/responses/new`, { response, letterID, responderID })
+        await axios.post(`/responses/new`, { message, letterID, responderID })
         setIsModal({ open: true, text: "Response save success!" });
         setTimeout(() => {
           navigate("/letters/")
