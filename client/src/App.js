@@ -39,10 +39,7 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
 import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
-<<<<<<< HEAD
 import AccountMenu from "./components/AccountMenu";
-=======
->>>>>>> eca08586741d77dcb8368ac9f3eeee60f32fe130
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -154,9 +151,11 @@ function App() {
                 <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
                 <NotificationCounter />
               </li>
+              <li>
+                <AccountMenu />
+              </li>
             </>
           )}
-          <AccountMenu />
         </div>
       </nav>
 

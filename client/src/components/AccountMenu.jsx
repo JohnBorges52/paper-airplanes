@@ -13,11 +13,12 @@ import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
 import { purple } from "@mui/material/colors";
+import LoginIcon from "@mui/icons-material/Login"
 // import { useRadioGroup } from "@mui/material";
 
 export default function AccountMenu() {
   const navigate = useNavigate();
-  const { userID, setUserID } = useContext(UserContext);
+  const { userID, setUserID, loggedInUserEmail } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -77,19 +78,12 @@ export default function AccountMenu() {
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
-        <MenuItem>
-          @lisa.simpson
-        </MenuItem>
-        <Divider />
         {userID &&
-          <>
-            {/* <MenuItem>
-              <ListItemIcon>
-                <Settings fontSize="small" />
-              </ListItemIcon>
-              Settings
-            </MenuItem> */}
-
+          <div>
+            <MenuItem>
+              {loggedInUserEmail}
+            </MenuItem>
+            <Divider />
             <MenuItem
               onClick={() => {
                 setUserID(null);
@@ -100,7 +94,7 @@ export default function AccountMenu() {
               </ListItemIcon>
               Logout
             </MenuItem>
-          </>
+          </div>
         }
       </Menu>
     </>
