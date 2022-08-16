@@ -64,7 +64,8 @@ module.exports = (db) => {
     // const response = req.body.response;
     // const responder_id = req.session.user_id;
     // const letter_id = req.params.letter_id; /*??????? IDK IF THIS WORKS*/
-    const queryString = `INSERT INTO responses (message, letter_id, responder_id) 
+    const queryString = `
+    INSERT INTO responses (message, letter_id, responder_id) 
     VALUES ($1, $2, $3)
     RETURNING *`;
     db.query(queryString, [
