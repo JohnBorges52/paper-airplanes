@@ -54,21 +54,17 @@ module.exports = (db) => {
   router.post("/new", (req, res) => {
     const queryString = `INSERT INTO letters (letter_message, type, sender_id, emote)
       VALUES ($1, $2, $3, $4)
-      `;
+      RETURNING *`;
     db.query(queryString, [
       req.body.message,
       req.body.letterType,
       req.body.senderID,
-      req.body.emote
-    ]);
+      req.body.emote,
+    ]).then((data) => {
+      res.status(200).json(data);
+    });
     // console.log(req.body)
-
-    return;
   });
-
-
-
-
 
   router.put("/:id/flag", (req, res) => {
     const queryString = `

@@ -48,24 +48,29 @@ function App() {
   const [socket, setSocket] = useState();
   const [updateNum, setUpdateNum] = useState(0);
 
-  useEffect(() => {
-    const socket = io();
-    setSocket(socket);
-    socket.on("connect", () => {
-      const data = { 1: "yes" };
-      console.log("data on client", data);
-      socket.emit("user", data);
-    });
+  // useEffect(
+  //   () => {
+  //     const socket = io();
+  //     setSocket(socket);
+  //     socket.on("connect", () => {
+  //       const data = { 1: "yes" };
+  //       console.log("data on client", data);
+  //       socket.emit("user", data);
+  //     });
 
-    socket.on("update", () => {
-      setUpdateNum(updateNum + 1);
-    });
+  //     socket.on("update", () => {
+  //       setUpdateNum(updateNum + 1);
+  //     });
 
-    // clean up
-    return () => {
-      socket.disconnect();
-    };
-  }, [updateNum]);
+  //     // clean up
+  //     return () => {
+  //       socket.disconnect();
+  //     };
+  //   },
+  //   [
+  //     // updateNum
+  //   ]
+  // );
 
   const handleChange = (event, newValue) => {
     setValue(newValue);

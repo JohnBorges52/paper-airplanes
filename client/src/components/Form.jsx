@@ -1,24 +1,22 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TypeSelector } from "./TypeSelector";
-import { useContext } from "react";
 import { UserContext } from "../UserContext";
-import axios from "axios";
-import "../styles/letterItem.scss";
-import classNames from "classnames";
 import { EmoteSelector } from "./EmoteSelector";
+import axios from "axios";
+import classNames from "classnames";
+import "../styles/letterItem.scss";
 
 // Material UI
+import { Popover, Typography, Box, Modal, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { purple, red } from "@mui/material/colors";
-import { Popover, Typography, Box, Modal } from "@mui/material";
+import { purple } from "@mui/material/colors";
 
 // Material Icons
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useEffect } from "react";
 
+// TensorFlow Machine Learning Toxicity Detector Model
 import { load } from "@tensorflow-models/toxicity";
 
 const style = {
@@ -32,7 +30,6 @@ const style = {
   boxShadow: 24,
   p: 4,
 };
-
 
 export const Form = (props) => {
   const navigate = useNavigate();
@@ -48,29 +45,21 @@ export const Form = (props) => {
   const [isModal, setIsModal] = useState(true)
   const open = Boolean(pos)
 
-  const threshold = 0.9;
+  const [isToxicModal, setIsToxicModal] = useState(false)
   const [toxicity, setToxicity] = useState("");
+  const threshold = 0.9;
 
-  const checkToxic = (message, eventTarget) => {
-    load(threshold)
-      .then((model) => {
-        console.log("Model loaded...");
-        model.classify(message)
-          .then((predictions) => {
-            const isToxic = predictions[6].results[0].match;
-            console.log(predictions)
-            if (isToxic) {
-              setToxicity(true);
-            } else {
-              setToxicity(false)
-            }
-          })
-      });
-    console.log(toxicity);
-    setPos(eventTarget);
-    setPopoverMsg("Too toxic!")
-    return toxicity
+  const checkToxic = async (message, eventTarget) => {
+    const model = await load(threshold)
+    console.log("Model loaded...");
+    const predictions = await model.classify(message)
+    const isToxic = predictions[6].results[0].match
+    setToxicity(isToxic)
+    console.log(isToxic)
+    return isToxic
   }
+
+  useEffect(() => { }, [isModal])
 
   const validateMessage = (message, eventTarget) => {
     if (message.length > 700) {
@@ -90,16 +79,20 @@ export const Form = (props) => {
     return true
   };
 
-  useEffect(() => { }, [isModal])
-
-  const submitMessage = (message, letterType, senderID, eventTarget) => {
-
-    if (validateMessage(message, eventTarget) && !checkToxic(message)) {
-      axios.post(`/letters/new`, { message, letterType, senderID })
-        .then(setTimeout(() => {
+  const submitMessage = async (message, letterType, senderID, emote, eventTarget) => {
+    if (validateMessage(message, eventTarget)) {
+      const result = await checkToxic(message)
+      if (result) {
+        return (console.log("didn't send"))
+      }
+      try {
+        await axios.post(`/letters/new`, { message, letterType, senderID, emote })
+        // console.log("response", response)
+        setTimeout(() => {
           navigate("/letters/profile")
-        }, 2200))
-
+        }, 0)
+      }
+      catch (error) { console.log(error) }
     }
   };
 
@@ -119,30 +112,14 @@ export const Form = (props) => {
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
         <TypeSelector
-          value={"request"} onChange={(event) => { setLetterType(event.target.value); }}>
+          onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
-      {/* <EmoteSelector
-        value={'1'} onChange={(event) => { setEmote(event.target.value) }}>
-      </EmoteSelector> */}
-
+      <EmoteSelector
+        onChange={(event) => { setEmote(event.target.value) }}>
+      </EmoteSelector>
 
       {/* Text field for form */}
-      <div className='inputSelector'>
-        <TextField sx={{ width: 1 }} style={{ marginTop: "25px", width: "100%", maxWidth: "1024px", minWidth: "200px" }}
-          id="filled-multiline-flexible"
-          label="What is on your mind?"
-          multiline
-          minRows={10}
-          value={message}
-          onChange={event => {
-            setMessage(event.target.value);
-            setCountCharacters(700 - event.target.value.length);
-          }}
-          variant="outlined"
-        />
-      </div>
-
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
         id="filled-multiline-flexible"
         label="What is on your mind?"
@@ -196,6 +173,22 @@ export const Form = (props) => {
               Submit
             </Button>
 
+            {isToxicModal && <Modal
+              open={open}
+              onClose={() => setPos(null)}
+              aria-labelledby="modal-modal-title"
+              aria-describedby="modal-modal-description"
+            >
+              <Box sx={style}>
+                <Typography id="modal-modal-title" variant="h6" component="h2">
+                  Message is inappropriate!
+                </Typography>
+                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
+                  Your message has been detected as inappropriate.  Please edit and try again...
+                </Typography>
+              </Box>
+            </Modal>}
+
             {isModal ?
               <Modal
                 open={open}
@@ -213,7 +206,7 @@ export const Form = (props) => {
                 </Box>
               </Modal>
               :
-              //* Popover alert on submit when message is too short or too long *
+              // Popover alert on submit when message is too short or too long
               <Popover
                 open={open}
                 anchorEl={pos}
