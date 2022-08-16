@@ -214,16 +214,16 @@
 
 .notification-counter{
   position: absolute;
-  right: 6px;
-  top: -4px;
+  right: 1px;
+  top: -10px;
   border-radius: 50%;
-  padding: 1px;
+  padding: 4px;
   background: white;
   border: 1px solid transparent;
   color: rgb(250, 0, 0);
   text-align: center;
-  font-family: 'Montserrat', sans-serif;
-  font-size: 12px;
+  font-family: "Montserrat", sans-serif;
+  font-size: 17px;
   height: 12px;
   font-weight: 600;
 
@@ -241,6 +241,10 @@
   align-items: center;
 }
 
+.lettertype-indicator{
+  margin-bottom: 7px;
+  font-weight: 300;
+}
 
 
 

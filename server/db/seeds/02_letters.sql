@@ -2,13 +2,13 @@
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('I worked really hard for my final project at Lighthouse Labs. I made a web app that connected to a remote-controlled vehicle and could be controlled by anyone through the internet. Everything was going ok, but on the day of the presentation, the Wi-Fi at the demonstration location was not working properly. This made my web app look like it was not functioning correctly and I couldn''t present it properly to the audience.  This made me feel sad. I''m worried that it was not impressive and I will never get a job in the tech industry. How can I get over this?', 'request', 1, 1, 9);
 
 -- Letter 1
-INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Sometimes I’m just doing mundane things, like driving somewhere or getting groceries… and I have this overwhelming urge to just cry, sob and break down. I feel like I could fall apart at any given moment but I have to remind myself that it is not the place or time.', 'vent', 1, 3, 7);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES (' Sometimes I’m just doing mundane things, like driving somewhere or getting groceries… and I have this overwhelming urge to just cry, sob and break down. I feel like I could fall apart at any given moment but I have to remind myself that it is not the place or time.', 'request', 1, 3, 7);
 --  Letter 2
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('When you are joyful, when you say yes to life and have fun and project positivity all around you, you become a sun in the center of every constellation, and people want to be near you.', 'encourage', 2, 2, 4);
 -- Letter 3
 INSERT INTO letters (letter_message, type, sender_id, emote) VALUES (' I found out two days ago that my husband has been having an affair. We have two daughters together and have been together for 11 years. The husband of the woman he’s been having an affair with reached out and told me something was going on. We compared stories and it’s even worse than what he initially thought. They’ve hung out together with our kids. What should I do?', 'request', 3, 9);
 -- Letter 4
-INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Sometimes the music I listen to depresses me but I am so addicted to them that I can not stop listening.', 'vent', 2, 2, 7);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('VENT Sometimes the music I listen to depresses me but I am so addicted to them that I can not stop listening.', 'vent', 2, 2, 7);
 -- Letter 5
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Virtually nothing is impossible in this world if you just put your mind to it and maintain a positive attitude.', 'encourage', 1, 4, 2);
 -- Letter 6
@@ -24,7 +24,7 @@ INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES 
 INSERT INTO letters (letter_message, type, sender_id, emote) VALUES ('Believe that life is worth living and your belief will help create the fact.', 'encourage', 3, 5);
 
 -- Letter 10
-INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Inspiration comes from within yourself. One has to be positive. When you’re positive, good things happen.', 'encourage', 1, 2, 12);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Inspiration comes from within yourself. One has to be positive. When you’re positive, good things happen.', 'encourage', 1, 2, 5);
 
 -- Letter 11
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Yesterday I was walking with my dog on the street and a group of guys started following me. I was afraid they would do something to me so I started running, but when I looked back to see them they were entering the bus. So probably they were running to not miss the bus. This kind of situation always happens to me. How can I be more fearless? .', 'request', 1, 3, 8);

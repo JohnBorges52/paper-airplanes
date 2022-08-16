@@ -65,20 +65,26 @@ export const LetterListItem = (props) => {
     >
       <div className='letter-wrapper-primary'>
         <div>
-          <p>{selectEmote(props.emote)}</p> {/*Change back to emoji */}
+          <p>{selectEmote(props.emote)}</p>
         </div>
         <div className='letter-wrapper-secondary'>
+          
+          
           <div className='letter-text-area'>
+
             {!expanded && <p className="letterMessage">{props.letterMessage.substring(0, 54)}{longLetter(props.letterMessage) && <span>...</span>}</p>}
             <Collapse in={expanded} timeout={100} unmountOnExit>
               <p className="letterMessage">{props.letterMessage}</p>
             </Collapse>
           </div>
+          
           <footer className="letter-footer">
             <div className="letter-userID"> {/*change here after*/}
               <div className="letterMessage">
 
-              {props.senderUserName}
+              {props.type === "request" && <span className="lettertype-indicator"> Looking for advice </span>}
+              {props.type === "vent" && <span className="lettertype-indicator"> Just venting </span>}
+              {props.type === "encourage" && <span className="lettertype-indicator"> Good vibes! </span>}
               
               </div>
             </div>
@@ -119,7 +125,11 @@ export const LetterListItem = (props) => {
 
             </CardActions>
           </footer>
+              
         </div>
+        {/* {props.type === "vent" && <span className="lettertype-indicator">✍️</span> }      
+        {props.type === "request" && <span className="lettertype-indicator">✍️</span> }      
+        {props.type === "encourage" && <span className="lettertype-indicator">💙</span> }       */}
       </div>
     </Card>
   );
