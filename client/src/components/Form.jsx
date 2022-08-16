@@ -37,19 +37,19 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
-  const [emote, setEmote] = useState(0);
+  const [emote, setEmote] = useState(1);
   const [countCharacters, setCountCharacters] = useState(700);
 
   const [popoverMsg, setPopoverMsg] = useState("")
   const [pos, setPos] = useState(null);
-  const [isModal, setIsModal] = useState(true)
+  const [isModal, setIsModal] = useState({ open: true, text: "" })
   const open = Boolean(pos)
 
   const [isToxicModal, setIsToxicModal] = useState(false)
   const [toxicity, setToxicity] = useState("");
   const threshold = 0.9;
 
-  const checkToxic = async (message, eventTarget) => {
+  const checkToxicity = async (message, eventTarget) => {
     const model = await load(threshold)
     console.log("Model loaded...");
     const predictions = await model.classify(message)
@@ -61,47 +61,70 @@ export const Form = (props) => {
 
   useEffect(() => { }, [isModal])
 
-  const validateMessage = (message, eventTarget) => {
+  //  Check that message is not too long or blank
+  const isMessageLengthValid = (message, eventTarget) => {
     if (message.length > 700) {
-      setIsModal(false);
+      setIsModal({ open: false, text: "" });
       setPos(eventTarget);
       setPopoverMsg("Letter needs to be 700 chararacters or less")
       return false;
     }
     else if (message.length < 1) {
-      setIsModal(false);
+      setIsModal({ open: false, text: "" });
       setPos(eventTarget)
       setPopoverMsg("Letter needs to have characters")
       return false
     }
-    setPos(eventTarget)
-    setIsModal(true);
     return true
   };
 
-  const submitMessage = async (message, letterType, senderID, emote, eventTarget) => {
-    if (validateMessage(message, eventTarget)) {
-      const result = await checkToxic(message)
-      if (result) {
-        return (console.log("didn't send"))
+  // Validate message for length and toxicty
+  const isLetterValid = async (message, eventTarget) => {
+    if (isMessageLengthValid(message, eventTarget)) {
+      const toxicityResult = await checkToxicity(message)
+      // If message is toxic
+      if (toxicityResult) {
+        setIsModal({ open: true, text: "Error in letter.  Please edit and try again." });
+        return false
       }
+      // If message IS NOT toxic
+      return true
+    }
+  };
+
+  // On submit the form for a new letter
+  const submitMessage = async (message, letterType, senderID, emote, eventTarget) => {
+    setPos(eventTarget);
+    setIsModal({ open: true, text: "Saving message..." });
+    const validateResult = await (isLetterValid(message, eventTarget))
+    console.log("Save the message? ", validateResult)
+    if (validateResult) {
       try {
         await axios.post(`/letters/new`, { message, letterType, senderID, emote })
+        setIsModal({ open: true, text: "Message save success!" });
         // console.log("response", response)
         setTimeout(() => {
           navigate("/letters/profile")
-        }, 0)
+        }, 500)
       }
       catch (error) { console.log(error) }
     }
   };
 
-  const submitResponse = (message, letterID, responderID, eventTarget) => {
-    if (validateMessage(message, eventTarget)) {
-      axios.post(`/responses/new`, { message, letterID, responderID })
-        .then(setTimeout(() => {
+  const submitResponse = async (response, letterID, responderID, eventTarget) => {
+    setPos(eventTarget);
+    setIsModal({ open: true, text: "Saving response..." });
+    const validateResult = await (isLetterValid(response, eventTarget))
+    console.log("Save the message? ", validateResult)
+    if (validateResult) {
+      try {
+        await axios.post(`/responses/new`, { response, letterID, responderID })
+        setIsModal({ open: true, text: "Response save success!" });
+        setTimeout(() => {
           navigate("/letters/")
-        }, 2200))
+        }, 500)
+      }
+      catch (error) { console.log(error) }
     }
   };
 
@@ -111,26 +134,13 @@ export const Form = (props) => {
     <div className="form-component">
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
-        <>
         <TypeSelector
-<<<<<<< HEAD
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
       <EmoteSelector
         onChange={(event) => { setEmote(event.target.value) }}>
       </EmoteSelector>
-=======
-          onChange={(event) => { setLetterType(event.target.value);  }}>
-        </TypeSelector>
-
-        <EmoteSelector
-          onChange={(event) => { setEmote(event.target.value)}}>
-        </EmoteSelector>
-        </>
-        }
-
->>>>>>> d196e5d38cd456e2ad5726722ad3786296411cbb
 
       {/* Text field for form */}
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
@@ -186,23 +196,7 @@ export const Form = (props) => {
               Submit
             </Button>
 
-            {isToxicModal && <Modal
-              open={open}
-              onClose={() => setPos(null)}
-              aria-labelledby="modal-modal-title"
-              aria-describedby="modal-modal-description"
-            >
-              <Box sx={style}>
-                <Typography id="modal-modal-title" variant="h6" component="h2">
-                  Message is inappropriate!
-                </Typography>
-                <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                  Your message has been detected as inappropriate.  Please edit and try again...
-                </Typography>
-              </Box>
-            </Modal>}
-
-            {isModal ?
+            {isModal.open ?
               <Modal
                 open={open}
                 onClose={() => setPos(null)}
@@ -211,10 +205,10 @@ export const Form = (props) => {
               >
                 <Box sx={style}>
                   <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Message Saved!💖
+                    Thanks for writing! 💖
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Redirecting...
+                    {isModal.text}
                   </Typography>
                 </Box>
               </Modal>
