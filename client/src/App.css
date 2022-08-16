@@ -2,8 +2,9 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  background-color: #FFFFFF;
+  background-color: hsla(0, 0%, 94%, 0.3);  
   padding-bottom: 5rem;  
+  height:92vh;
 }
 
 .nav-bar{
