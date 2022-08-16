@@ -1,4 +1,6 @@
-import { useState } from "react";
+import { useState, useContext } from "react";
+import { useNavigate } from "react-router-dom";
+import { UserContext } from "../UserContext";
 import Box from "@mui/material/Box";
 import Avatar from "@mui/material/Avatar";
 import Menu from "@mui/material/Menu";
@@ -6,12 +8,16 @@ import MenuItem from "@mui/material/MenuItem";
 import ListItemIcon from "@mui/material/ListItemIcon";
 import Divider from "@mui/material/Divider";
 import IconButton from "@mui/material/IconButton";
-import Tooltip from "@mui/material/Tooltip";
+// import Tooltip from "@mui/material/Tooltip";
 import Settings from "@mui/icons-material/Settings";
 import Logout from "@mui/icons-material/Logout";
 import MoreVertIcon from '@mui/icons-material/MoreVert';
+import { purple } from "@mui/material/colors";
+// import { useRadioGroup } from "@mui/material";
 
 export default function AccountMenu() {
+  const navigate = useNavigate();
+  const { userID, setUserID } = useContext(UserContext);
   const [anchorEl, setAnchorEl] = useState(null);
   const open = Boolean(anchorEl);
   const handleClick = (event) => {
@@ -32,7 +38,7 @@ export default function AccountMenu() {
           aria-haspopup="true"
           aria-expanded={open ? "true" : undefined}
         >
-          <MoreVertIcon />
+          <MoreVertIcon sx={{ color: purple[700], marginRight: "5px" }} />
         </IconButton>
         {/* </Tooltip> */}
       </Box>
@@ -72,27 +78,30 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> My account
+          <Avatar /> {userID}
         </MenuItem>
         <Divider />
+        {userID &&
+          <>
+            <MenuItem>
+              <ListItemIcon>
+                <Settings fontSize="small" />
+              </ListItemIcon>
+              Settings
+            </MenuItem>
 
-        <MenuItem
-        // onClick={() => {
-        //   setUserID(null);
-        //   navigate("/users/login");
-        // }}
-        >
-          <ListItemIcon>
-            <Settings fontSize="small" />
-          </ListItemIcon>
-          Settings
-        </MenuItem>
-        <MenuItem>
-          <ListItemIcon>
-            <Logout fontSize="small" />
-          </ListItemIcon>
-          Logout
-        </MenuItem>
+            <MenuItem
+              onClick={() => {
+                setUserID(null);
+                navigate("/users/login");
+              }}>
+              <ListItemIcon>
+                <Logout fontSize="small" />
+              </ListItemIcon>
+              Logout
+            </MenuItem>
+          </>
+        }
       </Menu>
     </>
   );

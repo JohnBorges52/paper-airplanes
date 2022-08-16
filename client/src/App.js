@@ -118,18 +118,6 @@ function App() {
             </li>
           ) : (
             <>
-              <li>
-                <Button
-                  variant="outlined"
-                  sx={{ color: purple[800], border: "1px solid purple" }}
-                  onClick={() => {
-                    setUserID(null);
-                    navigate("/users/login");
-                  }}
-                >
-                  LOGOUT
-                </Button>
-              </li>
               <li
                 className="notification-bell"
                 onClick={() => {
@@ -141,8 +129,8 @@ function App() {
               </li>
             </>
           )}
+          <AccountMenu />
         </div>
-        <AccountMenu />
       </nav>
 
       <BottomNavigation
