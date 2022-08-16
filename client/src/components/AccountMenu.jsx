@@ -78,17 +78,17 @@ export default function AccountMenu() {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
       >
         <MenuItem>
-          <Avatar /> {userID}
+          @lisa.simpson
         </MenuItem>
         <Divider />
         {userID &&
           <>
-            <MenuItem>
+            {/* <MenuItem>
               <ListItemIcon>
                 <Settings fontSize="small" />
               </ListItemIcon>
               Settings
-            </MenuItem>
+            </MenuItem> */}
 
             <MenuItem
               onClick={() => {
