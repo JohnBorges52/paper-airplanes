@@ -38,13 +38,14 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
-import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
+import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
+import AccountMenu from "./components/AccountMenu";
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
-  const [displayMusicControls, setDisplayMusicControls] = useState(false)
+  const [displayMusicControls, setDisplayMusicControls] = useState(false);
 
   const [socket, setSocket] = useState();
   const [updateNum, setUpdateNum] = useState(0);
@@ -54,7 +55,7 @@ function App() {
   //   setSocket(socket);
   //   socket.on("connect", () => {
 
-  //   }); 
+  //   });
 
   //   // clean up
   //   return () => {
@@ -87,10 +88,10 @@ function App() {
 
   const openMusicControls = () => {
     setDisplayMusicControls(true);
-  }
+  };
   const closeMusicControls = () => {
     setDisplayMusicControls(false);
-  }
+  };
 
   return (
     <div className="App">
@@ -141,6 +142,7 @@ function App() {
             </>
           )}
         </div>
+        <AccountMenu />
       </nav>
 
       <BottomNavigation
@@ -196,21 +198,13 @@ function App() {
         <Route
           path="/"
           element={
-            <LetterList
-              page={page}
-              setPage={setPage}
-              path={"/letters"}
-            />
+            <LetterList page={page} setPage={setPage} path={"/letters"} />
           }
         />
         <Route
           path="/letters"
           element={
-            <LetterList
-              page={page}
-              setPage={setPage}
-              path={"/letters"}
-            />
+            <LetterList page={page} setPage={setPage} path={"/letters"} />
           }
         />
         <Route path="/letters/new" element={<LetterNew />} />
@@ -236,8 +230,22 @@ function App() {
         <Route path="/chill" element={<Music />} />
       </Routes>
       <div id="music-widget">
-        {!displayMusicControls && <MusicNoteOutlinedIcon id="music-widget-show" onClick={() => { openMusicControls() }} />}
-        {displayMusicControls && <Music play={playFunc} pause={pauseFunc} music={music} closeControls={closeMusicControls}></Music>}
+        {!displayMusicControls && (
+          <MusicNoteOutlinedIcon
+            id="music-widget-show"
+            onClick={() => {
+              openMusicControls();
+            }}
+          />
+        )}
+        {displayMusicControls && (
+          <Music
+            play={playFunc}
+            pause={pauseFunc}
+            music={music}
+            closeControls={closeMusicControls}
+          ></Music>
+        )}
       </div>
     </div>
   );
