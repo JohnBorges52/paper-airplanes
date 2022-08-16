@@ -152,11 +152,10 @@
 .guy-heart{
   margin: 0 auto;
   width: 25%;
-  height: 105px;
+  height: 125px;
   background-image: url("../assests/com-gif-maker-1--unscreen.gif");
   background-repeat: no-repeat;
   background-size: contain;
-  
 }
 
 
@@ -176,25 +175,20 @@
   height: 76px;
   align-items: center;
   border-bottom: 1px solid rgb(160, 160, 160);
-  
-
-
 }
+
 .top-nav-bar li {
   list-style: none;
   display: inline-block;
   padding: 0 10px 0 10px;
   height: 100%;
-  
-
 }
+
 .top-nav-bar-rightcontainer{
   display: flex;
   margin-right: 15px;
   justify-content: center;
   align-items: center;
- 
-    
 }
 
 .top-nav-bar-leftcontainer{
@@ -209,14 +203,12 @@
   background-image: url("../assests/logo.png");
   background-repeat: no-repeat;
   background-size: contain;
-
+  cursor:pointer;
 }
 
 .notification-bell{
-
   position: relative;
-
-
+  cursor: pointer;
 }
 
 
@@ -241,6 +233,14 @@
   display: flex;
   width: 100%
 }
+.letter-report-component{
+  display: flex;
+  width: 100%;
+  flex-direction: column;
+ 
+  align-items: center;
+}
+
 
 
 
@@ -272,7 +272,6 @@
     height: 542px; 
   }
  
-
   .letter-item-vh{
     height: fit-content;
     max-width : 481px;
@@ -293,6 +292,26 @@
     max-width: 1024px;
     margin: 0 auto;
   }
+  .report-button {
+    
+    max-width: 481px;
+    margin: 7px ;
+    display: flex;
+    justify-content: flex-end;
+  }
+
+  .hr-divider{
+    width: 85%;
+  }
+  .letter-report-component{
+    display: flex;
+    width: 100%;
+    flex-direction: column;
+    margin-top: 10px;
+    align-items: center;
+  }
+
+  
   
 }
 

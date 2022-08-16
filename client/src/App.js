@@ -38,16 +38,18 @@ import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsAc
 import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
-
+import MusicNoteOutlinedIcon from '@mui/icons-material/MusicNoteOutlined';
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
+  const [displayMusicControls, setDisplayMusicControls] = useState(false)
 
   const [socket, setSocket] = useState();
   const [updateNum, setUpdateNum] = useState(0);
 
+<<<<<<< HEAD
   // useEffect(
   //   () => {
   //     const socket = io();
@@ -71,6 +73,20 @@ function App() {
   //     // updateNum
   //   ]
   // );
+=======
+  // useEffect(() => {
+  //   const socket = io();
+  //   setSocket(socket);
+  //   socket.on("connect", () => {
+
+  //   }); 
+
+  //   // clean up
+  //   return () => {
+  //     socket.disconnect();
+  //   };
+  // }, []);
+>>>>>>> d196e5d38cd456e2ad5726722ad3786296411cbb
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -81,7 +97,6 @@ function App() {
     setPage(1);
   };
 
-  // Music widget
   const songs = [song_one, song_two];
 
   const audio = new Audio(songs[Math.floor(Math.random() * 2)]);
@@ -95,6 +110,14 @@ function App() {
   const pauseFunc = (music) => {
     music.pause();
   };
+
+  const openMusicControls = () => {
+    setDisplayMusicControls(true);
+  }
+  const closeMusicControls = () => {
+    setDisplayMusicControls(false);
+  }
+
   return (
     <div className="App">
       <nav className="top-nav-bar">
@@ -105,12 +128,7 @@ function App() {
           }}
         ></div>
 
-        <div
-          onClick={() => {
-            navigate("/letters/profile");
-          }}
-          className="top-nav-bar-rightcontainer"
-        >
+        <div className="top-nav-bar-rightcontainer">
           {!userID ? (
             <li>
               <Button
@@ -137,7 +155,12 @@ function App() {
                   LOGOUT
                 </Button>
               </li>
-              <li className="notification-bell">
+              <li
+                className="notification-bell"
+                onClick={() => {
+                  navigate("/letters/profile");
+                }}
+              >
                 <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
                 <NotificationCounter />
               </li>
@@ -200,7 +223,6 @@ function App() {
           path="/"
           element={
             <LetterList
-              update={updateNum}
               page={page}
               setPage={setPage}
               path={"/letters"}
@@ -212,7 +234,6 @@ function App() {
           element={
             <LetterList
               page={page}
-              update={updateNum}
               setPage={setPage}
               path={"/letters"}
             />
@@ -241,7 +262,8 @@ function App() {
         <Route path="/chill" element={<Music />} />
       </Routes>
       <div id="music-widget">
-        <Music play={playFunc} pause={pauseFunc} music={music}></Music>
+        {!displayMusicControls && <MusicNoteOutlinedIcon id="music-widget-show" onClick={() => { openMusicControls() }} />}
+        {displayMusicControls && <Music play={playFunc} pause={pauseFunc} music={music} closeControls={closeMusicControls}></Music>}
       </div>
     </div>
   );

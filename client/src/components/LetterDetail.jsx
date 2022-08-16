@@ -11,6 +11,7 @@ import { useContext } from "react";
 import { makeStyles, responsiveFontSizes } from "@mui/material"
 import { Link } from "react-router-dom";
 import {selectEmote} from "../helper/emoteManager"
+import io from 'socket.io-client'; 
 
 // Material UI
 import { Card } from "@mui/material"
@@ -150,7 +151,7 @@ export const LetterDetail = (props) => {
     p: 4,
   };
 
-  
+
   return (
     <div className="letterDetail">
       <div className="letter-report-component">
@@ -190,6 +191,7 @@ export const LetterDetail = (props) => {
           /* Render delete button when it is your letter */
           <div className="report-button">
             {<Button
+              style={{cursor:"pointer"}}
               color="error"
               size="small"
               variant="outlined"
@@ -238,10 +240,10 @@ export const LetterDetail = (props) => {
           }
         </div>
       <br />
-      <hr />
+      <hr className="hr-divider"/>
       <br />
       {/* If user is not sender, show form */}
-      {userID !== data.sender_id && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
+      {(userID !== data.sender_id && (data.type === 'encourage' || data.type === 'request')) && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
 
       {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
       {/* If user is sender, show all responses */}
@@ -253,7 +255,7 @@ export const LetterDetail = (props) => {
 
           <div className='letter-wrapper-primary'>
             <div>
-              <p>{response.id}</p> {/*CHANGE TO EMOTE AFTER*/}
+               {/*CHANGE TO EMOTE AFTER*/}
               
             </div>
             <div className='letter-wrapper-secondary'>
@@ -261,7 +263,7 @@ export const LetterDetail = (props) => {
                 {<p className="letterMessage">{response.message}</p>}
               </div>
             </div>
-            <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end" }}
+            <DeleteForeverOutlinedIcon sx={{ color: red[600], alignSelf: "end", cursor:"pointer" }}
               onClick={() => { 
                 responseSetChildModal(false)
                 setResponseToDeleteId(response.id)

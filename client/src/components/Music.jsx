@@ -4,6 +4,8 @@ import {Button} from "@mui/material";
 import { purple } from "@mui/material/colors";
 import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
+import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+
 
 export const Music = (props) => {
 
@@ -45,6 +47,11 @@ export const Music = (props) => {
           className="music-control"
           color="primary" 
           onClick={()=>{props.pause(props.music)}} 
+        />
+        <CancelOutlinedIcon 
+          className="music-control"
+          color="primary" 
+          onClick={()=>{props.closeControls()}}
         />
     </Card>
   )

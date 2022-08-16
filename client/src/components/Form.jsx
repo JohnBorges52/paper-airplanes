@@ -37,7 +37,7 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
-  const [emote, setEmote] = useState(1);
+  const [emote, setEmote] = useState(0);
   const [countCharacters, setCountCharacters] = useState(700);
 
   const [popoverMsg, setPopoverMsg] = useState("")
@@ -111,13 +111,26 @@ export const Form = (props) => {
     <div className="form-component">
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
+        <>
         <TypeSelector
+<<<<<<< HEAD
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
       <EmoteSelector
         onChange={(event) => { setEmote(event.target.value) }}>
       </EmoteSelector>
+=======
+          onChange={(event) => { setLetterType(event.target.value);  }}>
+        </TypeSelector>
+
+        <EmoteSelector
+          onChange={(event) => { setEmote(event.target.value)}}>
+        </EmoteSelector>
+        </>
+        }
+
+>>>>>>> d196e5d38cd456e2ad5726722ad3786296411cbb
 
       {/* Text field for form */}
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}

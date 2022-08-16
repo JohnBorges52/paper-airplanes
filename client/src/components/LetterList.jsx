@@ -27,7 +27,7 @@ export const LetterList = (props) => {
         else { setLetterEmpty(false) }
       })
       .catch(() => setData([]));
-  }, [props.path, userID, props.updateNum]);
+  }, [props.path, userID]);
 
   const navigate = useNavigate();
 

@@ -21,10 +21,16 @@
     border-color: #626273;
   }
   .music-control{
-    color: #FFFFFF
-
-
-
-    ;
+    color: #FFFFFF;
   }
+  
+  
+  #music-widget-show{
+    color:purple
+  }
+}
+#music-widget :hover{
+  background-color: #aca4b4;
+  border-radius: 5px;
+  cursor: pointer;
 }

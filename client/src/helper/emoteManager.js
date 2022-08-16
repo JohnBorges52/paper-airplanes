@@ -1,7 +1,7 @@
 export const selectEmote = (emoteID) => {
 
   if (emoteID === 1) {
-    return "🙂 "
+    return "🙂"
   }
   else if (emoteID === 2) {
     return "😃"
@@ -35,5 +35,8 @@ export const selectEmote = (emoteID) => {
   }
   else if (emoteID === 12) {
     return "😠 "
+  }
+  else if (emoteID === 0) {
+    return "😐"
   }
 }

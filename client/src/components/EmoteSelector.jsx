@@ -11,7 +11,6 @@ export const EmoteSelector = (props) => {
         <InputLabel id="letter-type-label" style={{ backgroundColor: "white" }}>I am feeling... &nbsp;</InputLabel>
         <Select
           label="Emoji-Type"
-          // value={""}
           onChange={event => props.onChange(event)}
         >
           <MenuItem value={"1"}>🙂</MenuItem>
