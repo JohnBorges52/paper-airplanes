@@ -2,7 +2,7 @@
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('I worked really hard for my final project at Lighthouse Labs. I made a web app that connected to a remote-controlled vehicle and could be controlled by anyone through the internet. Everything was going ok, but on the day of the presentation, the Wi-Fi at the demonstration location was not working properly. This made my web app look like it was not functioning correctly and I couldn''t present it properly to the audience.  This made me feel sad. I''m worried that it was not impressive and I will never get a job in the tech industry. How can I get over this?', 'request', 1, 1, 9);
 
 -- Letter 1
-INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Sometimes I’m just doing mundane things, like driving somewhere or getting groceries… and I have this overwhelming urge to just cry, sob and break down. I feel like I could fall apart at any given moment but I have to remind myself that it is not the place or time.', 'vent', 1, 3, 7);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES (' VENT Sometimes I’m just doing mundane things, like driving somewhere or getting groceries… and I have this overwhelming urge to just cry, sob and break down. I feel like I could fall apart at any given moment but I have to remind myself that it is not the place or time.', 'vent', 1, 3, 7);
 --  Letter 2
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('When you are joyful, when you say yes to life and have fun and project positivity all around you, you become a sun in the center of every constellation, and people want to be near you.', 'encourage', 2, 2, 4);
 -- Letter 3
