@@ -1,24 +1,23 @@
-import { useState } from "react";
+import { useState, useEffect, useContext } from "react";
 import { useNavigate } from "react-router-dom";
 import { TypeSelector } from "./TypeSelector";
-import { useContext } from "react";
 import { UserContext } from "../UserContext";
-import axios from "axios";
-import "../styles/letterItem.scss";
-import classNames from "classnames";
 import { EmoteSelector } from "./EmoteSelector";
+import axios from "axios";
+import classNames from "classnames";
+import "../styles/letterItem.scss";
 
 // Material UI
+import { Popover, Typography, Box, Modal, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
-import Button from '@mui/material/Button';
-import { purple, red } from "@mui/material/colors";
-import { Popover, Typography, Box, Modal } from "@mui/material";
-
+import { purple } from "@mui/material/colors";
 
 // Material Icons
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
-import { useEffect } from "react";
+
+// TensorFlow Machine Learning Toxicity Detector Model
+import { load } from "@tensorflow-models/toxicity";
 
 const style = {
   position: 'absolute',
@@ -38,50 +37,94 @@ export const Form = (props) => {
   const { userID } = useContext(UserContext);
   const [message, setMessage] = useState("");
   const [letterType, setLetterType] = useState("request");
-  const [emote, setEmote] = useState(0);
+  const [emote, setEmote] = useState(1);
   const [countCharacters, setCountCharacters] = useState(700);
 
   const [popoverMsg, setPopoverMsg] = useState("")
   const [pos, setPos] = useState(null);
-  const [isModal, setIsModal] = useState(true)
+  const [isModal, setIsModal] = useState({ open: true, text: "" })
   const open = Boolean(pos)
 
-  const validateMessage = (message, eventTarget) => {
+  const [isToxicModal, setIsToxicModal] = useState(false)
+  const [toxicity, setToxicity] = useState("");
+  const threshold = 0.9;
+
+  const checkToxicity = async (message, eventTarget) => {
+    const model = await load(threshold)
+    console.log("Model loaded...");
+    const predictions = await model.classify(message)
+    const isToxic = predictions[6].results[0].match
+    setToxicity(isToxic)
+    console.log(isToxic)
+    return isToxic
+  }
+
+  useEffect(() => { }, [isModal])
+
+  //  Check that message is not too long or blank
+  const isMessageLengthValid = (message, eventTarget) => {
     if (message.length > 700) {
-      setIsModal(false);
+      setIsModal({ open: false, text: "" });
       setPos(eventTarget);
       setPopoverMsg("Letter needs to be 700 chararacters or less")
       return false;
     }
-    else if (message.length < 1) {
-      setIsModal(false);
+    else if ((message.length < 1) || (message[0] === ' ')) {
+      setIsModal({ open: false, text: "" });
       setPos(eventTarget)
       setPopoverMsg("Letter needs to have characters")
       return false
     }
-    setPos(eventTarget)
-    setIsModal(true);
     return true
   };
 
-  useEffect(() => { }, [isModal])
-
-  const submitMessage = (message, letterType, senderID, emote, eventTarget) => {
-    if (validateMessage(message, eventTarget)) {
-      axios.post(`/letters/new`, { message, letterType, senderID, emote })
-        .then(setTimeout(() => {
-          navigate("/letters/profile")
-        }, 2200))
-
+  // Validate message for length and toxicty
+  const isLetterValid = async (message, eventTarget) => {
+    if (isMessageLengthValid(message, eventTarget)) {
+      const toxicityResult = await checkToxicity(message)
+      // If message is toxic
+      if (toxicityResult) {
+        setIsModal({ open: true, text: "Error in letter.  Please edit and try again." });
+        return false
+      }
+      // If message IS NOT toxic
+      return true
     }
   };
 
-  const submitResponse = (message, letterID, responderID, eventTarget) => {
-    if (validateMessage(message, eventTarget)) {
-      axios.post(`/responses/new`, { message, letterID, responderID })
-        .then(setTimeout(() => {
+  // On submit the form for a new letter
+  const submitMessage = async (message, letterType, senderID, emote, eventTarget) => {
+    setPos(eventTarget);
+    setIsModal({ open: true, text: "Saving message..." });
+    const validateResult = await (isLetterValid(message, eventTarget))
+    console.log("Save the message? ", validateResult)
+    if (validateResult) {
+      try {
+        await axios.post(`/letters/new`, { message, letterType, senderID, emote })
+        setIsModal({ open: true, text: "Message save success!" });
+        // console.log("response", response)
+        setTimeout(() => {
+          navigate("/letters/profile")
+        }, 500)
+      }
+      catch (error) { console.log(error) }
+    }
+  };
+
+  const submitResponse = async (message, letterID, responderID, eventTarget) => {
+    setPos(eventTarget);
+    setIsModal({ open: true, text: "Saving response..." });
+    const validateResult = await (isLetterValid(message, eventTarget))
+    console.log("Save the message? ", validateResult)
+    if (validateResult) {
+      try {
+        await axios.post(`/responses/new`, { message, letterID, responderID })
+        setIsModal({ open: true, text: "Response save success!" });
+        setTimeout(() => {
           navigate("/letters/")
-        }, 2200))
+        }, 500)
+      }
+      catch (error) { console.log(error) }
     }
   };
 
@@ -91,21 +134,16 @@ export const Form = (props) => {
     <div className="form-component">
       <h1 className="letterListHeader"> {props.headerText} </h1>
       {!props.isResponse &&
-        <>
         <TypeSelector
-          onChange={(event) => { setLetterType(event.target.value);  }}>
-        </TypeSelector>
+          onChange={(event) => { setLetterType(event.target.value); }}>
+        </TypeSelector>}
 
-        <EmoteSelector
-          onChange={(event) => { setEmote(event.target.value)}}>
-        </EmoteSelector>
-        </>
-        }
-
+      <EmoteSelector
+        onChange={(event) => { setEmote(event.target.value) }}>
+      </EmoteSelector>
 
       {/* Text field for form */}
-      <div className='inputSelector'>
-      <TextField sx={{ width: 1 }} style={{ marginTop: "25px",width:"100%", maxWidth: "1024px", minWidth: "200px"}}
+      <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
         id="filled-multiline-flexible"
         label="What is on your mind?"
         multiline
@@ -117,7 +155,6 @@ export const Form = (props) => {
         }}
         variant="outlined"
       />
-      </div>
 
       {/* Character counter for message form */}
       <div className={colorCharacter} >
@@ -159,7 +196,7 @@ export const Form = (props) => {
               Submit
             </Button>
 
-            {isModal ?
+            {isModal.open ?
               <Modal
                 open={open}
                 onClose={() => setPos(null)}
@@ -168,15 +205,15 @@ export const Form = (props) => {
               >
                 <Box sx={style}>
                   <Typography id="modal-modal-title" variant="h6" component="h2">
-                    Message Saved!💖
+                    Thanks for writing! 💖
                   </Typography>
                   <Typography id="modal-modal-description" sx={{ mt: 2 }}>
-                    Redirecting...
+                    {isModal.text}
                   </Typography>
                 </Box>
               </Modal>
               :
-              //* Popover alert on submit when message is too short or too long *
+              // Popover alert on submit when message is too short or too long
               <Popover
                 open={open}
                 anchorEl={pos}
@@ -188,15 +225,15 @@ export const Form = (props) => {
               > <Typography sx={{ p: 1 }}>{popoverMsg}</Typography></Popover>
             }
           </>
-        }        
+        }
       </div>
 
       {!props.isResponse &&
-      
+
         <div className="guy-heart-container">
-        <div className="guy-heart"> </div>
-      </div>
-        }
+          <div className="guy-heart"> </div>
+        </div>
+      }
     </div >
   );
 };

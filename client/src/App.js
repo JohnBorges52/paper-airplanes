@@ -39,7 +39,10 @@ import axios from "axios";
 import io from "socket.io-client";
 import { useEffect } from "react";
 import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
+<<<<<<< HEAD
 import AccountMenu from "./components/AccountMenu";
+=======
+>>>>>>> eca08586741d77dcb8368ac9f3eeee60f32fe130
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
@@ -49,6 +52,30 @@ function App() {
 
   const [socket, setSocket] = useState();
   const [updateNum, setUpdateNum] = useState(0);
+
+  // useEffect(
+  //   () => {
+  //     const socket = io();
+  //     setSocket(socket);
+  //     socket.on("connect", () => {
+  //       const data = { 1: "yes" };
+  //       console.log("data on client", data);
+  //       socket.emit("user", data);
+  //     });
+
+  //     socket.on("update", () => {
+  //       setUpdateNum(updateNum + 1);
+  //     });
+
+  //     // clean up
+  //     return () => {
+  //       socket.disconnect();
+  //     };
+  //   },
+  //   [
+  //     // updateNum
+  //   ]
+  // );
 
   // useEffect(() => {
   //   const socket = io();

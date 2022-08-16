@@ -5,8 +5,6 @@ import Select from '@mui/material/Select';
 
 export const EmoteSelector = (props) => {
 
-  
-
   return (
     <div className='inputSelector'>
       <FormControl size="small" style={{ marginTop: "10px", width: "25vw", maxWidth: "168px", minWidth: "145px" }}>
