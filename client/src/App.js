@@ -24,7 +24,7 @@ import {
   Button,
 } from "@mui/material";
 import Paper from "@mui/material/Paper";
-import { purple } from "@mui/material/colors";
+import { purple, grey } from "@mui/material/colors";
 //Music Imports
 import song_one from "./assests/music/song_one.mp3";
 import song_two from "./assests/music/song_two.mp3";
@@ -165,7 +165,7 @@ function App() {
         onChange={handleChange}
         className="nav-bar"
         sx={{
-          // bgcolor: "purple",
+          bgcolor: grey[100],
           "& .Mui-selected": {
             "& .MuiBottomNavigationAction-label": {
               fontSize: (theme) => theme.typography.caption,
