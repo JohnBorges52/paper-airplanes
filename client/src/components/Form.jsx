@@ -84,7 +84,7 @@ export const Form = (props) => {
       const toxicityResult = await checkToxicity(message)
       // If message is toxic
       if (toxicityResult) {
-        setIsModal({ open: true, text: "Error in letter.  Please edit and try again." });
+        setIsModal({ open: true, text: "Did you really mean to say that?  Good vibes only please. ☺️" });
         return false
       }
       // If message IS NOT toxic
