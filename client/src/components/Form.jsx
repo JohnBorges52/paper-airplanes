@@ -84,7 +84,7 @@ export const Form = (props) => {
       const toxicityResult = await checkToxicity(message)
       // If message is toxic
       if (toxicityResult) {
-        setIsModal({ open: true, text: "Did you really mean to say that?  Good vibes only please. ☺️" });
+        setIsModal({ open: true, text: "Did you really mean to say that?  Positive vibes only please. ☺️" });
         return false
       }
       // If message IS NOT toxic
@@ -138,7 +138,7 @@ export const Form = (props) => {
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
-     {!props.isResponse && <EmoteSelector
+      {!props.isResponse && <EmoteSelector
         onChange={(event) => { setEmote(event.target.value) }}>
       </EmoteSelector>}
 
