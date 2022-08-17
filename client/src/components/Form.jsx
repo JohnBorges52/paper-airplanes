@@ -138,9 +138,9 @@ export const Form = (props) => {
           onChange={(event) => { setLetterType(event.target.value); }}>
         </TypeSelector>}
 
-      <EmoteSelector
+     {!props.isResponse && <EmoteSelector
         onChange={(event) => { setEmote(event.target.value) }}>
-      </EmoteSelector>
+      </EmoteSelector>}
 
       {/* Text field for form */}
       <TextField sx={{ width: 1 }} style={{ marginTop: "25px" }}
