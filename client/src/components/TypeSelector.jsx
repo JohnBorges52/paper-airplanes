@@ -15,9 +15,9 @@ export const TypeSelector = (props) => {
 
           onChange={event => props.onChange(event)}
         >
-          <MenuItem value={"request"}>Request</MenuItem>
-          <MenuItem value={"vent"}>Vent</MenuItem>
-          <MenuItem value={"encourage"}>Encourage</MenuItem>
+          <MenuItem value={"request"}>Looking for advice</MenuItem>
+          <MenuItem value={"vent"}>Just venting</MenuItem>
+          <MenuItem value={"encourage"}>Good vibes!</MenuItem>
         </Select>
       </FormControl>
     </div>
