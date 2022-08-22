@@ -55,10 +55,6 @@ module.exports = (db) => {
       .then((data) => {
         res.json(data.rows);
       })
-      .then(()=>{
-        console.log(12,req.query.email)
-
-      })
   });
 
   // POST login

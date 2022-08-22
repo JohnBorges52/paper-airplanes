@@ -7,8 +7,6 @@ import { useEffect } from "react";
 
 export const LetterNew = () => {
   const { userID } = useContext(UserContext);
-  console.log(userID);
-
   useEffect(() => { }, [userID])
 
   return (

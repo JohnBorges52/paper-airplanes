@@ -13,8 +13,6 @@ export const LetterList = (props) => {
   //STATES
 
   const { userID, setUserID } = useContext(UserContext);
-  console.log("userID", userID);
-
   const [data, setData] = useState([]);
   const [currentLetter, setCurrentLetter] = useState({});
   const [letterEmpty, setLetterEmpty] = useState(false)
@@ -31,11 +29,9 @@ export const LetterList = (props) => {
 
   const navigate = useNavigate();
 
-  console.log("Letter Empty", letterEmpty)
-
   return (
     <>
-      {props.path === "/letters" ? <h1 className="letterListHeader">All Letters</h1> : (<h1 className="letterListHeader">My Letters</h1>)}
+      {props.path === "/letters" ? <h1 className="letterListHeader">All Planes</h1> : (<h1 className="letterListHeader">My Planes</h1>)}
       {!letterEmpty ?
         <div>
           {(data.map((letter) =>

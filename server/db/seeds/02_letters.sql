@@ -4,7 +4,7 @@ INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES 
 -- Letter 1
 INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES (' Sometimes I’m just doing mundane things, like driving somewhere or getting groceries… and I have this overwhelming urge to just cry, sob and break down. I feel like I could fall apart at any given moment but I have to remind myself that it is not the place or time.', 'request', 1, 3, 7);
 --  Letter 2
-INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Stop being so lazy everyone. Go get real help.', 'encourage', 2, 2, 4);
+INSERT INTO letters (letter_message, type, flag_count, sender_id, emote) VALUES ('Stop being so lazy everyone. Go get real help.', 'vent', 2, 2, 12);
 -- Letter 3
 INSERT INTO letters (letter_message, type, sender_id, emote) VALUES (' I found out two days ago that my husband has been having an affair. We have two daughters together and have been together for 11 years. The husband of the woman he’s been having an affair with reached out and told me something was going on. We compared stories and it’s even worse than what he initially thought. They’ve hung out together with our kids. What should I do?', 'request', 3, 9);
 -- Letter 4

@@ -1,11 +1,7 @@
 import { Route, Routes, useNavigate } from "react-router-dom";
 import "./App.css";
 import "./styles/musicwidget.scss";
-// import "./styles/letterItem.scss";
-// import { Navbar } from "./components/Navbar";
-// import { Form } from "./components/Form";
-// import { UserInformation } from "./components/UserInfomation";
-// import { UserProvider } from "./UserContext";
+
 import { LetterNew } from "./components/LetterNew";
 import { NotificationCounter } from "./components/NotificationCounter";
 
@@ -16,6 +12,7 @@ import { LoginError } from "./components/LoginError";
 import { useState, useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Music } from "./components/Music";
+import { BottomNav } from "./components/BottomNav";
 
 // Material UI
 import {
@@ -35,9 +32,6 @@ import MailOutlineIcon from "@mui/icons-material/MailOutline";
 import CreateOutlinedIcon from "@mui/icons-material/CreateOutlined";
 import MarkunreadMailboxOutlinedIcon from "@mui/icons-material/MarkunreadMailboxOutlined";
 import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
-import axios from "axios";
-import io from "socket.io-client";
-import { useEffect } from "react";
 import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
 import AccountMenu from "./components/AccountMenu";
 function App() {
@@ -46,46 +40,6 @@ function App() {
   const [value, setValue] = useState("recents");
   const { userID, setUserID } = useContext(UserContext);
   const [displayMusicControls, setDisplayMusicControls] = useState(false);
-
-  const [socket, setSocket] = useState();
-  const [updateNum, setUpdateNum] = useState(0);
-
-  // useEffect(
-  //   () => {
-  //     const socket = io();
-  //     setSocket(socket);
-  //     socket.on("connect", () => {
-  //       const data = { 1: "yes" };
-  //       console.log("data on client", data);
-  //       socket.emit("user", data);
-  //     });
-
-  //     socket.on("update", () => {
-  //       setUpdateNum(updateNum + 1);
-  //     });
-
-  //     // clean up
-  //     return () => {
-  //       socket.disconnect();
-  //     };
-  //   },
-  //   [
-  //     // updateNum
-  //   ]
-  // );
-
-  // useEffect(() => {
-  //   const socket = io();
-  //   setSocket(socket);
-  //   socket.on("connect", () => {
-
-  //   });
-
-  //   // clean up
-  //   return () => {
-  //     socket.disconnect();
-  //   };
-  // }, []);
 
   const handleChange = (event, newValue) => {
     setValue(newValue);
@@ -118,46 +72,103 @@ function App() {
   };
 
   return (
-    <div className="App">
-      <nav className="top-nav-bar">
-        <div
-          className="logo"
-          onClick={() => {
-            navigate("/letters");
-          }}
-        ></div>
+    <>
+      <div className="App">
+        <nav className="top-nav-bar">
+          <div
+            className="logo"
+            onClick={() => {
+              navigate("/letters");
+            }}
+          ></div>
 
-        <div className="top-nav-bar-rightcontainer">
-          {!userID ? (
-            <li>
-              <Button
-                variant="outlined"
-                sx={{ color: purple[800], border: "1px solid purple" }}
-                onClick={() => {
-                  navigate("/users/login");
-                }}
-              >
-                LOGIN
-              </Button>
-            </li>
-          ) : (
-            <>
-              <li
-                className="notification-bell"
-                onClick={() => {
-                  navigate("/letters/profile");
-                }}
-              >
-                <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
-                <NotificationCounter />
-              </li>
+          <div className="top-nav-bar-rightcontainer">
+            {!userID ? (
               <li>
-                <AccountMenu />
+                <Button
+                  variant="outlined"
+                  sx={{ color: purple[800], border: "1px solid purple" }}
+                  onClick={() => {
+                    navigate("/users/login");
+                  }}
+                >
+                  LOGIN
+                </Button>
               </li>
-            </>
+            ) : (
+              <>
+                <li
+                  className="notification-bell"
+                  onClick={() => {
+                    navigate("/letters/profile");
+                  }}
+                >
+                  <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
+                  <NotificationCounter />
+                </li>
+                <li>
+                  <AccountMenu />
+                </li>
+              </>
+            )}
+          </div>
+        </nav>
+
+        <Routes>
+          <Route
+            path="/"
+            element={
+              <LetterList page={page} setPage={setPage} path={"/letters"} />
+            }
+          />
+          <Route
+            path="/letters"
+            element={
+              <LetterList page={page} setPage={setPage} path={"/letters"} />
+            }
+          />
+          <Route path="/letters/new" element={<LetterNew />} />
+          <Route
+            path="/letters/profile"
+            element={
+              <LetterList
+                path={"/letters/profile"}
+                page={page}
+                setPage={setPage}
+              />
+            }
+          />
+          <Route path="/letters/:id" element={<LetterDetail />} />
+          <Route
+            path="/users/login"
+            element={<Login redirectPath={"/letters/profile"} />}
+          />
+          <Route
+            path="/users/login/error"
+            element={<LoginError redirectPath={"/letters/profile"} />}
+          />
+          <Route path="/chill" element={<Music />} />
+        </Routes>
+
+        <div id="music-widget">
+          {!displayMusicControls && (
+            <MusicNoteOutlinedIcon
+              id="music-widget-show"
+              onClick={() => {
+                openMusicControls();
+              }}
+            />
+          )}
+          {displayMusicControls && (
+            <Music
+              play={playFunc}
+              pause={pauseFunc}
+              music={music}
+              closeControls={closeMusicControls}
+            ></Music>
           )}
         </div>
-      </nav>
+      </div>
 
       <BottomNavigation
         showLabels
@@ -181,6 +192,7 @@ function App() {
           left: 0,
           right: 0,
           height: "76px",
+          marginTop: "50px"
         }}
       >
         <BottomNavigationAction
@@ -188,7 +200,7 @@ function App() {
             navigate("/letters");
             setPage(1);
           }}
-          label="All Letters"
+          label="All Planes"
           icon={<MailOutlineIcon fontSize="large" />}
         />
 
@@ -196,7 +208,7 @@ function App() {
           onClick={() => {
             !userID ? navigate("/users/login/error") : navToMyLetters();
           }}
-          label="My Letters"
+          label="My Planes"
           icon={<MarkunreadMailboxOutlinedIcon fontSize="large" />}
         />
         <BottomNavigationAction
@@ -207,61 +219,7 @@ function App() {
           icon={<CreateOutlinedIcon fontSize="large" />}
         />
       </BottomNavigation>
-      {/* </Paper> */}
-      <Routes>
-        <Route
-          path="/"
-          element={
-            <LetterList page={page} setPage={setPage} path={"/letters"} />
-          }
-        />
-        <Route
-          path="/letters"
-          element={
-            <LetterList page={page} setPage={setPage} path={"/letters"} />
-          }
-        />
-        <Route path="/letters/new" element={<LetterNew />} />
-        <Route
-          path="/letters/profile"
-          element={
-            <LetterList
-              path={"/letters/profile"}
-              page={page}
-              setPage={setPage}
-            />
-          }
-        />
-        <Route path="/letters/:id" element={<LetterDetail />} />
-        <Route
-          path="/users/login"
-          element={<Login redirectPath={"/letters/profile"} />}
-        />
-        <Route
-          path="/users/login/error"
-          element={<LoginError redirectPath={"/letters/profile"} />}
-        />
-        <Route path="/chill" element={<Music />} />
-      </Routes>
-      <div id="music-widget">
-        {!displayMusicControls && (
-          <MusicNoteOutlinedIcon
-            id="music-widget-show"
-            onClick={() => {
-              openMusicControls();
-            }}
-          />
-        )}
-        {displayMusicControls && (
-          <Music
-            play={playFunc}
-            pause={pauseFunc}
-            music={music}
-            closeControls={closeMusicControls}
-          ></Music>
-        )}
-      </div>
-    </div>
+    </>
   );
 }
 

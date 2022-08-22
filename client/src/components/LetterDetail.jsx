@@ -91,13 +91,11 @@ export const LetterDetail = (props) => {
   }, [letterStatus, id])
 
   const updateFlagCount = () => {
-    console.log("ID = ", id)
     axios.put(`/letters/${id}/flag`)
       .then((res) => setLetterStatus([res.data]))
   }
 
   const updateLetterStatus = () => {
-    console.log("ID = ", id)
     axios.put(`/letters/${id}/delete`)
       .then((res) => setLetterStatus([res.data]))
   }

@@ -203,7 +203,7 @@
   margin-top: 7px;
   margin-left: 10px;
   width: 50%;
-  height: 80%;
+  height: 40px;
   background-image: url("../assests/logo.png");
   background-repeat: no-repeat;
   background-size: contain;
@@ -255,6 +255,8 @@
 
 
 
+
+
 //Desktop View
 @media (min-width: 481px) {
   .cardStyle{
@@ -283,6 +285,19 @@
     background-position: bottom right;
     max-width: 707px;
     height: 542px; 
+  }
+  .logo{
+ 
+    margin-top: 7px;
+    margin-left: 10px;
+    width: 50%;
+    height: 60px;
+    background-image: url("../assests/logo.png");
+    background-repeat: no-repeat;
+    background-size: contain;
+    cursor:pointer;
+    
+
   }
  
   .letter-item-vh{

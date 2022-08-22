@@ -3,8 +3,6 @@ const router = require("express").Router();
 //GET all active letters
 module.exports = (db) => {
   router.get("/", (req, res) => {
-    // let queryString = "";
-    console.log(req.query.userID);
     //// This query is to show all letters when I am not logged in
     if (!req.query.userID) {
       const queryString = `

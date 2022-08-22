@@ -9,7 +9,7 @@ export const TypeSelector = (props) => {
   return (
     <div className='inputSelector'>
       <FormControl size="small" style={{ width: "84vw", maxWidth: "1024px", minWidth: "200px" }}>
-        <InputLabel id="letter-type-label" size="small" style={{ backgroundColor: "white" }}>Choose a Letter Type&nbsp;</InputLabel>
+        <InputLabel id="letter-type-label" size="small" style={{ backgroundColor: "white" }}>Choose a Plane Type&nbsp;</InputLabel>
         <Select
           label="Letter-Type"
 
