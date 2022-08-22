@@ -7,11 +7,11 @@ Full Stack Project that allows users to anonymously send and respond to messages
 1. Clone this repo.
 2. Go to the server folder in the terminal and npm install the dependencies.
 3. Got to the client folder in the terminal and npm install the dependencies.
-4. Create .env file using the .env-example as a template.
+4. Create .env file using the .env-example as a template.<br />
    4.1 (Here is an [Article](https://medium.com/coding-blocks/creating-user-database-and-adding-access-on-postgresql-8bfcd2f4a91e) about creating databases if needed.)
 5. Go to the server folder and start the server side with npm start in the terminal.
 6. Go to the client folder and start the client side with npm start in the terminal.
-7. To log-in you can use the user peter-griffin@gmail.com, no password is needed.
+7. To log-in you can use the user peter-griffin@gmail.com, no password is needed.<br />
    7.1 **Obs:** _In order to practice React, the authentication is used with UserContext. So the log-in information does not persist when the page is refreshed. In order to keep logged in, go to /client/UserContext and set the userID to 5_
 
 ## FEATURES
