@@ -18,13 +18,13 @@ Full Stack Project that allows users to anonymously send and respond to messages
 
 1. The user can choose between 3 types of paper airplanes they want to send.
 
-- Looking for advice: Which allows other users to respond to their plane with positive messages and adivice.
+- Looking for advice: Which allows other users to respond to their plane with positive messages and advice.
 - Just Venting: This type does not allow any user to interact with this plane. The idea is to encourage users to let their problems out without worrying about getting any response.
-- Good Vibes: Sometimes users only want to read good messages in order to be more positive. This type allows users to write inpirational posts so others can read.
+- Good Vibes: Sometimes users only want to read good messages in order to be more positive. This type allows users to write inspirational posts so others can read.
 
 !["gif showing the functionality of the types that can be selected"](https://github.com/JohnBorges52/paper-airplanes/blob/master/client/public/types%20demonstration.gif)
 
-2. If necessary, the user is able to delete specific responses they judge as not helpful. They can do the same thing to their own planes if they want. Regarding planes others wrote, if users find that it is toxic or inappropriate, they can flag it once and after the plane is flagged 3 times, the plane is hidden from everyone.
+2. If necessary, the user is able to delete specific responses they judge as not helpful. They can do the same thing to their own planes if they want. Regarding planes, others wrote, that if users find that it is toxic or inappropriate, they can flag it once and after the plane is flagged 3 times, the plane is hidden from everyone.
 
 !["gif showing the delete functionality"](https://github.com/JohnBorges52/paper-airplanes/blob/master/client/public/delete%20function%20demo.gif)
 
