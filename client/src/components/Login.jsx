@@ -3,6 +3,7 @@ import { useState } from "react"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
 import { useNavigate } from "react-router-dom";
+import "../styles/login.scss"
 
 // Material UI
 import TextField from '@mui/material/TextField';

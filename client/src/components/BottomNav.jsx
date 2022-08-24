@@ -31,7 +31,6 @@ export const BottomNav = () => {
         showLabels
         value={value}
         onChange={handleChange}
-        className="nav-bar"
         sx={{
           bgcolor: grey[100],
           "& .Mui-selected": {

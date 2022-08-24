@@ -1,4 +1,5 @@
 import { Login } from "./Login"
+import "../styles/login.scss"
 
 export const LoginError = (props) => {
   const notLoggedIn = "You are not logged in, please log in."

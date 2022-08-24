@@ -6,6 +6,9 @@ import { EmoteSelector } from "./EmoteSelector";
 import axios from "axios";
 import classNames from "classnames";
 import "../styles/letterItem.scss";
+import "../styles/character-counter.scss"
+import "../styles/litle-guy-gifs.scss"
+import "../styles/form.scss"
 
 // Material UI
 import { Popover, Typography, Box, Modal, Button } from "@mui/material";
