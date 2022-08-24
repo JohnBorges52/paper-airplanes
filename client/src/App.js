@@ -3,7 +3,7 @@ import "./App.css";
 import "./styles/musicwidget.scss";
 
 import { LetterNew } from "./components/LetterNew";
-import { NotificationCounter } from "./components/NotificationCounter";
+import { Notification } from "./components/Notification";
 import { Button } from "@mui/material";
 
 import { LetterList } from "./components/LetterList";
@@ -14,27 +14,17 @@ import { useState, useContext } from "react";
 import { UserContext } from "./UserContext";
 import { Music } from "./components/Music";
 import { BottomNav } from "./components/BottomNav";
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
+
 
 // Material UI
-
 import { purple } from "@mui/material/colors";
-//Music Imports
-
-// import song_three from "./assests/music/song_three.mp3"
-
-// Material UI Icons
-
-
 import AccountMenu from "./components/AccountMenu";
+
+
 function App() {
   const navigate = useNavigate();
   const [page, setPage] = useState(1);
   const { userID, setUserID } = useContext(UserContext);
-
-
-
-
 
   return (
     <>
@@ -68,8 +58,7 @@ function App() {
                     navigate("/letters/profile");
                   }}
                 >
-                  <NotificationsActiveOutlinedIcon sx={{ color: purple[700] }} />
-                  <NotificationCounter />
+                  <Notification />
                 </li>
                 <li>
                   <AccountMenu />
@@ -116,9 +105,7 @@ function App() {
         </Routes>
 
         <Music />
-
       </div>
-
       <BottomNav />
     </>
   );

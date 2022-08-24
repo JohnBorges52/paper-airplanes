@@ -1,19 +1,19 @@
 import React from "react";
-import {Card, useThemeProps} from "@mui/material"
-import {Button} from "@mui/material";
+import { useState} from "react";
+
+// MATERIAL UI //
+import {Card} from "@mui/material"
 import { purple } from "@mui/material/colors";
 import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
-import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
 import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
 
+// SONGS //
 import song_one from "../assests/music/song_one.mp3";
 import song_two from "../assests/music/song_two.mp3";
-import { useState, useContext } from "react";
 
-
-export const Music = (props) => {
+export const Music = () => {
   
   const songs = [song_one, song_two];
   const audio = new Audio(songs[Math.floor(Math.random() * 2)]);
@@ -36,8 +36,6 @@ export const Music = (props) => {
     setDisplayMusicControls(false);
   };
 
-
-  
   return(
     <div id="music-widget">
           {!displayMusicControls && (
@@ -49,9 +47,7 @@ export const Music = (props) => {
             />
           )}
           {displayMusicControls && (
-            
-          
-       
+               
     <Card id="music-controls"
       sx={{ 
         margin: 1, 
@@ -80,6 +76,6 @@ export const Music = (props) => {
         />
     </Card>
     )}
-     </div>
+  </div>
   )
 }
