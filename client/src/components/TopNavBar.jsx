@@ -3,6 +3,7 @@ import AccountMenu from "./AccountMenu";
 import { useContext } from "react";
 import { UserContext } from "../UserContext";
 import { useNavigate } from "react-router-dom";
+import "../styles/top-nav-bar.scss"
 
 //MATERIAL UI //
 import { purple } from "@mui/material/colors";
