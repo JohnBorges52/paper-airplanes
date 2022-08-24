@@ -13,8 +13,9 @@ export const Login = (props) => {
 
   const navigate = useNavigate();
   const [userEmail, setUserEmail] = useState("")
-  const { userID, setUserID } = useContext(UserContext);
-  const { loggedInUserEmail, setLoggedInUserEmail } = useContext(UserContext);
+  const { setUserID } = useContext(UserContext);
+  const { setLoggedInUserEmail } = useContext(UserContext);
+  
   const getUserId = (email, specPath) => {
     axios.get('/users/login/success', { params: { email } })
       .then(res => { setUserID(res.data[0].id); setLoggedInUserEmail(res.data[0].email.split('@')[0]) })
@@ -23,7 +24,6 @@ export const Login = (props) => {
   }
 
   return (
-
     <div className="homepage">
       <div className="login">
 
@@ -55,6 +55,7 @@ export const Login = (props) => {
           variant="contained"
           onClick={() => { console.log("A NEW USER HAS BEEN REGISTERED") }}>Register
         </Button>
+        
       </div>
     </div>
   )

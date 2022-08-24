@@ -5,7 +5,6 @@ import FormControl from '@mui/material/FormControl';
 import Select from '@mui/material/Select';
 
 export const TypeSelector = (props) => {
-
   return (
     <div className='inputSelector'>
       <FormControl size="small" style={{ width: "84vw", maxWidth: "1024px", minWidth: "200px" }}>

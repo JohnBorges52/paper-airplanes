@@ -10,9 +10,7 @@ import Card from '@mui/material/Card';
 import CardActions from "@mui/material/CardActions";
 import Collapse from "@mui/material/Collapse";
 import { styled } from '@mui/material/styles';
-import { grey, deepPurple, purple } from "@mui/material/colors";
-
-// Material UI Icons
+import { purple } from "@mui/material/colors";
 import IconButton from "@mui/material/IconButton";
 import ExpandCircleDownOutlinedIcon from '@mui/icons-material/ExpandCircleDownOutlined';
 import DriveFileRenameOutlineOutlinedIcon from '@mui/icons-material/DriveFileRenameOutlineOutlined';
@@ -34,8 +32,7 @@ const ExpandMore = styled((props) => {
 export const LetterListItem = (props) => {
   const navigate = useNavigate();
   const [expanded, setExpanded] = useState(false);
-  // const { letter, setCurrentLetter } = props;
-  const { userID, setUserID } = useContext(UserContext);
+  const { userID } = useContext(UserContext);
 
   const handleExpandClick = () => {
     setExpanded(!expanded);
@@ -61,7 +58,7 @@ export const LetterListItem = (props) => {
   return (
     <Card className={expandedDiv}
       sx={{ margin: 1, padding: 1, backgroundColor: purple[100], marginBottom: "40px", boxShadow: "7px 7px purple", border: "1px solid", borderColor: purple[600] }}
-    //    onClick={() => setCurrentLetter(letter)}>
+    
     >
       <div className='letter-wrapper-primary'>
         <div>
@@ -79,7 +76,7 @@ export const LetterListItem = (props) => {
           </div>
           
           <footer className="letter-footer">
-            <div className="letter-userID"> {/*change here after*/}
+            <div className="letter-userID"> 
               <div className="letterMessage">
 
               {props.type === "request" && <span className="lettertype-indicator"> Looking for advice </span>}
@@ -122,14 +119,9 @@ export const LetterListItem = (props) => {
                 aria-label="show more">
                 <ExpandCircleDownOutlinedIcon />
               </ExpandMore>
-
             </CardActions>
           </footer>
-              
         </div>
-        {/* {props.type === "vent" && <span className="lettertype-indicator">✍️</span> }      
-        {props.type === "request" && <span className="lettertype-indicator">✍️</span> }      
-        {props.type === "encourage" && <span className="lettertype-indicator">💙</span> }       */}
       </div>
     </Card>
   );

@@ -6,7 +6,9 @@ import { LoginError } from "./LoginError";
 import { useEffect } from "react";
 
 export const LetterNew = () => {
+  
   const { userID } = useContext(UserContext);
+  
   useEffect(() => { }, [userID])
 
   return (
@@ -15,7 +17,7 @@ export const LetterNew = () => {
       {!userID && <LoginError redirectPath='/letters/new' />}
       {/* If logged in, render new letter form */}
       <div className="letterDetail">
-        {userID && <Form headerText={"New Letter"} />}
+      {userID && <Form headerText={"New Letter"} />}
       </div >
     </>
   )

@@ -48,34 +48,34 @@ export const Music = () => {
           )}
           {displayMusicControls && (
                
-    <Card id="music-controls"
-      sx={{ 
-        margin: 1, 
-        padding: 1, 
-        backgroundColor: purple[50], 
-        marginBottom: "40px", 
-        boxShadow: "3px 3px purple", 
-        border: "1px solid", 
-        borderColor: purple[600] }}
-      >
-        <p>Music</p>
-        <PlayCircleOutlineOutlinedIcon
-          className="music-control"  
-          color="primary" 
-          onClick={()=>{playFunc(music)}}
-        />
-        <PauseCircleOutlineOutlinedIcon 
-          className="music-control"
-          color="primary" 
-          onClick={()=>{pauseFunc(music)}} 
-        />
-        <CancelOutlinedIcon 
-          className="music-control"
-          color="primary" 
-          onClick={()=>{closeMusicControls()}}
-        />
-    </Card>
-    )}
+      <Card id="music-controls"
+        sx={{ 
+          margin: 1, 
+          padding: 1, 
+          backgroundColor: purple[50], 
+          marginBottom: "40px", 
+          boxShadow: "3px 3px purple", 
+          border: "1px solid", 
+          borderColor: purple[600] }}
+        >
+          <p>Music</p>
+          <PlayCircleOutlineOutlinedIcon
+            className="music-control"  
+            color="primary" 
+            onClick={()=>{playFunc(music)}}
+          />
+          <PauseCircleOutlineOutlinedIcon 
+            className="music-control"
+            color="primary" 
+            onClick={()=>{pauseFunc(music)}} 
+          />
+          <CancelOutlinedIcon 
+            className="music-control"
+            color="primary" 
+            onClick={()=>{closeMusicControls()}}
+          />
+      </Card>
+      )}
   </div>
   )
 }

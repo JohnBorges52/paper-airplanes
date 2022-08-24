@@ -1,17 +1,14 @@
 import React from "react"
 import axios from "axios"
 import { useEffect } from "react"
-// import { Button } from "./Button"
 import { useState } from "react"
-import { Navigate, useParams } from "react-router-dom"
+import { useParams } from "react-router-dom"
 import { useNavigate } from "react-router-dom"
 import { Form } from "./Form"
 import { UserContext } from "../UserContext";
 import { useContext } from "react";
-import { makeStyles, responsiveFontSizes } from "@mui/material"
-import { Link } from "react-router-dom";
 import {selectEmote} from "../helper/emoteManager"
-import io from 'socket.io-client'; 
+
 
 // Material UI
 import { Card } from "@mui/material"
@@ -19,25 +16,13 @@ import Button from '@mui/material/Button';
 import { purple, red, deepPurple } from "@mui/material/colors"
 import DeleteForeverOutlinedIcon from '@mui/icons-material/DeleteForeverOutlined';
 import {Modal, Box, Typography } from "@mui/material"
-
-
-// Material Icons
 import ReportGmailerrorredOutlinedIcon from '@mui/icons-material/ReportGmailerrorredOutlined';
 
 
 export const ChildModal= (props) => {
+  //return the child Modal when the parent is clicked //
 
-  const navigate = useNavigate();
   const [open, setOpen] = useState(true)
-
-  
-
-  const handleOpen = () => {
-    setOpen(true);
-  };
-  const handleClose = () => {
-    setOpen(false);
-  };
   const style = {
     position: 'absolute',
     top: '50%',
@@ -49,7 +34,6 @@ export const ChildModal= (props) => {
     boxShadow: 24,
     p: 4,
   };
-
 
   return(        
     
@@ -69,19 +53,18 @@ export const ChildModal= (props) => {
     </Box>
   </Modal> 
 
-  )}
+)}
 
 
 export const LetterDetail = (props) => {
   const navigate = useNavigate();
   let { id } = useParams();
-  // alert(id)
   const { userID } = useContext(UserContext);
   const [data, setData] = useState("")
   const [responses, setResponses] = useState([])
   const [letterStatus, setLetterStatus] = useState([])
   const [reported, setReported] = useState(false)
-  // const expandedDiv = classNames("cardStyle",'letter-item-vh');
+ 
   useEffect(() => {
     axios.get(`/letters/${id}`)
       .then(res => setData(res.data[0]))
@@ -108,21 +91,16 @@ export const LetterDetail = (props) => {
 
   const deleteLetter = () => {
     updateLetterStatus()
-    
-    
   }
 
   const deleteResponse = (responseId) => {
     updateResponseStatus(responseId)
-    
-
   }
 
 
   const report = () => {
     updateFlagCount()
     setReported(true)
-    
   }
 
 
@@ -130,12 +108,9 @@ export const LetterDetail = (props) => {
   const [responseOpen, setResponseOpen] = useState(false)
   const [flagOpen, setFlagOpen] = useState(false)
 
-
   const [letterChildModal, letterSetChildModal] = useState(false)
   const [responseChildModal, responseSetChildModal] = useState(false)
   const [responseToDeleteId, setResponseToDeleteId] = useState(0)
-
- // useEffect=(() => {}, [responseOpen])
   
   const style = {
     position: 'absolute',
@@ -158,7 +133,7 @@ export const LetterDetail = (props) => {
           >
           <div className='letter-wrapper-primary'>
             <div>
-              <p>{selectEmote(data.emote)}</p> {/*CHANGE TO EMOTE AFTER*/}
+              <p>{selectEmote(data.emote)}</p>
               
             </div>
             <div className='letter-wrapper-secondary'>
@@ -199,7 +174,7 @@ export const LetterDetail = (props) => {
               Delete
             </Button>
             }
-              <Modal  ////// modal letter
+              <Modal  // Modal pop up of the letter interaction //
                 open={open}
                 onClose={() => setOpen(false)}
                 aria-labelledby="modal-modal-title"
@@ -243,9 +218,8 @@ export const LetterDetail = (props) => {
       {/* If user is not sender, show form */}
       {(userID !== data.sender_id && (data.type === 'encourage' || data.type === 'request')) && <Form letterID={id} headerText={'New Response'}isResponse={true} />}
 
-      {/* {userID === data.sender_id && responses.map(e=><p>{e.message}</p>)}  */}
+  
       {/* If user is sender, show all responses */}
-
       {userID === data.sender_id && responses.map(response =>
         <Card className="response-cardStyle letter-item-vh"
           sx={{ padding: 1, backgroundColor: deepPurple[100] }}
@@ -253,8 +227,7 @@ export const LetterDetail = (props) => {
 
           <div className='letter-wrapper-primary'>
             <div>
-               {/*CHANGE TO EMOTE AFTER*/}
-              
+
             </div>
             <div className='letter-wrapper-secondary'>
               <div className='letter-text-area'>
@@ -266,15 +239,12 @@ export const LetterDetail = (props) => {
                 responseSetChildModal(false)
                 setResponseToDeleteId(response.id)
                 setResponseOpen(true)
-                
               }}
             />
-               
-             
           </div>
         </Card>)}
         
-        <Modal    /// modal response
+        <Modal // Modal popup for the response interaction //
         open={responseOpen}
         onClose={() => setOpen(false)}
         aria-labelledby="modal-modal-title"
@@ -305,10 +275,7 @@ export const LetterDetail = (props) => {
         </Box>
       </Modal> 
 
-
-
-
-      <Modal    /// modal flag
+      <Modal    /// Modal for the flag interaction ///
         open={flagOpen}
         onClose={() => setFlagOpen(false)}
         aria-labelledby="modal-modal-title"
@@ -336,11 +303,6 @@ export const LetterDetail = (props) => {
             </Button>
         </Box>
       </Modal> 
-
-
-
-
-
     </div>
   )
 }

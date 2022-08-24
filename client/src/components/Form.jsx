@@ -11,8 +11,6 @@ import "../styles/letterItem.scss";
 import { Popover, Typography, Box, Modal, Button } from "@mui/material";
 import TextField from '@mui/material/TextField';
 import { purple } from "@mui/material/colors";
-
-// Material Icons
 import SendIcon from '@mui/icons-material/Send';
 import ClearIcon from '@mui/icons-material/Clear';
 
@@ -45,7 +43,6 @@ export const Form = (props) => {
   const [isModal, setIsModal] = useState({ open: true, text: "" })
   const open = Boolean(pos)
 
-  const [isToxicModal, setIsToxicModal] = useState(false)
   const [toxicity, setToxicity] = useState("");
   const threshold = 0.9;
 

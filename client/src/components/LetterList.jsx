@@ -6,11 +6,12 @@ import { LetterListItem } from "./LetterListItem";
 import { UserContext } from "../UserContext";
 import '../styles/letterItem.scss'
 import '../styles/letterlist.scss'
+
+// MATERIAL UI //
 import { Button } from "@mui/material";
 import { purple } from "@mui/material/colors";
 
 export const LetterList = (props) => {
-  //STATES
 
   const { userID, setUserID } = useContext(UserContext);
   const [data, setData] = useState([]);
@@ -30,6 +31,7 @@ export const LetterList = (props) => {
   const navigate = useNavigate();
 
   return (
+  
     <>
       {props.path === "/letters" ? <h1 className="letterListHeader">All Planes</h1> : (<h1 className="letterListHeader">My Planes</h1>)}
       {!letterEmpty ?
@@ -65,5 +67,4 @@ export const LetterList = (props) => {
       }
     </>
   );
-
 };
