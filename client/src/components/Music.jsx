@@ -5,30 +5,55 @@ import { purple } from "@mui/material/colors";
 import PlayCircleOutlineOutlinedIcon from '@mui/icons-material/PlayCircleOutlineOutlined';
 import PauseCircleOutlineOutlinedIcon from '@mui/icons-material/PauseCircleOutlineOutlined';
 import CancelOutlinedIcon from '@mui/icons-material/CancelOutlined';
+import NotificationsActiveOutlinedIcon from "@mui/icons-material/NotificationsActiveOutlined";
+import MusicNoteOutlinedIcon from "@mui/icons-material/MusicNoteOutlined";
+
+import song_one from "../assests/music/song_one.mp3";
+import song_two from "../assests/music/song_two.mp3";
+import { useState, useContext } from "react";
 
 
 export const Music = (props) => {
+  
+  const songs = [song_one, song_two];
+  const audio = new Audio(songs[Math.floor(Math.random() * 2)]);
+  const [displayMusicControls, setDisplayMusicControls] = useState(false);
+  const [music] = useState(audio);
 
-  // const audio = new Audio(song1)
-  // const [music, setMusic] = useState(audio)
+  const playFunc = (music) => {
+    music.volume = 0.08;
+    music.play();
+  };
+
+  const pauseFunc = (music) => {
+    music.pause();
+  };
+
+  const openMusicControls = () => {
+    setDisplayMusicControls(true);
+  };
+  const closeMusicControls = () => {
+    setDisplayMusicControls(false);
+  };
 
 
-  // const playFunc = (music) => {
-  //   music.volume = 0.2
-  //   music.play()
-  // }
-
-  // const pauseFunc = (music) => {
-  //   music.pause()
-  // }
-  //Something
   
   return(
-
+    <div id="music-widget">
+          {!displayMusicControls && (
+            <MusicNoteOutlinedIcon
+              id="music-widget-show"
+              onClick={() => {
+                openMusicControls();
+              }}
+            />
+          )}
+          {displayMusicControls && (
+            
+          
+       
     <Card id="music-controls"
       sx={{ 
-        
-        
         margin: 1, 
         padding: 1, 
         backgroundColor: purple[50], 
@@ -41,18 +66,20 @@ export const Music = (props) => {
         <PlayCircleOutlineOutlinedIcon
           className="music-control"  
           color="primary" 
-          onClick={()=>{props.play(props.music)}}
+          onClick={()=>{playFunc(music)}}
         />
         <PauseCircleOutlineOutlinedIcon 
           className="music-control"
           color="primary" 
-          onClick={()=>{props.pause(props.music)}} 
+          onClick={()=>{pauseFunc(music)}} 
         />
         <CancelOutlinedIcon 
           className="music-control"
           color="primary" 
-          onClick={()=>{props.closeControls()}}
+          onClick={()=>{closeMusicControls()}}
         />
     </Card>
+    )}
+     </div>
   )
 }
